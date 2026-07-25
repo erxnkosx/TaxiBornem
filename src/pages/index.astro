@@ -1,14 +1,8 @@
 ---
+import Layout from "../layouts/Layout.astro";
+import HomePage from "../components/pages/HomePage";
 ---
 
-<html lang="nl">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>Taxi Bornem Hamid</title>
-  </head>
-  <body>
-    <h1>Taxi Bornem Hamid</h1>
-    <p>Site in opbouw.</p>
-  </body>
-</html>
+<Layout title="Taxi Bornem" description="Betrouwbare taxi in Bornem en omgeving. Stipt, professioneel en persoonlijk — 24u/24, 7 dagen op 7. Boek uw rit bij Hamid.">
+  <HomePage client:load />
+</Layout>
