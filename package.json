@@ -9,7 +9,8 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "test": "esbuild test-booking.mjs --bundle --platform=node --format=esm --outfile=node_modules/.cache/test.mjs --log-level=error && node node_modules/.cache/test.mjs"
   },
   "dependencies": {
     "@astrojs/react": "^6.0.1",

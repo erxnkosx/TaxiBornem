@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { MessageCircle, ArrowRight, Check, Navigation2, AlertCircle } from "lucide-react";
 import { WHATSAPP_URL } from "../data/site";
 import { validate, type Errors } from "../lib/validation";
+import { buildWeb3FormsPayload, WEB3FORMS_ENDPOINT } from "../lib/web3forms";
 
 export default function BookingForm() {
   const [form, setForm] = useState({
@@ -20,6 +21,11 @@ export default function BookingForm() {
   });
   const [submitting, setSubmitting] = useState(false);
   const [errors, setErrors] = useState<Errors>({});
+  const [formError, setFormError] = useState("");
+  const [honeypot, setHoneypot] = useState("");
+
+  // Tijdstip waarop het formulier verscheen — bots vullen sneller in dan mensen.
+  const geopendOp = useRef(Date.now());
 
   const set = (key: string, val: string) => {
     setForm((f) => ({ ...f, [key]: val }));
@@ -27,8 +33,9 @@ export default function BookingForm() {
     setErrors((e) => (e[key as keyof Errors] ? { ...e, [key]: undefined } : e));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setFormError("");
 
     const found = validate(form as any);
     if (Object.keys(found).length > 0) {
@@ -40,12 +47,41 @@ export default function BookingForm() {
       return;
     }
 
-    // TODO: echte verzending volgt. Voorlopig door naar de bedankpagina.
+    // Spamval 1: bots vullen dit verborgen veld in. Stil doen alsof het lukte.
+    if (honeypot !== "") {
+      window.location.href = "/bedankt";
+      return;
+    }
+    // Spamval 2: een mens doet er langer dan drie seconden over.
+    if (Date.now() - geopendOp.current < 3000) {
+      window.location.href = "/bedankt";
+      return;
+    }
+
     setErrors({});
     setSubmitting(true);
-    setTimeout(() => {
-      window.location.href = "/bedankt";
-    }, 600);
+    try {
+      const res = await fetch(WEB3FORMS_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          ...buildWeb3FormsPayload(form as any),
+          botcheck: honeypot, // Web3Forms' eigen spamcontrole
+        }),
+      });
+      const data = await res.json().catch(() => ({}));
+
+      if (res.ok && data.success) {
+        window.location.href = "/bedankt";
+        return;
+      }
+      setFormError(
+        data.message ?? "Er ging iets mis bij het verzenden. Probeer het opnieuw of app Hamid rechtstreeks."
+      );
+    } catch {
+      setFormError("Geen verbinding. Controleer uw internet, of app Hamid rechtstreeks.");
+    }
+    setSubmitting(false);
   };
 
   /** Rode rand zodra een veld een fout heeft. */
@@ -189,6 +225,30 @@ export default function BookingForm() {
           <strong className="text-[#181818]">Hamid bekijkt elke aanvraag persoonlijk</strong> en stuurt u een prijsvoorstel via WhatsApp. Pas na uw akkoord is de rit bevestigd.
         </p>
       </div>
+
+      {/* Spamval: onzichtbaar voor bezoekers, onweerstaanbaar voor bots. */}
+      <div className="hidden" aria-hidden="true">
+        <label>
+          Website
+          <input
+            type="text"
+            tabIndex={-1}
+            autoComplete="off"
+            value={honeypot}
+            onChange={(e) => setHoneypot(e.target.value)}
+          />
+        </label>
+      </div>
+
+      {formError && (
+        <div
+          role="alert"
+          className="sm:col-span-2 flex items-start gap-2.5 rounded-[14px] border border-[#d4183d]/25 bg-[#d4183d]/8 px-4 py-3"
+        >
+          <AlertCircle className="mt-0.5 h-4 w-4 flex-shrink-0 text-[#d4183d]" />
+          <p className="text-xs leading-relaxed text-[#d4183d]">{formError}</p>
+        </div>
+      )}
 
       <div className="sm:col-span-2 flex flex-col sm:flex-row gap-3">
         <button
