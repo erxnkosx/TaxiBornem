@@ -5,6 +5,15 @@ import react from '@astrojs/react';
 
 // https://astro.build/config
 export default defineConfig({
+  // Definitieve URL — gebruikt voor canonical links, sitemap en Open Graph.
+  site: 'https://www.taxibornem.be',
+
+  // Nette URL's zonder trailing slash: /diensten i.p.v. /diensten/
+  trailingSlash: 'never',
+  build: {
+    format: 'file', // genereert /diensten.html i.p.v. /diensten/index.html
+  },
+
   vite: {
     plugins: [tailwindcss()],
   },

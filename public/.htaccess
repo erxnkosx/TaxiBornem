@@ -1,0 +1,51 @@
+# ─────────────────────────────────────────────────────────────────────
+#  Taxi Bornem Hamid — serverinstellingen voor Hostinger (Apache)
+#  Dit bestand hoort in public_html/ naast de gebouwde site.
+# ─────────────────────────────────────────────────────────────────────
+
+# Nette 404-pagina in plaats van de standaard Apache-melding
+ErrorDocument 404 /404.html
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # Forceer https:// (veilig slotje in de browser)
+  RewriteCond %{HTTPS} off
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+  # Forceer het www-adres, zodat www.taxibornem.be de enige versie is
+  RewriteCond %{HTTP_HOST} ^taxibornem\.be$ [NC]
+  RewriteRule ^ https://www.taxibornem.be%{REQUEST_URI} [L,R=301]
+
+  # Laat /diensten werken zonder de .html-extensie te tonen
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME}\.html -f
+  RewriteRule ^(.+?)/?$ $1.html [L]
+</IfModule>
+
+# ─── Caching: laat de browser vaste bestanden onthouden ──────────────
+<IfModule mod_expires.c>
+  ExpiresActive On
+  # Afbeeldingen, fonts, CSS en JS met een vingerafdruk in de naam: lang cachen
+  ExpiresByType image/webp              "access plus 1 year"
+  ExpiresByType image/png               "access plus 1 year"
+  ExpiresByType image/svg+xml           "access plus 1 year"
+  ExpiresByType text/css                "access plus 1 year"
+  ExpiresByType application/javascript  "access plus 1 year"
+  ExpiresByType font/woff2              "access plus 1 year"
+  # HTML zelf kort cachen, zodat wijzigingen snel zichtbaar zijn
+  ExpiresByType text/html               "access plus 0 seconds"
+</IfModule>
+
+# ─── Compressie: kleinere bestanden, snellere site ───────────────────
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css application/javascript
+  AddOutputFilterByType DEFLATE image/svg+xml application/json
+</IfModule>
+
+# ─── Beveiligingsheaders ─────────────────────────────────────────────
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options "nosniff"
+  Header set X-Frame-Options "SAMEORIGIN"
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
