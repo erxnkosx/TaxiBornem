@@ -1,0 +1,92 @@
+---
+import "@fontsource/inter/300.css";
+import "@fontsource/inter/400.css";
+import "@fontsource/inter/500.css";
+import "@fontsource/inter/600.css";
+import "@fontsource/inter/700.css";
+import "@fontsource/inter/800.css";
+import "../styles/global.css";
+
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import WhatsAppButton from "../components/WhatsAppButton";
+
+interface Props {
+  title: string;
+  description: string;
+  /** Zet op false voor de bedank- en 404-pagina (geen navigatie/footer). */
+  chrome?: boolean;
+  noindex?: boolean;
+}
+
+const { title, description, chrome = true, noindex = false } = Astro.props;
+
+const SITE = "https://www.taxibornem.be";
+const canonical = new URL(Astro.url.pathname, SITE).href;
+const currentPath = Astro.url.pathname.replace(/(.)\/$/, "$1");
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "TaxiService",
+  name: "Taxi Bornem Hamid",
+  url: SITE,
+  image: `${SITE}/logo.webp`,
+  telephone: "+32489123456",
+  email: "info@taxibornem.be",
+  priceRange: "€€",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Bornem",
+    postalCode: "2880",
+    addressRegion: "Antwerpen",
+    addressCountry: "BE",
+  },
+  areaServed: ["Bornem", "Puurs-Sint-Amands", "Antwerpen", "Mechelen", "Brussel"],
+  openingHoursSpecification: {
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    opens: "00:00",
+    closes: "23:59",
+  },
+  aggregateRating: {
+    "@type": "AggregateRating",
+    ratingValue: "4.9",
+    reviewCount: "80",
+  },
+};
+---
+
+<!doctype html>
+<html lang="nl-BE">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <title>{title} | Taxi Bornem Hamid</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Taxi Bornem Hamid" />
+    <meta property="og:locale" content="nl_BE" />
+    <meta property="og:title" content={`${title} | Taxi Bornem Hamid`} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={`${SITE}/logo.webp`} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="theme-color" content="#FFC107" />
+
+    <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+  </head>
+
+  <body class="min-h-screen bg-background font-[Inter,sans-serif] antialiased">
+    {chrome && <Navbar client:load currentPath={currentPath} />}
+    <main>
+      <slot />
+    </main>
+    {chrome && <Footer />}
+    <WhatsAppButton />
+  </body>
+</html>
