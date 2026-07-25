@@ -1,11 +1,13 @@
 import { useState } from "react";
-import { MessageCircle, ArrowRight, Check, Navigation2 } from "lucide-react";
+import { MessageCircle, ArrowRight, Check, Navigation2, AlertCircle } from "lucide-react";
 import { WHATSAPP_URL } from "../data/site";
+import { validate, type Errors } from "../lib/validation";
 
 export default function BookingForm() {
   const [form, setForm] = useState({
     naam: "",
     telefoon: "",
+    email: "",
     ophalen: "",
     bestemming: "",
     ritType: "enkel",
@@ -17,18 +19,49 @@ export default function BookingForm() {
     opmerkingen: "",
   });
   const [submitting, setSubmitting] = useState(false);
+  const [errors, setErrors] = useState<Errors>({});
 
-  const set = (key: string, val: string) => setForm((f) => ({ ...f, [key]: val }));
+  const set = (key: string, val: string) => {
+    setForm((f) => ({ ...f, [key]: val }));
+    // Fout meteen weghalen zodra de bezoeker het veld corrigeert.
+    setErrors((e) => (e[key as keyof Errors] ? { ...e, [key]: undefined } : e));
+  };
 
-  // TODO (Fase 2): hier komt de echte verzending. Voorlopig gaat de aanvraag
-  // gewoon naar de bedankpagina.
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    const found = validate(form as any);
+    if (Object.keys(found).length > 0) {
+      setErrors(found);
+      // Spring naar het eerste probleem zodat het niet buiten beeld blijft.
+      document
+        .querySelector<HTMLElement>(`[data-veld="${Object.keys(found)[0]}"]`)
+        ?.scrollIntoView({ behavior: "smooth", block: "center" });
+      return;
+    }
+
+    // TODO: echte verzending volgt. Voorlopig door naar de bedankpagina.
+    setErrors({});
     setSubmitting(true);
     setTimeout(() => {
       window.location.href = "/bedankt";
-    }, 800);
+    }, 600);
   };
+
+  /** Rode rand zodra een veld een fout heeft. */
+  const fieldClass = (veld: keyof Errors) =>
+    errors[veld]
+      ? inputClass.replace("border-transparent", "border-[#d4183d]") + " bg-[#d4183d]/5"
+      : inputClass;
+
+  /** Foutmelding onder een veld. */
+  const Fout = ({ veld }: { veld: keyof Errors }) =>
+    errors[veld] ? (
+      <p className="mt-1.5 flex items-center gap-1 text-xs text-[#d4183d]">
+        <AlertCircle className="w-3 h-3 flex-shrink-0" />
+        {errors[veld]}
+      </p>
+    ) : null;
 
   const inputClass =
     "w-full px-4 py-3 bg-[#f4f4f4] border border-transparent rounded-[14px] text-sm text-[#181818] placeholder:text-[#9b9b9b] focus:outline-none focus:border-[#FFC107] focus:bg-white transition-all duration-150";
@@ -69,27 +102,46 @@ export default function BookingForm() {
     </div>
       <div>
         <label className={labelClass}>Naam</label>
-        <input required className={inputClass} placeholder="Uw volledige naam" value={form.naam} onChange={(e) => set("naam", e.target.value)} />
+        <input data-veld="naam" className={fieldClass("naam")} placeholder="Uw volledige naam" value={form.naam} onChange={(e) => set("naam", e.target.value)} />
+        <Fout veld="naam" />
       </div>
       <div>
         <label className={labelClass}>Telefoon</label>
-        <input required type="tel" className={inputClass} placeholder="+32 4XX XX XX XX" value={form.telefoon} onChange={(e) => set("telefoon", e.target.value)} />
+        <input type="tel" data-veld="telefoon" className={fieldClass("telefoon")} placeholder="+32 4XX XX XX XX" value={form.telefoon} onChange={(e) => set("telefoon", e.target.value)} />
+        <Fout veld="telefoon" />
+      </div>
+      <div className="sm:col-span-2">
+        <label className={labelClass}>
+          E-mail <span className="normal-case font-normal text-[#9b9b9b]">— optioneel, voor een bevestiging</span>
+        </label>
+        <input
+          type="email"
+          data-veld="email" className={fieldClass("email")}
+          placeholder="uw@email.be"
+          value={form.email}
+          onChange={(e) => set("email", e.target.value)}
+        />
+        <Fout veld="email" />
       </div>
       <div>
         <label className={labelClass}>Ophalen (adres)</label>
-        <input required className={inputClass} placeholder="Vertrekadres" value={form.ophalen} onChange={(e) => set("ophalen", e.target.value)} />
+        <input data-veld="ophalen" className={fieldClass("ophalen")} placeholder="Vertrekadres" value={form.ophalen} onChange={(e) => set("ophalen", e.target.value)} />
+        <Fout veld="ophalen" />
       </div>
       <div>
         <label className={labelClass}>Bestemming</label>
-        <input required className={inputClass} placeholder="Aankomstadres" value={form.bestemming} onChange={(e) => set("bestemming", e.target.value)} />
+        <input data-veld="bestemming" className={fieldClass("bestemming")} placeholder="Aankomstadres" value={form.bestemming} onChange={(e) => set("bestemming", e.target.value)} />
+        <Fout veld="bestemming" />
       </div>
       <div>
         <label className={labelClass}>Datum</label>
-        <input required type="date" className={inputClass} value={form.datum} onChange={(e) => set("datum", e.target.value)} />
+        <input type="date" data-veld="datum" className={fieldClass("datum")} value={form.datum} onChange={(e) => set("datum", e.target.value)} />
+        <Fout veld="datum" />
       </div>
       <div>
         <label className={labelClass}>Tijd</label>
-        <input required type="time" className={inputClass} value={form.tijd} onChange={(e) => set("tijd", e.target.value)} />
+        <input type="time" data-veld="tijd" className={fieldClass("tijd")} value={form.tijd} onChange={(e) => set("tijd", e.target.value)} />
+        <Fout veld="tijd" />
       </div>
       {form.ritType === "heen-terug" && (
         <>
@@ -98,10 +150,11 @@ export default function BookingForm() {
 
             <input
               type="date"
-              className={inputClass}
+              data-veld="terugDatum" className={fieldClass("terugDatum")}
               value={form.terugDatum}
               onChange={(e) => set("terugDatum", e.target.value)}
             />
+            <Fout veld="terugDatum" />
           </div>
 
           <div>
@@ -109,10 +162,11 @@ export default function BookingForm() {
 
             <input
               type="time"
-              className={inputClass}
+              data-veld="terugTijd" className={fieldClass("terugTijd")}
               value={form.terugTijd}
               onChange={(e) => set("terugTijd", e.target.value)}
             />
+            <Fout veld="terugTijd" />
           </div>
         </>
       )}
