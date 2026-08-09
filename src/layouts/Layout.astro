@@ -17,9 +17,11 @@ interface Props {
   /** Zet op false voor de bedank- en 404-pagina (geen navigatie/footer). */
   chrome?: boolean;
   noindex?: boolean;
+  /** Extra schema.org-blok, bv. de FAQ op de homepage. */
+  extraSchema?: object;
 }
 
-const { title, description, chrome = true, noindex = false } = Astro.props;
+const { title, description, chrome = true, noindex = false, extraSchema } = Astro.props;
 
 const SITE = "https://www.taxibornem.be";
 const canonical = new URL(Astro.url.pathname, SITE).href;
@@ -79,6 +81,7 @@ const schema = {
     <meta name="theme-color" content="#FFC107" />
 
     <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+    {extraSchema && <script type="application/ld+json" set:html={JSON.stringify(extraSchema)} />}
   </head>
 
   <body class="min-h-screen bg-background font-[Inter,sans-serif] antialiased">

@@ -1,8 +1,21 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import HomePage from "../components/pages/HomePage";
+import { faqItems } from "../data/site";
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqItems.map((item) => ({
+    "@type": "Question",
+    name: item.q,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: item.a,
+    },
+  })),
+};
 ---
 
-<Layout title="Taxi Bornem — Stipt & Betrouwbaar" description="Betrouwbare taxi in Bornem en omgeving. Stipt, professioneel en persoonlijk — 24u/24, 7 dagen op 7. Boek uw rit bij Hamid.">
-  <HomePage client:load />
+<Layout title="Taxi Bornem — Stipt & Betrouwbaar" description="Betrouwbare taxi in Bornem en omgeving. Stipt, professioneel en persoonlijk — 24u/24, 7 dagen op 7. Boek uw rit bij Hamid." extraSchema={faqSchema}>  <HomePage client:load />
 </Layout>
