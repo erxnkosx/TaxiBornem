@@ -66,7 +66,7 @@ export default function DienstenPage() {
             {[
               { icon: Shield, title: "Stiptheid", desc: "Op tijd, altijd. Hamid volgt verkeer en vluchten op de voet." },
               { icon: Award, title: "Discretie", desc: "Wat in de wagen blijft, blijft in de wagen. 100% vertrouwelijk." },
-              { icon: Star, title: "Comfort", desc: "Mercedes-Benz vloot, schoon en geluxeerd voor elke rit." },
+              { icon: Star, title: "Comfort", desc: "Verzorgde Kia, schoon en comfortabel voor elke rit." },
             ].map((v, i) => (
               <div key={i} className="taxi-card flex flex-col items-center text-center p-6 rounded-[18px] bg-[#f7f7f7]">
                 <div className="w-12 h-12 bg-[#FFC107]/10 rounded-[14px] flex items-center justify-center mb-4">

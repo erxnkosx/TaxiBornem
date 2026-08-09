@@ -89,7 +89,7 @@ export default function HomePage() {
               <div className="taxi-image-frame relative rounded-[24px] overflow-hidden shadow-2xl shadow-black/15 aspect-[4/3]">
                 <img
                   src="/car.webp"
-                  alt="Luxe Mercedes taxi van Hamid"
+                  alt="Kia taxi van Taxi Bornem Hamid in Bornem"
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />

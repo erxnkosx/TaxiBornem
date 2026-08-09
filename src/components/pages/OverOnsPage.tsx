@@ -24,7 +24,7 @@ export default function OverOnsPage() {
               <div className="flex flex-col gap-3">
                 <div className="flex items-center gap-2">
                   <Check className="w-4 h-4 text-[#FFC107]" />
-                  <span className="text-sm text-[#181818]">Mercedes-Benz voertuig — geluxeerd en altijd schoon</span>
+                  <span className="text-sm text-[#181818]">Verzorgde Kia — comfortabel en altijd schoon</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Check className="w-4 h-4 text-[#FFC107]" />
@@ -89,7 +89,7 @@ export default function OverOnsPage() {
               {
                 icon: Award,
                 title: "Comfort",
-                desc: "Een propere, geluxeerde Mercedes. Airco, water, stille muziek of stilte — zoals u dat wenst.",
+                desc: "Een propere, verzorgde Kia. Airco, water, stille muziek of stilte — zoals u dat wenst.",
               },
             ].map((v, i) => (
               <div key={i} className="taxi-card p-7 rounded-[18px] bg-[#f7f7f7] flex flex-col gap-4">
