@@ -31,34 +31,102 @@ export const WEB3FORMS_ACCESS_KEY = "VERVANG-DOOR-JE-WEB3FORMS-KEY";
 export const services = [
   {
     icon: Plane,
+    slug: "luchthavenvervoer",
     title: "Luchthavenvervoer",
     subtitle: "Airport transfer",
     description: "Stressvrij naar Brussels Airport (Zaventem), Charleroi of Eindhoven. Vluchttracking inbegrepen — Hamid wacht op u bij aankomst.",
     tag: "Meest gevraagd",
+    details: [
+      "Brussels Airport (Zaventem), Charleroi en Eindhoven",
+      "Vluchttracking: bij vertraging wacht Hamid gewoon",
+      "Hulp met bagage, in- en uitladen",
+      "Kinderzitje gratis op aanvraag",
+    ],
+    note: "Ophalen aan de terminal: toeslag luchthavenparkeren +€8,00.",
   },
   {
     icon: Briefcase,
+    slug: "zakelijk-vervoer",
     title: "Zakelijk vervoer",
     subtitle: "Business travel",
     description: "Punctueel, discreet en professioneel. Ideaal voor executives, zakenreizen en corporate events in de Benelux.",
     tag: null,
+    details: [
+      "Discrete, professionele chauffeur",
+      "Facturatie mogelijk voor bedrijven",
+      "Vaste chauffeur voor terugkerende ritten",
+      "Stipt — afgestemd op uw agenda",
+    ],
+    note: null,
   },
   {
     icon: Star,
+    slug: "prive-ritten",
     title: "Privé ritten",
     subtitle: "Private rides",
     description: "Uw persoonlijke chauffeur voor daguitstappen, avondshopping of gewoon een comfortabele rit naar huis.",
     tag: null,
+    details: [
+      "Daguitstappen en avondshopping",
+      "Veilig thuisgebracht, ook 's nachts",
+      "Wachtdienst mogelijk tijdens uw afspraak",
+      "Comfortabele, verzorgde wagen",
+    ],
+    note: null,
   },
   {
     icon: Navigation2,
+    slug: "lange-afstanden",
     title: "Lange afstanden",
     subtitle: "Long distance",
     description: "Parijs, Amsterdam, Keulen of elke bestemming in Europa. Comfortabel en aan een vaste prijs, op voorhand bevestigd.",
     tag: null,
+    details: [
+      "Parijs, Amsterdam, Keulen en heel Europa",
+      "Vaste prijs, op voorhand afgesproken",
+      "Comfortabel voor lange ritten",
+      "Ook retour mogelijk",
+    ],
+    note: null,
   },
 ];
 
+// ─── Tarieven ─────────────────────────────────────────────────────────────────
+// Losse getallen zodat de prijscalculator ermee kan rekenen.
+// Pas hier de tarieven aan; de tarievenpagina neemt ze automatisch over.
+export const rates = {
+  base: 3.5, // starttarief bij elke rit (€)
+  perKm: 2.1, // prijs per kilometer (€)
+  waitingPerHour: 30, // wachttijd (€/uur)
+  surcharges: {
+    night: 25, // 's nachts, 22:00–06:00 (%)
+    weekend: 15, // zaterdag & zondag (%)
+    holiday: 25, // officiële feestdagen (%)
+    airportParking: 8, // luchthavenparkeren, ophaal aan terminal (€)
+  },
+};
+
+// Toeslagen zoals ze getoond worden in "Toeslagen in één oogopslag".
+export const surcharges = [
+  { icon: "moon", label: "Nachttoeslag", desc: "22:00 – 06:00", value: "+25%" },
+  { icon: "calendar", label: "Weekendtoeslag", desc: "Zaterdag & zondag", value: "+15%" },
+  { icon: "party", label: "Feestdagentoeslag", desc: "Officiële feestdagen", value: "+25%" },
+  { icon: "plane", label: "Luchthavenparkeren", desc: "Ophaal aan terminal", value: "+€8,00" },
+  { icon: "baby", label: "Kinderzitje", desc: "Op aanvraag", value: "Gratis" },
+  { icon: "clock", label: "Wachttijd", desc: "Hamid wacht ter plaatse", value: "€30,00/u" },
+];
+
+// Betaalmethoden zoals getoond op de tarievenpagina.
+export const paymentMethods = [
+  "Cash",
+  "Bancontact",
+  "Visa & Mastercard",
+  "Overschrijving voor zakelijke klanten",
+];
+
+// Welke FAQ-vragen tonen op de tarievenpagina (verwijst naar faqItems hierboven).
+// De cijfers zijn de posities in faqItems: 0 = eerste vraag, 2 = derde, enzovoort.
+export const tariffFaqIndexes = [0, 2, 4, 5];
 export const faqItems = [
   {
     q: "Hoe kan ik een taxi boeken?",
