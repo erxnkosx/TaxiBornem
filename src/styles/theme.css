@@ -436,3 +436,68 @@ body {
     transition: none !important;
   }
 }
+
+
+/* ── Prijscalculator: schuifbalk ──────────────────────────────
+   Plak dit onderaan src/styles/theme.css
+   Zorgt dat de slider er in alle browsers hetzelfde uitziet.
+   ─────────────────────────────────────────────────────────── */
+
+.taxi-range {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 6px;
+  border-radius: 999px;
+  outline: none;
+  cursor: pointer;
+}
+
+/* Het bolletje — Chrome, Safari, Edge */
+.taxi-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #181818;
+  border: 3px solid #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  cursor: grab;
+  transition: transform 0.15s ease;
+}
+
+.taxi-range::-webkit-slider-thumb:hover {
+  transform: scale(1.12);
+}
+
+.taxi-range::-webkit-slider-thumb:active {
+  cursor: grabbing;
+  transform: scale(1.05);
+}
+
+/* Het bolletje — Firefox */
+.taxi-range::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #181818;
+  border: 3px solid #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  cursor: grab;
+  transition: transform 0.15s ease;
+}
+
+.taxi-range::-moz-range-thumb:hover {
+  transform: scale(1.12);
+}
+
+/* Toetsenbordgebruikers zien duidelijk waar de focus staat */
+.taxi-range:focus-visible::-webkit-slider-thumb {
+  outline: 2px solid #ffc107;
+  outline-offset: 2px;
+}
+
+.taxi-range:focus-visible::-moz-range-thumb {
+  outline: 2px solid #ffc107;
+  outline-offset: 2px;
+}

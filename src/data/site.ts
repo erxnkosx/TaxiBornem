@@ -32,6 +32,7 @@ export const services = [
   {
     icon: Plane,
     slug: "luchthavenvervoer",
+    image: "/dienst-luchthaven.webp",
     title: "Luchthavenvervoer",
     subtitle: "Airport transfer",
     description: "Stressvrij naar Brussels Airport (Zaventem), Charleroi of Eindhoven. Vluchttracking inbegrepen — Hamid wacht op u bij aankomst.",
@@ -47,6 +48,7 @@ export const services = [
   {
     icon: Briefcase,
     slug: "zakelijk-vervoer",
+    image: "/dienst-zakelijk.webp",
     title: "Zakelijk vervoer",
     subtitle: "Business travel",
     description: "Punctueel, discreet en professioneel. Ideaal voor executives, zakenreizen en corporate events in de Benelux.",
@@ -62,6 +64,7 @@ export const services = [
   {
     icon: Star,
     slug: "prive-ritten",
+    image: "/dienst-prive.webp",
     title: "Privé ritten",
     subtitle: "Private rides",
     description: "Uw persoonlijke chauffeur voor daguitstappen, avondshopping of gewoon een comfortabele rit naar huis.",
@@ -77,6 +80,7 @@ export const services = [
   {
     icon: Navigation2,
     slug: "lange-afstanden",
+    image: "/dienst-lange-afstand.webp",
     title: "Lange afstanden",
     subtitle: "Long distance",
     description: "Parijs, Amsterdam, Keulen of elke bestemming in Europa. Comfortabel en aan een vaste prijs, op voorhand bevestigd.",

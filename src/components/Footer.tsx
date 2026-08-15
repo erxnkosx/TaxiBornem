@@ -9,9 +9,18 @@ export default function Footer() {
           {/* Brand */}
           <div className="md:col-span-2">
             <div className="flex items-center gap-2.5 mb-4">
-              <div className="w-8 h-8 rounded-xl bg-[#FFC107] flex items-center justify-center">
-                <Car className="w-4 h-4 text-[#181818]" />
-              </div>
+
+            {/* Logo */}
+            <a href="/" className="flex items-center gap-2.5 group" aria-label="Taxi Bornem Hamid — startpagina">
+              <img
+                src="/logo.webp"
+                alt="Taxi Bornem Hamid"
+                className="h-16 w-auto"
+                width={320}
+                height={160}
+              />
+
+            </a>
               <span className="font-bold text-white text-base">Taxi Bornem Hamid</span>
             </div>
             <p className="text-sm text-white/50 leading-relaxed max-w-xs mb-6">
