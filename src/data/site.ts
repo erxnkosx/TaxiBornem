@@ -159,12 +159,12 @@ export const faqItems = [
 ];
 
 export const destinations = [
-  { from: "Bornem", to: "Brussels Airport (Zaventem)", price: "€75", duration: "±55 min" },
-  { from: "Bornem", to: "Antwerpen Centraal", price: "€35", duration: "±30 min" },
-  { from: "Bornem", to: "Brussel-Centrum", price: "€65", duration: "±50 min" },
-  { from: "Bornem", to: "Gent-Sint-Pieters", price: "€80", duration: "±60 min" },
-  { from: "Bornem", to: "Charleroi Airport", price: "€95", duration: "±75 min" },
-  { from: "Bornem", to: "Mechelen", price: "€25", duration: "±20 min" },
+  { from: "Bornem", to: "Brussels Airport (Zaventem)", price: "€107", duration: "±40 min" },
+  { from: "Bornem", to: "Antwerpen Centraal", price: "€83", duration: "±35 min" },
+  { from: "Bornem", to: "Brussel-Centrum", price: "€110", duration: "±45 min" },
+  { from: "Bornem", to: "Gent-Sint-Pieters", price: "€129", duration: "±40 min" },
+  { from: "Bornem", to: "Charleroi Airport", price: "€256", duration: "±60 min" },
+  { from: "Bornem", to: "Mechelen", price: "€64", duration: "±30 min" },
 ];
 
 export const reviews = [
