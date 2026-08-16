@@ -16,11 +16,11 @@ export const PATHS: Record<Page, string> = {
   "not-found": "/404",
 };
 
-export const PHONE = "+32 489 12 34 56";
-export const PHONE_RAW = "+32489123456";
-export const WHATSAPP_URL = "https://wa.me/32489123456?text=Hallo%20Hamid%2C%20ik%20wil%20graag%20een%20taxi%20boeken.";
+export const PHONE = "+32 472 70 62 45";
+export const PHONE_RAW = "+32472706245";
+export const WHATSAPP_URL = "https://wa.me/32472706245?text=Hallo%20Hamid%2C%20ik%20wil%20graag%20een%20taxi%20boeken.";
 export const EMAIL = "info@taxibornem.be";
-export const GOOGLE_REVIEWS_URL = "https://maps.google.com/?cid=taxibornemhamid";
+export const GOOGLE_REVIEWS_URL = "https://maps.google.com/?cid=5113066939281304031";
 
 // Access key van Web3Forms (web3forms.com) — verwerkt het boekingsformulier.
 // Deze sleutel mag publiek zijn: ze bepaalt enkel naar welke mailbox de
@@ -99,8 +99,8 @@ export const services = [
 // Losse getallen zodat de prijscalculator ermee kan rekenen.
 // Pas hier de tarieven aan; de tarievenpagina neemt ze automatisch over.
 export const rates = {
-  base: 3.5, // starttarief bij elke rit (€)
-  perKm: 2.1, // prijs per kilometer (€)
+  base: 5, // starttarief bij elke rit (€)
+  perKm: 2.7, // prijs per kilometer (€)
   waitingPerHour: 30, // wachttijd (€/uur)
   surcharges: {
     night: 25, // 's nachts, 22:00–06:00 (%)
@@ -169,36 +169,36 @@ export const destinations = [
 
 export const reviews = [
   {
-    name: "Jan Vermeersch",
-    initials: "JV",
+    name: "Sahin Kemaldar",
+    initials: "S",
     rating: 5,
-    date: "2 weken geleden",
-    text: "Hamid was perfect op tijd, wagen was makeloos en hij heeft me vriendelijk geholpen met mijn koffers. Zaventem vlot bereikt, aanrader!",
-    color: "#4285F4",
+    date: "3 maanden geleden",
+    text: "Ik heb onlangs gebruikgemaakt van deze taxiservice en ben zeer tevreden over de ervaring. De chauffeur was stipt op tijd, vriendelijk en professioneel. De rit zelf verliep vlot en comfortabel, en de wagen was proper en goed onderhouden.\n\nWat ik vooral apprecieerde, was de veilige rijstijl en de aangename sfeer tijdens de rit. Ik voelde me meteen op mijn gemak. Ook de prijs-kwaliteitverhouding was correct.\n\nZeker een aanrader voor wie op zoek is naar betrouwbaar en comfortabel vervoer!\n\nDankjewel Hamid 👍",
+    color: "#f4511e",
   },
   {
-    name: "Sophie Claes",
-    initials: "SC",
+    name: "Dominique De Roeck",
+    initials: "D",
     rating: 5,
-    date: "1 maand geleden",
-    text: "Professioneel, stipt en aangenaam gezelschap. Hamid wacht ook als uw vlucht vertraging heeft — dat is goud waard. Absoluut mijn vaste chauffeur.",
-    color: "#34A853",
+    date: "3 maanden geleden",
+    text: "Toen een ander vooraf geboekt taxibedrijf op het afgesproken uur (3u15 's nachts) niet opdaagde en ook geen gehoor gaf hebben we in volle paniek Taxi Bornem gebeld en die stonden op een kwartier tijd aan onze deur. Letterlijk onze redder in nood !\nHeel hartelijk bedankt.",
+    color: "#455a64",
   },
   {
-    name: "Marc Wouters",
-    initials: "MW",
+    name: "Werner De Decker",
+    initials: "W",
     rating: 5,
-    date: "3 weken geleden",
-    text: "Al meer dan 3 jaar mijn vertrouwde taxi voor zakelijke verplaatsingen. Hamid is discreet, betrouwbaar en altijd netjes gekleed. Top service!",
-    color: "#EA4335",
+    date: "2 maanden geleden",
+    text: "Ik heb vervoer van en naar vlieghaven Zaventem gedaan met deze firma. Met 4 personen en 4 middelgrote koffers. Goed op voorhand juiste uren en kostprijs afgesproken en alles verliep heel goed. Voordeel was ook dat de taxidienst heel kort bij mijn woonplaats is (bornem)... Zeer vriendelijke en behulpzame chauffeur en auto tiptop in orde. Ik kan deze service ten zeerste aanraden!",
+    color: "#33691e",
   },
   {
-    name: "Lien De Backer",
-    initials: "LB",
+    name: "Dorien Jaen",
+    initials: "D",
     rating: 5,
-    date: "5 dagen geleden",
-    text: "Vriendelijke chauffeur die ook op zaterdagnacht beschikbaar was. Wagen was schoon, comfortabel en de prijs was eerlijk afgesproken via WhatsApp.",
-    color: "#FBBC05",
+    date: "8 maanden geleden",
+    text: "Zeer vriendelijke mensen een top bediening\nOp voorhand alles gepland. We raden deze mensen ten zeerste aan. Ook door hen hadden we een top reis alles was tot in de puntjes en op tijd gepland.zo zorgeloos voor ons\nEerlijke prijs . We nemen met plezier de volgende diensten terug aan\nGrjes jean & dorien",
+    color: "#512da8",
   },
 ];
 

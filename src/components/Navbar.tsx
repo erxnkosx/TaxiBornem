@@ -70,7 +70,7 @@ export default function Navbar({ currentPath }: { currentPath: string }) {
           </a>
           <a
             href="/contact"
-            className="taxi-primary-btn px-4 py-2 bg-[#181818] text-white text-sm font-semibold rounded-[18px] hover:bg-[#2a2a2a] active:bg-[#111] transition-all shadow-sm"
+            className="taxi-primary-btn px-4 py-2 bg-[#FFC107] text-white text-sm font-semibold rounded-[18px] hover:bg-[#2a2a2a] active:bg-[#111] transition-all shadow-sm"
           >
             Boek een rit
           </a>

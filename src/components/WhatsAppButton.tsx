@@ -11,7 +11,7 @@ export default function WhatsAppButton() {
       aria-label="Chat op WhatsApp"
     >
       <MessageCircle className="w-5 h-5 fill-white" />
-      <span className="text-sm font-semibold hidden sm:block">WhatsApp Hamid</span>
+      <span className="text-sm font-semibold hidden sm:block">WhatsApp Taxi Bornem</span>
     </a>
   );
 }

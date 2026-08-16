@@ -30,7 +30,7 @@ export default function GoogleReviews() {
                 ))}
               </div>
               <span className="text-2xl font-bold text-[#181818]">4,9</span>
-              <span className="text-sm text-[#6b6b6b]">op basis van 80+ Google Reviews</span>
+              <span className="text-sm text-[#6b6b6b]">op basis van 46 Google Reviews</span>
             </div>
           </div>
           <a
@@ -73,7 +73,7 @@ export default function GoogleReviews() {
                   <Star key={j} className="w-3.5 h-3.5 fill-[#FFC107] text-[#FFC107]" />
                 ))}
               </div>
-              <p className="text-sm text-[#444] leading-relaxed">{r.text}</p>
+              <p className="text-sm text-[#444] leading-relaxed whitespace-pre-line">{r.text}</p>
             </div>
           ))}
         </div>
