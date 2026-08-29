@@ -15,11 +15,10 @@ export default function Footer() {
               <img
                 src="/logo.webp"
                 alt="Taxi Bornem Hamid"
-                className="h-16 w-auto"
+                className="h-16 w-auto rounded overflow-hidden"
                 width={320}
                 height={160}
               />
-
             </a>
               <span className="font-bold text-white text-base">Taxi Bornem</span>
             </div>
