@@ -36,7 +36,7 @@ export default function HomePage() {
               </h1>
 
               <p className="text-lg text-[#6b6b6b] leading-relaxed mb-8 max-w-md">
-                Stipt, professioneel en persoonlijk. Wij rijden u comfortabel naar uw bestemming — elke dag, dag en nacht.
+                Stipt, betrouwbaar en persoonlijk. Taxi Bornem brengt u comfortabel en veilig naar elke bestemming, 24 uur per dag, 7 dagen per week.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-3 mb-10">
