@@ -1,5 +1,5 @@
-import { Phone, MessageCircle, Mail, MapPin, Star, Car } from "lucide-react";
-import { PHONE, PHONE_RAW, WHATSAPP_URL, EMAIL } from "../data/site";
+import {Phone, MessageCircle, Mail, MapPin, Star, ShieldCheck, Cookie, Building2} from "lucide-react";
+import { PHONE, PHONE_RAW, WHATSAPP_URL, EMAIL, BTWNUMMER } from "../data/site";
 
 export default function Footer() {
   return (
@@ -38,6 +38,25 @@ export default function Footer() {
               <a href={`mailto:${EMAIL}`} className="flex items-center gap-2 hover:text-[#FFC107] transition-colors">
                 <Mail className="w-3.5 h-3.5" />
                 {EMAIL}
+              </a>
+              <span className="flex items-center gap-2">
+                <Building2 className="w-3.5 h-3.5" />
+                {BTWNUMMER}
+              </span>
+              <a
+                href="/privacybeleid"
+                className="flex items-center gap-2 hover:text-[#FFC107] transition-colors"
+              >
+                <ShieldCheck className="w-3.5 h-3.5" />
+                Privacybeleid
+              </a>
+
+              <a
+                href="/cookiebeleid"
+                className="flex items-center gap-2 hover:text-[#FFC107] transition-colors"
+              >
+                <Cookie className="w-3.5 h-3.5" />
+                Cookiebeleid
               </a>
               <span className="flex items-center gap-2">
                 <MapPin className="w-3.5 h-3.5" />

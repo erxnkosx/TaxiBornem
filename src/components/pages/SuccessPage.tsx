@@ -11,7 +11,7 @@ export default function SuccessPage() {
         </div>
         <h1 className="text-2xl font-bold text-[#181818] mb-3">Aanvraag ontvangen!</h1>
         <p className="text-[#6b6b6b] text-sm leading-relaxed mb-6">
-          Hamid heeft uw ritaanvraag ontvangen en zal u zo snel mogelijk een{" "}
+          We hebben uw ritaanvraag ontvangen en zal u zo snel mogelijk een{" "}
           <strong className="text-[#181818]">persoonlijk prijsvoorstel sturen via WhatsApp</strong>.
         </p>
 
@@ -19,7 +19,7 @@ export default function SuccessPage() {
           <div className="flex flex-col gap-3 text-sm">
             {[
               ["Aanvraag verzonden", "✓"],
-              ["Hamid bekijkt uw aanvraag", "Binnenkort"],
+              ["We bekijke, uw aanvraag", "Binnenkort"],
               ["Prijsvoorstel via WhatsApp", "Binnenkort"],
             ].map(([step, status], i) => (
               <div key={i} className="flex items-center justify-between">
@@ -31,7 +31,7 @@ export default function SuccessPage() {
         </div>
 
         <p className="text-xs text-[#9b9b9b] mb-6">
-          Heeft u een dringende rit? Contacteer Hamid direct via WhatsApp of telefoon.
+          Heeft u een dringende rit? Contacteer ons direct via WhatsApp of telefoon.
         </p>
 
         <div className="flex flex-col gap-2.5">
@@ -42,7 +42,7 @@ export default function SuccessPage() {
             className="w-full py-3 bg-[#25D366] text-white text-sm font-semibold rounded-[14px] hover:bg-[#1db954] transition-colors flex items-center justify-center gap-2"
           >
             <MessageCircle className="w-4 h-4" />
-            Open WhatsApp met Hamid
+            Open WhatsApp
           </a>
           <a
             href="/"

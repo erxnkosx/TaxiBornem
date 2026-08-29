@@ -76,10 +76,10 @@ export default function BookingForm() {
         return;
       }
       setFormError(
-        data.message ?? "Er ging iets mis bij het verzenden. Probeer het opnieuw of app Hamid rechtstreeks."
+        data.message ?? "Er ging iets mis bij het verzenden. Probeer het opnieuw of app ons rechtstreeks."
       );
     } catch {
-      setFormError("Geen verbinding. Controleer uw internet, of app Hamid rechtstreeks.");
+      setFormError("Geen verbinding. Controleer uw internet, of app ons rechtstreeks.");
     }
     setSubmitting(false);
   };
@@ -222,7 +222,7 @@ export default function BookingForm() {
       <div className="sm:col-span-2 bg-[#FFC107]/10 border border-[#FFC107]/20 rounded-[14px] px-4 py-3 flex items-start gap-2.5">
         <MessageCircle className="w-4 h-4 text-[#FFC107] mt-0.5 flex-shrink-0" />
         <p className="text-xs text-[#6b6b6b] leading-relaxed">
-          <strong className="text-[#181818]">Hamid bekijkt elke aanvraag persoonlijk</strong> en stuurt u een prijsvoorstel via WhatsApp. Pas na uw akkoord is de rit bevestigd.
+          <strong className="text-[#181818]">We bekijken elke aanvraag persoonlijk</strong> en stuurt u een prijsvoorstel via WhatsApp. Pas na uw akkoord is de rit bevestigd.
         </p>
       </div>
 

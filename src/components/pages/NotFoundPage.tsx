@@ -11,7 +11,7 @@ export default function NotFoundPage() {
         <p className="text-[#FFC107] font-bold text-6xl mb-4">404</p>
         <h1 className="text-2xl font-bold text-[#181818] mb-3">Pagina niet gevonden</h1>
         <p className="text-[#6b6b6b] text-sm mb-8 leading-relaxed">
-          Deze pagina lijkt nergens naartoe te rijden. Geen zorgen — Hamid brengt u terug op de juiste weg.
+          Deze pagina lijkt nergens naartoe te rijden. Geen zorgen — We brengen u terug op de juiste weg.
         </p>
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
           <a
@@ -27,7 +27,7 @@ export default function NotFoundPage() {
             className="px-6 py-3 bg-[#25D366] text-white text-sm font-semibold rounded-[18px] hover:bg-[#1db954] transition-colors flex items-center justify-center gap-2"
           >
             <MessageCircle className="w-4 h-4" />
-            WhatsApp Hamid
+            WhatsApp Taxi Bornem
           </a>
         </div>
       </div>

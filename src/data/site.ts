@@ -18,6 +18,7 @@ export const PATHS: Record<Page, string> = {
 
 export const PHONE = "+32 472 70 62 45";
 export const PHONE_RAW = "+32472706245";
+export const BTWNUMMER= "BE 1019.703.590";
 export const WHATSAPP_URL = "https://wa.me/32472706245?text=Hallo%20Hamid%2C%20ik%20wil%20graag%20een%20taxi%20boeken.";
 export const EMAIL = "info@taxibornem.be";
 export const GOOGLE_REVIEWS_URL = "https://maps.google.com/?cid=5113066939281304031";
@@ -25,7 +26,7 @@ export const GOOGLE_REVIEWS_URL = "https://maps.google.com/?cid=5113066939281304
 // Access key van Web3Forms (web3forms.com) — verwerkt het boekingsformulier.
 // Deze sleutel mag publiek zijn: ze bepaalt enkel naar welke mailbox de
 // aanvraag gaat. Vervang door de echte sleutel uit je Web3Forms-account.
-export const WEB3FORMS_ACCESS_KEY = "VERVANG-DOOR-JE-WEB3FORMS-KEY";
+export const WEB3FORMS_ACCESS_KEY = "0450fe7f-daa2-4019-849d-8e6c272baa5c";
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 export const services = [
