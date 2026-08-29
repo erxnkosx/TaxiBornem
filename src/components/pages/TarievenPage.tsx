@@ -22,7 +22,7 @@ const surchargeList = [
   { icon: "party", label: "Feestdagentoeslag", desc: "Officiële feestdagen", value: "+25%" },
   { icon: "plane", label: "Luchthavenparkeren", desc: "Ophaal aan terminal", value: "+€8,00" },
   { icon: "baby", label: "Kinderzitje", desc: "Op aanvraag", value: "Gratis" },
-  { icon: "clock", label: "Wachttijd", desc: "Hamid wacht ter plaatse", value: "€30,00/u" },
+  { icon: "clock", label: "Wachttijd", desc: "We wachten ter plaatse", value: "€30,00/u" },
 ];
 
 const betaalIcons = [Banknote, CreditCard, CreditCard, Building2];

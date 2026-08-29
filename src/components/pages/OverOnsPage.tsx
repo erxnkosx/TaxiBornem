@@ -108,7 +108,7 @@ export default function OverOnsPage() {
               className="taxi-primary-btn px-6 py-3.5 bg-[#181818] text-white font-semibold rounded-[18px] hover:bg-[#2a2a2a] transition-all text-sm flex items-center justify-center gap-2"
             >
               <Phone className="w-4 h-4" />
-              Bel Hamid
+              Bellen
             </a>
             <a
               href={WHATSAPP_URL}

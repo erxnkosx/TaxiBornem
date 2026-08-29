@@ -124,7 +124,7 @@ export default function Navbar({ currentPath }: { currentPath: string }) {
               className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-[#25D366] text-white text-sm font-semibold rounded-[18px]"
             >
               <MessageCircle className="w-4 h-4" />
-              WhatsApp Hamid
+              WhatsApp Taxi Bornem
             </a>
           </div>
         </div>
