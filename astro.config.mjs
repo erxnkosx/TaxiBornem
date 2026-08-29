@@ -13,7 +13,7 @@ export default defineConfig({
   // Nette URL's zonder trailing slash: /diensten i.p.v. /diensten/
   trailingSlash: 'never',
   build: {
-    format: 'file', // genereert /diensten.html i.p.v. /diensten/index.html
+    format: 'directory', // genereert /diensten.html i.p.v. /diensten/index.html
   },
 
   vite: {
