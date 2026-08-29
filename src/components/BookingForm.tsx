@@ -104,8 +104,12 @@ export default function BookingForm() {
   const labelClass = "block text-xs font-semibold text-[#6b6b6b] uppercase tracking-wide mb-1.5";
 
   return (
-    <form onSubmit={handleSubmit} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-    <div className="sm:col-span-2">
+      <form
+        onSubmit={handleSubmit}
+        aria-label="Rit aanvragen"
+        className="grid grid-cols-1 sm:grid-cols-2 gap-4"
+      >
+      <div className="sm:col-span-2">
       <label className={labelClass}>Rittype</label>
 
       <div className="mt-2 grid grid-cols-2 gap-1 rounded-[18px] bg-[#f4f4f4] p-1">
@@ -137,22 +141,37 @@ export default function BookingForm() {
       </div>
     </div>
       <div>
-        <label className={labelClass}>Naam</label>
-        <input data-veld="naam" className={fieldClass("naam")} placeholder="Uw volledige naam" value={form.naam} onChange={(e) => set("naam", e.target.value)} />
+        <label htmlFor="naam" className={labelClass}>Naam</label>
+        <input
+          id="naam"
+          data-veld="naam"
+          className={fieldClass("naam")}
+          placeholder="Uw volledige naam"
+          value={form.naam}
+          onChange={(e) => set("naam", e.target.value)}
+        />
         <Fout veld="naam" />
       </div>
       <div>
-        <label className={labelClass}>Telefoon</label>
-        <input type="tel" data-veld="telefoon" className={fieldClass("telefoon")} placeholder="+32 4XX XX XX XX" value={form.telefoon} onChange={(e) => set("telefoon", e.target.value)} />
+        <label htmlFor="telefoon" className={labelClass}>Telefoon</label>
+        <input
+          id="telefoon"
+          type="tel"
+          data-veld="telefoon"
+          className={fieldClass("telefoon")}
+          placeholder="+32 4XX XX XX XX"
+          value={form.telefoon}
+          onChange={(e) => set("telefoon", e.target.value)}
+        />
         <Fout veld="telefoon" />
       </div>
       <div className="sm:col-span-2">
-        <label className={labelClass}>
-          E-mail <span className="normal-case font-normal text-[#9b9b9b]"></span>
-        </label>
+        <label htmlFor="email" className={labelClass}>E-mail</label>
         <input
+          id="email"
           type="email"
-          data-veld="email" className={fieldClass("email")}
+          data-veld="email"
+          className={fieldClass("email")}
           placeholder="uw@email.be"
           value={form.email}
           onChange={(e) => set("email", e.target.value)}
@@ -160,33 +179,62 @@ export default function BookingForm() {
         <Fout veld="email" />
       </div>
       <div>
-        <label className={labelClass}>Ophalen (adres)</label>
-        <input data-veld="ophalen" className={fieldClass("ophalen")} placeholder="Vertrekadres" value={form.ophalen} onChange={(e) => set("ophalen", e.target.value)} />
+        <label htmlFor="ophalen" className={labelClass}>Ophalen (adres)</label>
+        <input
+          id="ophalen"
+          data-veld="ophalen"
+          className={fieldClass("ophalen")}
+          placeholder="Vertrekadres"
+          value={form.ophalen}
+          onChange={(e) => set("ophalen", e.target.value)}
+        />
         <Fout veld="ophalen" />
       </div>
       <div>
-        <label className={labelClass}>Bestemming</label>
-        <input data-veld="bestemming" className={fieldClass("bestemming")} placeholder="Aankomstadres" value={form.bestemming} onChange={(e) => set("bestemming", e.target.value)} />
+        <label htmlFor="bestemming" className={labelClass}>Bestemming</label>
+        <input
+          id="bestemming"
+          data-veld="bestemming"
+          className={fieldClass("bestemming")}
+          placeholder="Aankomstadres"
+          value={form.bestemming}
+          onChange={(e) => set("bestemming", e.target.value)}
+        />
         <Fout veld="bestemming" />
       </div>
       <div>
-        <label className={labelClass}>Datum</label>
-        <input type="date" data-veld="datum" className={fieldClass("datum")} value={form.datum} onChange={(e) => set("datum", e.target.value)} />
+        <label htmlFor="datum" className={labelClass}>Datum</label>
+        <input
+          id="datum"
+          type="date"
+          data-veld="datum"
+          className={fieldClass("datum")}
+          value={form.datum}
+          onChange={(e) => set("datum", e.target.value)}
+        />
         <Fout veld="datum" />
       </div>
       <div>
-        <label className={labelClass}>Tijd</label>
-        <input type="time" data-veld="tijd" className={fieldClass("tijd")} value={form.tijd} onChange={(e) => set("tijd", e.target.value)} />
+        <label htmlFor="tijd" className={labelClass}>Tijd</label>
+        <input
+          id="tijd"
+          type="time"
+          data-veld="tijd"
+          className={fieldClass("tijd")}
+          value={form.tijd}
+          onChange={(e) => set("tijd", e.target.value)}
+        />
         <Fout veld="tijd" />
       </div>
       {form.ritType === "heen-terug" && (
         <>
           <div>
-            <label className={labelClass}>Terugrit datum</label>
-
+            <label htmlFor="terugDatum" className={labelClass}>Terugrit datum</label>
             <input
+              id="terugDatum"
               type="date"
-              data-veld="terugDatum" className={fieldClass("terugDatum")}
+              data-veld="terugDatum"
+              className={fieldClass("terugDatum")}
               value={form.terugDatum}
               onChange={(e) => set("terugDatum", e.target.value)}
             />
@@ -194,11 +242,12 @@ export default function BookingForm() {
           </div>
 
           <div>
-            <label className={labelClass}>Terugrit tijd</label>
-
+            <label htmlFor="terugTijd" className={labelClass}>Terugrit tijd</label>
             <input
+              id="terugTijd"
               type="time"
-              data-veld="terugTijd" className={fieldClass("terugTijd")}
+              data-veld="terugTijd"
+              className={fieldClass("terugTijd")}
               value={form.terugTijd}
               onChange={(e) => set("terugTijd", e.target.value)}
             />
@@ -207,16 +256,33 @@ export default function BookingForm() {
         </>
       )}
       <div>
-        <label className={labelClass}>Aantal personen</label>
-        <select className={inputClass} value={form.personen} onChange={(e) => set("personen", e.target.value)}>
+          <label htmlFor="personen" className={labelClass}>
+            Aantal personen
+          </label>
+
+          <select
+            id="personen"
+            className={inputClass}
+            value={form.personen}
+            onChange={(e) => set("personen", e.target.value)}
+          >
           {[1, 2, 3, 4, 5, 6, 7].map((n) => (
             <option key={n} value={n}>{n} {n === 1 ? "persoon" : "personen"}</option>
           ))}
         </select>
       </div>
       <div>
-        <label className={labelClass}>Opmerkingen</label>
-        <input className={inputClass} placeholder="Kinderzitje, extra bagage, …" value={form.opmerkingen} onChange={(e) => set("opmerkingen", e.target.value)} />
+        <label htmlFor="opmerkingen" className={labelClass}>
+          Opmerkingen
+        </label>
+
+        <input
+          id="opmerkingen"
+          className={inputClass}
+          placeholder="Kinderzitje, extra bagage, …"
+          value={form.opmerkingen}
+          onChange={(e) => set("opmerkingen", e.target.value)}
+        />
       </div>
 
       <div className="sm:col-span-2 bg-[#FFC107]/10 border border-[#FFC107]/20 rounded-[14px] px-4 py-3 flex items-start gap-2.5">
