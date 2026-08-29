@@ -27,6 +27,9 @@ export function buildWeb3FormsPayload(b: Booking): Record<string, string> {
     b.ritType === "heen-terug"
       ? `\nTerugrit: ${nlDatum(b.terugDatum)} om ${b.terugTijd}`
       : "";
+const whatsappNumber = b.telefoon.replace(/\D/g, "");
+
+const whatsappLink = `https://wa.me/${whatsappNumber}`;
 
   const message =
     `Nieuwe ritaanvraag via de website\n\n` +
@@ -38,6 +41,7 @@ export function buildWeb3FormsPayload(b: Booking): Record<string, string> {
     `Wanneer: ${nlDatum(b.datum)} om ${b.tijd}${retour}\n` +
     `Type rit: ${b.ritType === "heen-terug" ? "Heen & terug" : "Enkele rit"}\n` +
     `Personen: ${b.personen}\n` +
+    `WhatsApp klant:\n${whatsappLink}\n\n` +
     (b.opmerkingen ? `Opmerkingen: ${b.opmerkingen}\n` : "");
 
   return {
