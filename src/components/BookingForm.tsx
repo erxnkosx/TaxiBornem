@@ -148,7 +148,7 @@ export default function BookingForm() {
       </div>
       <div className="sm:col-span-2">
         <label className={labelClass}>
-          E-mail <span className="normal-case font-normal text-[#9b9b9b]">— optioneel, voor een bevestiging</span>
+          E-mail <span className="normal-case font-normal text-[#9b9b9b]"></span>
         </label>
         <input
           type="email"

@@ -36,7 +36,7 @@ export default function HomePage() {
               </h1>
 
               <p className="text-lg text-[#6b6b6b] leading-relaxed mb-8 max-w-md">
-                Stipt, professioneel en persoonlijk. Hamid rijdt u comfortabel naar uw bestemming — elke dag, dag en nacht.
+                Stipt, professioneel en persoonlijk. Wij rijden u comfortabel naar uw bestemming — elke dag, dag en nacht.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-3 mb-10">
@@ -56,7 +56,7 @@ export default function HomePage() {
                   className="px-6 py-3.5 bg-[#25D366] text-white font-semibold rounded-[18px] hover:bg-[#1db954] transition-colors text-sm flex items-center justify-center gap-2 shadow-lg shadow-green-500/15"
                 >
                   <MessageCircle className="w-4 h-4" />
-                  WhatsApp Hamid
+                  WhatsApp
                 </a>
               </div>
 
@@ -191,7 +191,7 @@ export default function HomePage() {
             <p className="taxi-kicker text-xs font-semibold uppercase tracking-widest mb-3">Populaire ritten</p>
             <h2 className="text-3xl sm:text-4xl font-bold text-[#181818] tracking-tight">Vanafprijzen</h2>
             <p className="text-[#6b6b6b] mt-3 text-sm max-w-md mx-auto">
-              Indicatieve startprijzen. De definitieve prijs wordt persoonlijk bevestigd door Hamid.
+              Indicatieve startprijzen. De definitieve prijs wordt persoonlijk bevestigd door onze medewerkers.
             </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
@@ -236,7 +236,7 @@ export default function HomePage() {
             Klaar voor een comfortabele rit?
           </h2>
           <p className="text-white/50 mb-8 text-base leading-relaxed">
-            Contacteer Hamid vandaag nog. Persoonlijk, stipt en betrouwbaar — elke keer.
+            Contacteer ons vandaag nog. Persoonlijk, stipt en betrouwbaar — elke keer.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <a
@@ -253,7 +253,7 @@ export default function HomePage() {
               className="px-6 py-3.5 bg-white/10 text-white font-semibold rounded-[18px] hover:bg-white/20 transition-colors text-sm flex items-center justify-center gap-2"
             >
               <MessageCircle className="w-4 h-4" />
-              WhatsApp Hamid
+              WhatsApp Taxi Bornem
             </a>
           </div>
         </div>

@@ -35,13 +35,12 @@ export const services = [
     image: "/dienst-luchthaven.webp",
     title: "Luchthavenvervoer",
     subtitle: "Airport transfer",
-    description: "Stressvrij naar Brussels Airport (Zaventem), Charleroi of Eindhoven. Vluchttracking inbegrepen — Hamid wacht op u bij aankomst.",
+    description: "Stressvrij naar Brussels Airport (Zaventem), Charleroi of Eindhoven. Wij wachten op u bij aankomst.",
     tag: "Meest gevraagd",
     details: [
       "Brussels Airport (Zaventem), Charleroi en Eindhoven",
-      "Vluchttracking: bij vertraging wacht Hamid gewoon",
+      "Vluchttracking: bij vertraging wachten we, zonder bijkomende kosten",
       "Hulp met bagage, in- en uitladen",
-      "Kinderzitje gratis op aanvraag",
     ],
     note: "Ophalen aan de terminal: toeslag luchthavenparkeren +€8,00.",
   },
@@ -134,27 +133,23 @@ export const tariffFaqIndexes = [0, 2, 4, 5];
 export const faqItems = [
   {
     q: "Hoe kan ik een taxi boeken?",
-    a: "Via het boekingsformulier op deze website, per telefoon of via WhatsApp. Hamid bekijkt uw aanvraag persoonlijk en stuurt u een prijsvoorstel via WhatsApp vóór bevestiging.",
+    a: "Via het boekingsformulier op deze website, per telefoon of via WhatsApp. Wij bekijken uw aanvraag persoonlijk en sturen u een prijsvoorstel vóór bevestiging.",
   },
   {
     q: "Hoe lang van tevoren moet ik boeken?",
-    a: "Liefst 24 uur op voorhand, zeker voor luchthaventrips. Voor spoedriten kunt u altijd bellen — Hamid doet zijn uiterste best om u zo snel mogelijk te helpen.",
+    a: "Liefst 24 uur op voorhand, zeker voor luchthavenvervoer. Voor spoedritten kunt u altijd bellen. Wij doen ons uiterste best om u zo snel mogelijk te helpen.",
   },
   {
     q: "Welke betalingsmethoden zijn er?",
     a: "Cash, Bancontact, Visa/Mastercard en overschrijving voor zakelijke klanten. Alle betaalmethoden worden vooraf besproken bij de prijsbevestiging.",
   },
   {
-    q: "Kan ik een kinderzitje aanvragen?",
-    a: "Ja, kinderzitjes (inclusief reiswiegjes) zijn beschikbaar op aanvraag. Vermeld dit in uw boeking zodat Hamid dit tijdig kan voorbereiden.",
-  },
-  {
     q: "Zijn er toeslagen voor nachten of weekenden?",
-    a: "Een nachttoeslag van +25% geldt tussen 22:00 en 06:00. Weekendritten kennen een minimumtoeslag van +15%. Deze zijn altijd inbegrepen in het prijsvoorstel van Hamid.",
+    a: "Een nachttoeslag van +25% geldt tussen 22:00 en 06:00. Weekendritten kennen een minimumtoeslag van +15%. Deze zijn altijd inbegrepen in het prijsvoorstel.",
   },
   {
     q: "Hoe werkt de prijsbevestiging precies?",
-    a: "Na uw boeking berekent Hamid de exacte prijs op basis van uw rit. U ontvangt een voorstel via WhatsApp. Pas na uw akkoord is de rit definitief geboekt. Geen verrassingen.",
+    a: "Na uw boeking berekenen we de exacte prijs op basis van uw rit. U ontvangt een voorstel via WhatsApp. Pas na uw akkoord is de rit definitief geboekt. Geen verrassingen.",
   },
 ];
 

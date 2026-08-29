@@ -1,4 +1,4 @@
-import { Phone, MessageCircle, Clock, Check, Shield, Award } from "lucide-react";
+import { Phone, MessageCircle, Check, Shield, Award, Star } from "lucide-react";
 import { PHONE_RAW, WHATSAPP_URL, stats } from "../../data/site";
 
 export default function OverOnsPage() {
@@ -15,11 +15,11 @@ export default function OverOnsPage() {
                 <span className="text-[#6b6b6b]">Een vertrouwde partner.</span>
               </h1>
               <p className="text-base text-[#6b6b6b] leading-relaxed mb-6">
-                Hamid startte in 2012 met één doel: de meest betrouwbare taxichauffeur van Bornem worden.
+                Wij startten in 2012 met één doel: de meest betrouwbare taxichauffeur van Bornem worden.
                 Wat begon als een soloproject groeide uit tot een vertrouwde naam in de regio, gebaseerd op stiptheid, discretie en een oprechte glimlach.
               </p>
               <p className="text-base text-[#6b6b6b] leading-relaxed mb-8">
-                Vandaag rijdt Hamid elke dag zakenmensen, gezinnen en reizigers naar hun bestemming — altijd persoonlijk, altijd met zorg. Geen callcenter, geen anonieme service: ú belt Hamid, en Hamid rijdt u.
+                Vandaag brengen we elke dag zakenmensen, gezinnen en reizigers veilig naar hun bestemming — altijd persoonlijk, altijd met zorg. Geen callcenter, geen anonieme service: u belt ons, en wij brengen u waar u moet zijn.
               </p>
               <div className="flex flex-col gap-3">
                 <div className="flex items-center gap-2">
@@ -32,7 +32,7 @@ export default function OverOnsPage() {
                 </div>
                 <div className="flex items-center gap-2">
                   <Check className="w-4 h-4 text-[#FFC107]" />
-                  <span className="text-sm text-[#181818]">Meertalig: Nederlands, Frans, Engels, Arabisch</span>
+                  <span className="text-sm text-[#181818]">Meertalig: Nederlands, Engels, Arabisch</span>
                 </div>
               </div>
             </div>
@@ -41,7 +41,7 @@ export default function OverOnsPage() {
             <div className="relative">
               <div className="taxi-image-frame relative rounded-[24px] overflow-hidden aspect-[16/10] shadow-xl shadow-black/10 max-w-xl mx-auto">
                 <img
-                  src="/logo.webp"
+                  src="/hamid-portret.webp"
                   alt="Hamid, professionele taxichauffeur in Bornem"
                   className="w-full h-full object-cover"
                 />
@@ -69,37 +69,28 @@ export default function OverOnsPage() {
       </section>
 
       {/* Values */}
-      <section className="py-20 bg-white">
+      <section className="py-24 bg-white">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-[#181818] tracking-tight">Onze waarden</h2>
+          <div className="text-center mb-14">
+            <h2 className="text-3xl sm:text-4xl font-bold text-[#181818] tracking-tight">
+              Waarom Taxi Bornem?
+            </h2>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
             {[
-              {
-                icon: Clock,
-                title: "Stiptheid",
-                desc: "Op tijd zijn is respect. Hamid plant elke rit nauwkeurig en volgt verkeer en vluchten live op.",
-              },
-              {
-                icon: Shield,
-                title: "Discretie",
-                desc: "Zakelijke gesprekken, persoonlijke verhalen — alles wat in de wagen wordt gezegd, blijft vertrouwelijk.",
-              },
-              {
-                icon: Award,
-                title: "Comfort",
-                desc: "Een propere, verzorgde Kia. Airco, water, stille muziek of stilte — zoals u dat wenst.",
-              },
+              { icon: Shield, title: "Stiptheid", desc: "Op tijd, altijd. Wij volgen verkeer en vluchten op de voet." },
+              { icon: Award, title: "Discretie", desc: "Wij zijn discreet over wie we vervoeren en waarheen. Dat spreekt voor zich." },
+              { icon: Star, title: "Comfort", desc: "Verzorgde Kia, schoon en comfortabel voor elke rit." },
             ].map((v, i) => (
-              <div key={i} className="taxi-card p-7 rounded-[18px] bg-[#f7f7f7] flex flex-col gap-4">
-                <div className="w-12 h-12 bg-[#FFC107]/10 rounded-[14px] flex items-center justify-center">
+              <div
+                key={i}
+                className="taxi-card flex flex-col items-center text-center px-7 py-9 rounded-[20px] bg-[#f7f7f7]"
+              >
+                <div className="w-14 h-14 bg-[#FFC107]/12 rounded-[16px] flex items-center justify-center mb-5">
                   <v.icon className="w-6 h-6 text-[#FFC107]" />
                 </div>
-                <div>
-                  <h3 className="font-bold text-[#181818] text-base mb-2">{v.title}</h3>
-                  <p className="text-sm text-[#6b6b6b] leading-relaxed">{v.desc}</p>
-                </div>
+                <h3 className="font-bold text-[#181818] text-lg mb-2.5">{v.title}</h3>
+                <p className="text-[15px] text-[#6b6b6b] leading-[1.7]">{v.desc}</p>
               </div>
             ))}
           </div>
@@ -109,8 +100,8 @@ export default function OverOnsPage() {
       {/* CTA */}
       <section className="py-16 bg-[#f7f7f7]">
         <div className="max-w-3xl mx-auto px-4 text-center">
-          <h2 className="text-2xl font-bold text-[#181818] mb-4">Leer Hamid persoonlijk kennen</h2>
-          <p className="text-[#6b6b6b] mb-6 text-sm">Bel of stuur een WhatsApp — Hamid beantwoordt elke vraag persoonlijk.</p>
+          <h2 className="text-2xl font-bold text-[#181818] mb-4">Leer ons persoonlijk kennen</h2>
+          <p className="text-[#6b6b6b] mb-6 text-sm">Bel of stuur een WhatsApp — We beantwoorden elke vraag persoonlijk.</p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <a
               href={`tel:${PHONE_RAW}`}

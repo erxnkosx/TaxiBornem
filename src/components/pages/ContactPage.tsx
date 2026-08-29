@@ -27,7 +27,7 @@ export default function ContactPage() {
             Neem contact op
           </h1>
           <p className="text-lg text-[#6b6b6b] max-w-lg">
-            Hamid staat klaar om uw vragen te beantwoorden en uw rit te bevestigen.
+            We staan klaar om uw vragen te beantwoorden en uw rit te bevestigen.
           </p>
         </div>
       </section>

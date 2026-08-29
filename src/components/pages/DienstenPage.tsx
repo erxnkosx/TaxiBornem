@@ -19,7 +19,7 @@ export default function DienstenPage() {
               Premium taxidiensten voor elk moment
             </h1>
             <p className="text-lg text-[#6b6b6b] leading-relaxed">
-              Van luchthaventransfer tot lange afstanden — Hamid rijdt u stipt en comfortabel
+              Van luchthaventransfer tot lange afstanden — Wij rijden u stipt en comfortabel
               naar elke bestemming.
             </p>
           </div>
@@ -129,18 +129,18 @@ export default function DienstenPage() {
         </div>
       </section>
 
-      {/* ── Waarom Hamid ─────────────────────────────────────── */}
+      {/* ── Waarom Taxi Bornem ─────────────────────────────────────── */}
       <section className="py-24 bg-white">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-14">
             <h2 className="text-3xl sm:text-4xl font-bold text-[#181818] tracking-tight">
-              Waarom Hamid?
+              Waarom Taxi Bornem?
             </h2>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
             {[
-              { icon: Shield, title: "Stiptheid", desc: "Op tijd, altijd. Hamid volgt verkeer en vluchten op de voet." },
-              { icon: Award, title: "Discretie", desc: "Wat in de wagen blijft, blijft in de wagen. 100% vertrouwelijk." },
+              { icon: Shield, title: "Stiptheid", desc: "Op tijd, altijd. Wij volgen verkeer en vluchten op de voet." },
+              { icon: Award, title: "Discretie", desc: "Wij zijn discreet over wie we vervoeren en waarheen. Dat spreekt voor zich." },
               { icon: Star, title: "Comfort", desc: "Verzorgde Kia, schoon en comfortabel voor elke rit." },
             ].map((v, i) => (
               <div

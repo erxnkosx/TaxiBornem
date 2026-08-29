@@ -62,7 +62,7 @@ export default function TarievenPage() {
             Transparante prijzen
           </h1>
           <p className="text-lg text-[#6b6b6b] max-w-xl mx-auto leading-relaxed">
-            Elke definitieve prijs wordt persoonlijk bevestigd door Hamid via WhatsApp.
+            Elke definitieve prijs wordt persoonlijk bevestigd door onze medewerkers via WhatsApp.
             Geen verrassingen, altijd eerlijk.
           </p>
         </div>
@@ -75,7 +75,7 @@ export default function TarievenPage() {
             <h2 className="text-2xl sm:text-3xl font-bold text-[#181818] tracking-tight mb-2">
               Zo is uw prijs opgebouwd
             </h2>
-            <p className="text-sm text-[#6b6b6b]">Drie eenvoudige onderdelen — meer is het niet.</p>
+            <p className="text-sm text-[#6b6b6b]">Drie eenvoudige onderdelen, meer is het niet.</p>
           </div>
 
           <div className="flex flex-col sm:flex-row items-stretch justify-center gap-3 sm:gap-2">
@@ -208,7 +208,7 @@ export default function TarievenPage() {
               <Info className="w-4 h-4 text-[#c99700] mt-0.5 flex-shrink-0" />
               <p className="text-[13px] text-[#6b6b6b] leading-relaxed">
                 Dit is een <strong className="text-[#181818]">indicatie</strong> op basis van de
-                basistarieven. Hamid berekent uw exacte prijs op basis van de werkelijke route en het
+                basistarieven. Wij berekenen uw exacte prijs op basis van de werkelijke route en het
                 tijdstip, en bevestigt die vóór de rit via WhatsApp.
               </p>
             </div>
@@ -373,7 +373,7 @@ export default function TarievenPage() {
             Exacte prijs opvragen?
           </h2>
           <p className="text-white/50 mb-8 leading-relaxed">
-            Stuur uw rit door en Hamid bezorgt u snel een persoonlijk voorstel — zonder verplichting.
+            Stuur uw rit door en wij bezorgen u snel een persoonlijk voorstel.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <a

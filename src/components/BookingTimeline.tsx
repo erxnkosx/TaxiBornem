@@ -3,7 +3,7 @@ import { MessageCircle, Car, Check, Calendar, User } from "lucide-react";
 
 export default function BookingTimeline() {
   const steps = [
-    { icon: Calendar, label: "Aanvraag", desc: "U vult het formulier in of stuurt een WhatsApp" },
+    { icon: Calendar, label: "Aanvraag", desc: "U vult het formulier in of stuurt een WhatsApp bericht" },
     { icon: User, label: "Aanvraag ontvangen", desc: "Wij bekijken uw aanvraag persoonlijk" },
     { icon: MessageCircle, label: "Prijs via WhatsApp", desc: "U ontvangt een transparant prijsvoorstel" },
     { icon: Check, label: "Klant bevestigt", desc: "U geeft akkoord via WhatsApp of telefoon" },

@@ -11,7 +11,7 @@ export default function Footer() {
             <div className="flex items-center gap-2.5 mb-4">
 
             {/* Logo */}
-            <a href="/" className="flex items-center gap-2.5 group" aria-label="Taxi Bornem Hamid — startpagina">
+            <a href="/" className="flex items-center gap-2.5 group" aria-label="Taxi Bornem — startpagina">
               <img
                 src="/logo.webp"
                 alt="Taxi Bornem Hamid"
@@ -21,7 +21,7 @@ export default function Footer() {
               />
 
             </a>
-              <span className="font-bold text-white text-base">Taxi Bornem Hamid</span>
+              <span className="font-bold text-white text-base">Taxi Bornem</span>
             </div>
             <p className="text-sm text-white/50 leading-relaxed max-w-xs mb-6">
               Uw betrouwbare en luxueuze taxiservice in Bornem en omgeving. Persoonlijk, stipt en professioneel — elke rit.
@@ -73,7 +73,7 @@ export default function Footer() {
                 <span className="text-sm text-white/70 font-medium">24u/24u — 7d/7</span>
               </div>
               <p className="text-sm text-white/40 leading-relaxed mt-1">
-                Elke dag van de week, ook op feestdagen. Hamid staat voor u klaar.
+                Elke dag van de week, ook op feestdagen. Wij staan voor u klaar.
               </p>
               <a
                 href={WHATSAPP_URL}
@@ -90,7 +90,7 @@ export default function Footer() {
 
         <div className="border-t border-white/8 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs text-white/30">
-            © {new Date().getFullYear()} Taxi Bornem Hamid. Alle rechten voorbehouden.
+            © {new Date().getFullYear()} Taxi Bornem. Alle rechten voorbehouden.
           </p>
           <div className="flex items-center gap-1 text-xs text-white/20">
             <div className="flex">
