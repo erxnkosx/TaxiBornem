@@ -1,8 +1,9 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { MessageCircle, ArrowRight, Check, Navigation2, AlertCircle } from "lucide-react";
 import { WHATSAPP_URL } from "../data/site";
 import { validate, type Errors } from "../lib/validation";
 import { buildWeb3FormsPayload, WEB3FORMS_ENDPOINT } from "../lib/web3forms";
+import AddressAutocomplete, { type GeoPoint } from "./AddressAutocomplete";
 
 export default function BookingForm() {
   const [form, setForm] = useState({
@@ -24,8 +25,53 @@ export default function BookingForm() {
   const [formError, setFormError] = useState("");
   const [honeypot, setHoneypot] = useState("");
 
+  // Gekozen coördinaten uit de adres-suggesties (null zolang er geen exacte
+  // match geselecteerd is, of zodra de tekst nadien nog wijzigt).
+  const [ophalenPunt, setOphalenPunt] = useState<GeoPoint | null>(null);
+  const [bestemmingPunt, setBestemmingPunt] = useState<GeoPoint | null>(null);
+  const [afstand, setAfstand] = useState<{ km: number; minuten: number } | null>(null);
+  const [afstandLaden, setAfstandLaden] = useState(false);
+
   // Tijdstip waarop het formulier verscheen — bots vullen sneller in dan mensen.
   const geopendOp = useRef(Date.now());
+
+  // Zodra beide adressen gekozen zijn, rijafstand opvragen via OSRM
+  // (router.project-osrm.org) — een gratis, publieke routeserver zonder
+  // API-key. Draait client-side, past bij de statische site.
+  useEffect(() => {
+    if (!ophalenPunt || !bestemmingPunt) {
+      setAfstand(null);
+      return;
+    }
+    let geannuleerd = false;
+    setAfstandLaden(true);
+    const url = `https://router.project-osrm.org/route/v1/driving/${ophalenPunt.lon},${ophalenPunt.lat};${bestemmingPunt.lon},${bestemmingPunt.lat}?overview=false`;
+
+    fetch(url)
+      .then((r) => r.json())
+      .then((data) => {
+        if (geannuleerd) return;
+        const route = data.routes?.[0];
+        if (route) {
+          setAfstand({
+            km: Math.round(route.distance / 100) / 10,
+            minuten: Math.round(route.duration / 60),
+          });
+        } else {
+          setAfstand(null);
+        }
+      })
+      .catch(() => {
+        if (!geannuleerd) setAfstand(null);
+      })
+      .finally(() => {
+        if (!geannuleerd) setAfstandLaden(false);
+      });
+
+    return () => {
+      geannuleerd = true;
+    };
+  }, [ophalenPunt, bestemmingPunt]);
 
   const set = (key: string, val: string) => {
     setForm((f) => ({ ...f, [key]: val }));
@@ -65,7 +111,10 @@ export default function BookingForm() {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({
-          ...buildWeb3FormsPayload(form as any),
+          ...buildWeb3FormsPayload(
+            form as any,
+            afstand ? { afstandKm: afstand.km, rijtijdMin: afstand.minuten } : undefined
+          ),
           botcheck: honeypot, // Web3Forms' eigen spamcontrole
         }),
       });
@@ -180,28 +229,43 @@ export default function BookingForm() {
       </div>
       <div>
         <label htmlFor="ophalen" className={labelClass}>Ophalen (adres)</label>
-        <input
+        <AddressAutocomplete
           id="ophalen"
-          data-veld="ophalen"
+          dataVeld="ophalen"
           className={fieldClass("ophalen")}
           placeholder="Vertrekadres"
           value={form.ophalen}
-          onChange={(e) => set("ophalen", e.target.value)}
+          onChange={(v) => set("ophalen", v)}
+          onSelect={setOphalenPunt}
         />
         <Fout veld="ophalen" />
       </div>
       <div>
         <label htmlFor="bestemming" className={labelClass}>Bestemming</label>
-        <input
+        <AddressAutocomplete
           id="bestemming"
-          data-veld="bestemming"
+          dataVeld="bestemming"
           className={fieldClass("bestemming")}
           placeholder="Aankomstadres"
           value={form.bestemming}
-          onChange={(e) => set("bestemming", e.target.value)}
+          onChange={(v) => set("bestemming", v)}
+          onSelect={setBestemmingPunt}
         />
         <Fout veld="bestemming" />
       </div>
+      {(afstand || afstandLaden) && (
+        <div className="sm:col-span-2 flex items-center gap-2.5 rounded-[14px] bg-[#FFC107]/10 px-4 py-2.5">
+          <Navigation2 className="w-4 h-4 flex-shrink-0 text-[#B7791F]" />
+          {afstandLaden ? (
+            <p className="text-xs text-[#6b6b6b]">Afstand berekenen…</p>
+          ) : (
+            <p className="text-xs text-[#181818]">
+              Geschatte afstand: <strong>{afstand!.km} km</strong> · ±{afstand!.minuten} min rijden
+              <span className="text-[#6b6b6b]"></span>
+            </p>
+          )}
+        </div>
+      )}
       <div>
         <label htmlFor="datum" className={labelClass}>Datum</label>
         <input
