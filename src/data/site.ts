@@ -237,7 +237,7 @@ export const reviews = [
 
 export const stats = [
   { value: "1", label: "Vaste chauffeur" },
-  { value: "50+", label: "Tevreden klanten" },
+  { value: "46", label: "Beoordelingen" },
   { value: "4,9/5", label: "Google-beoordeling" },
   { value: "24/7", label: "Beschikbaar" },
 ];

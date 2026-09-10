@@ -100,8 +100,8 @@ export default function HomePage() {
                   <Award className="w-5 h-5 text-[#FFC107]" />
                 </div>
                 <div>
-                  <p className="font-bold text-[#181818] text-sm">50+ ritten</p>
-                  <p className="text-xs text-[#6b6b6b]">Tevreden klanten</p>
+                  <p className="font-bold text-[#181818] text-sm">4,9 / 5</p>
+                  <p className="text-xs text-[#6b6b6b]">46 Google-reviews</p>
                 </div>
               </div>
               <div className="absolute -top-4 -right-4 bg-white rounded-[18px] p-4 shadow-xl border border-black/5 flex items-center gap-3">
