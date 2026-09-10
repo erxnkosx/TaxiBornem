@@ -1,12 +1,29 @@
-import { useState } from "react";
-import { Phone, MessageCircle, Mail, MapPin, Clock } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Phone, MessageCircle, Mail, MapPin, Clock, Play } from "lucide-react";
 import { PHONE, PHONE_RAW, WHATSAPP_URL, EMAIL } from "../../data/site";
+import {
+  readConsent,
+  writeConsent,
+  openConsentBanner,
+  CONSENT_CHANGED,
+} from "../../lib/cookieConsent";
 import GoogleReviews from "../GoogleReviews";
 import BookingForm from "../BookingForm";
 
 export default function ContactPage() {
   const [contactForm, setContactForm] = useState({ naam: "", email: "", bericht: "" });
   const [sent, setSent] = useState(false);
+
+  // De Google Maps-kaart volgt de keuze uit de cookiebanner. Zolang de
+  // bezoeker niets toegestaan heeft, gaat er geen enkel verzoek naar Google.
+  const [kaartGeladen, setKaartGeladen] = useState(false);
+
+  useEffect(() => {
+    const sync = () => setKaartGeladen(readConsent() === "accepted");
+    sync();
+    window.addEventListener(CONSENT_CHANGED, sync);
+    return () => window.removeEventListener(CONSENT_CHANGED, sync);
+  }, []);
 
   const handleSend = (e: React.FormEvent) => {
     e.preventDefault();
@@ -123,12 +140,55 @@ export default function ContactPage() {
                     Open in Google Maps →
                   </a>
                 </div>
-                <iframe
-                  title="Bornem op Google Maps"
-                  src="https://maps.google.com/maps?q=Bornem,Belgium&t=&z=13&ie=UTF8&iwloc=&output=embed"
-                  className="w-full h-56 border-0"
-                  loading="lazy"
-                />
+                {kaartGeladen ? (
+                  <iframe
+                    title="Bornem op Google Maps"
+                    src="https://maps.google.com/maps?q=Bornem,Belgium&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                    className="w-full h-56 border-0"
+                    loading="lazy"
+                  />
+                ) : (
+                  <div className="relative w-full h-56 bg-[#f4f4f4] overflow-hidden">
+                    {/* Decoratief stratenpatroon — puur CSS, geen externe verzoeken. */}
+                    <div
+                      aria-hidden="true"
+                      className="absolute inset-0 opacity-[0.55]"
+                      style={{
+                        backgroundImage:
+                          "linear-gradient(#e2e2e2 1px, transparent 1px), linear-gradient(90deg, #e2e2e2 1px, transparent 1px), linear-gradient(115deg, transparent 47%, #dcdcdc 47%, #dcdcdc 53%, transparent 53%)",
+                        backgroundSize: "28px 28px, 28px 28px, 100% 100%",
+                      }}
+                    />
+                    <div className="relative h-full flex flex-col items-center justify-center text-center px-6 gap-3">
+                      <MapPin className="w-6 h-6 text-[#FFC107]" />
+                      <p className="text-xs text-[#6b6b6b] max-w-xs leading-relaxed">
+                        De kaart komt van Google. Laadt u hem, dan kan Google cookies op uw
+                        toestel plaatsen. Meer hierover in ons{" "}
+                        <a href="/cookiebeleid" className="underline hover:text-[#181818]">
+                          cookiebeleid
+                        </a>
+                        .
+                      </p>
+                      <button
+                        type="button"
+                        onClick={() => writeConsent("accepted")}
+                        className="inline-flex items-center gap-2 px-4 py-2.5 bg-[#FFC107] text-[#181818] text-sm font-bold rounded-[12px] hover:bg-[#FFD54F] transition-colors"
+                      >
+                        <Play className="w-3.5 h-3.5" />
+                        Kaart laden
+                      </button>
+                      {readConsent() === "refused" && (
+                        <button
+                          type="button"
+                          onClick={openConsentBanner}
+                          className="text-[11px] text-[#9b9b9b] underline hover:text-[#6b6b6b] transition-colors"
+                        >
+                          Cookievoorkeuren wijzigen
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </div>

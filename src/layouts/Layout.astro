@@ -10,6 +10,7 @@ import "../styles/global.css";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import WhatsAppButton from "../components/WhatsAppButton";
+import CookieBanner from "../components/CookieBanner";
 
 interface Props {
   title: string;
@@ -24,8 +25,18 @@ interface Props {
 const { title, description, chrome = true, noindex = false, extraSchema } = Astro.props;
 
 const SITE = "https://www.taxibornem.be";
-const canonical = new URL(Astro.url.pathname, SITE).href;
-const currentPath = Astro.url.pathname.replace(/(.)\/$/, "$1");
+
+// De build zet pagina's neer als /diensten.html (zie astro.config.mjs), maar
+// de .htaccess bedient ze op /diensten. Hier maken we het pad weer schoon,
+// zodat canonical, sitemap en de actieve link in de navbar hetzelfde zeggen.
+const cleanPath =
+  Astro.url.pathname
+    .replace(/\/index\.html$/, "/")
+    .replace(/\.html$/, "")
+    .replace(/(.)\/$/, "$1") || "/";
+
+const canonical = new URL(cleanPath, SITE).href;
+const currentPath = cleanPath;
 
 const schema = {
   "@context": "https://schema.org",
@@ -91,5 +102,6 @@ const schema = {
     </main>
     {chrome && <Footer />}
     <WhatsAppButton />
+    <CookieBanner client:load />
   </body>
 </html>

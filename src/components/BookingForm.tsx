@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { MessageCircle, ArrowRight, Check, Navigation2, AlertCircle } from "lucide-react";
 import { WHATSAPP_URL } from "../data/site";
 import { validate, type Errors } from "../lib/validation";
@@ -33,7 +33,6 @@ export default function BookingForm() {
   const [afstandLaden, setAfstandLaden] = useState(false);
 
   // Tijdstip waarop het formulier verscheen — bots vullen sneller in dan mensen.
-  const geopendOp = useRef(Date.now());
 
   // Zodra beide adressen gekozen zijn, rijafstand opvragen via OSRM
   // (router.project-osrm.org) — een gratis, publieke routeserver zonder
@@ -93,13 +92,9 @@ export default function BookingForm() {
       return;
     }
 
-    // Spamval 1: bots vullen dit verborgen veld in. Stil doen alsof het lukte.
+    // Spamval: bots vullen dit verborgen veld in. Stil doen alsof het lukte.
+    // Web3Forms controleert dit veld ook zelf, server-side (zie botcheck).
     if (honeypot !== "") {
-      window.location.href = "/bedankt";
-      return;
-    }
-    // Spamval 2: een mens doet er langer dan drie seconden over.
-    if (Date.now() - geopendOp.current < 3000) {
       window.location.href = "/bedankt";
       return;
     }
@@ -324,9 +319,18 @@ export default function BookingForm() {
             Aantal personen
           </label>
 
+          {/* De native pijl van een <select> negeert padding-right, dus die
+              zetten we uit en tekenen we er zelf een. background-position
+              bepaalt nu exact hoe ver hij van de rand staat. */}
           <select
             id="personen"
-            className={inputClass}
+            className={`${inputClass} appearance-none pr-11 bg-no-repeat`}
+            style={{
+              backgroundImage:
+                "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236b6b6b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E\")",
+              backgroundPosition: "right 1rem center",
+              backgroundSize: "16px 16px",
+            }}
             value={form.personen}
             onChange={(e) => set("personen", e.target.value)}
           >
@@ -352,7 +356,7 @@ export default function BookingForm() {
       <div className="sm:col-span-2 bg-[#FFC107]/10 border border-[#FFC107]/20 rounded-[14px] px-4 py-3 flex items-start gap-2.5">
         <MessageCircle className="w-4 h-4 text-[#FFC107] mt-0.5 flex-shrink-0" />
         <p className="text-xs text-[#6b6b6b] leading-relaxed">
-          <strong className="text-[#181818]">We bekijken elke aanvraag persoonlijk</strong> en stuurt u een prijsvoorstel via WhatsApp. Pas na uw akkoord is de rit bevestigd.
+          <strong className="text-[#181818]">We bekijken elke aanvraag persoonlijk</strong> en sturen u een prijsvoorstel via WhatsApp. Pas na uw akkoord is de rit bevestigd.
         </p>
       </div>
 

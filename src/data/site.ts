@@ -36,10 +36,10 @@ export const services = [
     image: "/dienst-luchthaven.webp",
     title: "Luchthavenvervoer",
     subtitle: "Airport transfer",
-    description: "Stressvrij naar Brussels Airport (Zaventem), Charleroi of Eindhoven. Wij wachten op u bij aankomst.",
+    description: "Stressvrij naar Zaventem, Charleroi, Antwerpen, Eindhoven, Schiphol of Köln. Wij wachten op u bij aankomst.",
     tag: "Meest gevraagd",
     details: [
-      "Brussels Airport (Zaventem), Charleroi en Eindhoven",
+      "Vaste prijs naar zes luchthavens, van Zaventem tot Köln",
       "Vluchttracking: bij vertraging wachten we, zonder bijkomende kosten",
       "Hulp met bagage, in- en uitladen",
     ],

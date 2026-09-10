@@ -6,9 +6,11 @@ import {
   Database,
   Phone,
   MessageCircle,
+  SlidersHorizontal,
 } from "lucide-react";
 
 import { PHONE_RAW, WHATSAPP_URL } from "../../data/site";
+import { openConsentBanner } from "../../lib/cookieConsent";
 
 export default function CookiebeleidPage() {
   const sections = [
@@ -28,19 +30,19 @@ export default function CookiebeleidPage() {
       icon: Database,
       title: "Analytische cookies",
       content:
-        "Indien analytische tools zoals Google Analytics worden gebruikt, helpen deze cookies ons inzicht te krijgen in het gebruik van de website. Deze gegevens worden uitsluitend gebruikt om onze dienstverlening en website te verbeteren.",
+        "Wij gebruiken geen Google Analytics of vergelijkbare meetsoftware. Er wordt dus niet bijgehouden welke pagina's u bekijkt of hoe lang u blijft.",
     },
     {
       icon: Globe,
       title: "Cookies van derden",
       content:
-        "Externe diensten zoals Google Maps, WhatsApp of Google Reviews kunnen hun eigen cookies plaatsen. Deze cookies vallen onder het privacy- en cookiebeleid van de betreffende aanbieder.",
+        "De kaart op onze contactpagina komt van Google Maps en wordt pas geladen nadat u daar toestemming voor geeft. Doet u dat, dan kan Google eigen cookies plaatsen; die vallen onder het beleid van Google. Onze WhatsApp-knop en de link naar Google Reviews zijn gewone links: die versturen niets tot u erop klikt.",
     },
     {
       icon: Shield,
       title: "Cookies beheren of verwijderen",
       content:
-        "U kunt cookies op elk moment beheren, blokkeren of verwijderen via de instellingen van uw browser. Houd er rekening mee dat bepaalde functies van de website hierdoor mogelijk minder goed werken.",
+        "U kunt uw keuze op elk moment wijzigen met de knop onderaan deze pagina. Daarnaast kunt u cookies altijd beheren, blokkeren of verwijderen via de instellingen van uw browser.",
     },
     {
       icon: Shield,
@@ -66,8 +68,9 @@ export default function CookiebeleidPage() {
             </h1>
 
             <p className="text-lg text-[#6b6b6b] leading-relaxed">
-              Deze website maakt gebruik van cookies om de gebruikerservaring
-              te verbeteren en de website correct te laten functioneren.
+              Deze website plaatst zelf geen cookies. Enkel externe inhoud die u
+              uitdrukkelijk toestaat — vandaag is dat alleen de kaart op onze
+              contactpagina — kan cookies plaatsen.
             </p>
           </div>
 
@@ -75,11 +78,11 @@ export default function CookiebeleidPage() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-14">
             <div className="taxi-card bg-[#f7f7f7] rounded-[24px] p-6">
               <p className="text-[#FFC107] font-bold text-sm mb-2">
-                Functioneel
+                Cookievrij
               </p>
 
               <p className="text-[#181818] font-medium">
-                Essentiële cookies voor een goed werkende website.
+                Geen eigen cookies. De website werkt zonder.
               </p>
             </div>
 
@@ -142,6 +145,25 @@ export default function CookiebeleidPage() {
       {/* CTA */}
       <section className="py-16 bg-[#f7f7f7]">
         <div className="max-w-3xl mx-auto px-4 text-center">
+
+          <div className="mb-10 pb-10 border-b border-black/10">
+            <h2 className="text-2xl font-bold text-[#181818] mb-3">
+              Uw keuze wijzigen
+            </h2>
+
+            <p className="text-[#6b6b6b] mb-5 text-sm">
+              Hier past u aan of externe inhoud zoals de Google Maps-kaart mag laden.
+            </p>
+
+            <button
+              type="button"
+              onClick={openConsentBanner}
+              className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-[#FFC107] text-[#181818] font-semibold rounded-[18px] hover:bg-[#FFD54F] transition-colors"
+            >
+              <SlidersHorizontal className="w-4 h-4" />
+              Cookievoorkeuren openen
+            </button>
+          </div>
 
           <h2 className="text-2xl font-bold text-[#181818] mb-4">
             Vragen over ons cookiebeleid?
