@@ -23,11 +23,6 @@ export const WHATSAPP_URL = "https://wa.me/32472706245?text=Hallo%20Hamid%2C%20i
 export const EMAIL = "info@taxibornem.be";
 export const GOOGLE_REVIEWS_URL = "https://maps.google.com/?cid=5113066939281304031";
 
-// Access key van Web3Forms (web3forms.com) — verwerkt het boekingsformulier.
-// Deze sleutel mag publiek zijn: ze bepaalt enkel naar welke mailbox de
-// aanvraag gaat. Vervang door de echte sleutel uit je Web3Forms-account.
-export const WEB3FORMS_ACCESS_KEY = "0450fe7f-daa2-4019-849d-8e6c272baa5c";
-
 // ─── Data ─────────────────────────────────────────────────────────────────────
 export const services = [
   {

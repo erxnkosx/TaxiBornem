@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { MessageCircle, ArrowRight, Check, Navigation2, AlertCircle } from "lucide-react";
 import { WHATSAPP_URL } from "../data/site";
 import { validate, type Errors } from "../lib/validation";
-import { buildWeb3FormsPayload, WEB3FORMS_ENDPOINT } from "../lib/web3forms";
 import AddressAutocomplete, { type GeoPoint } from "./AddressAutocomplete";
 
 export default function BookingForm() {
@@ -93,7 +92,7 @@ export default function BookingForm() {
     }
 
     // Spamval: bots vullen dit verborgen veld in. Stil doen alsof het lukte.
-    // Web3Forms controleert dit veld ook zelf, server-side (zie botcheck).
+    // De server (functions/api/booking.ts) controleert botcheck nog eens.
     if (honeypot !== "") {
       window.location.href = "/bedankt";
       return;
@@ -102,15 +101,14 @@ export default function BookingForm() {
     setErrors({});
     setSubmitting(true);
     try {
-      const res = await fetch(WEB3FORMS_ENDPOINT, {
+      const res = await fetch("/api/booking", {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({
-          ...buildWeb3FormsPayload(
-            form as any,
-            afstand ? { afstandKm: afstand.km, rijtijdMin: afstand.minuten } : undefined
-          ),
-          botcheck: honeypot, // Web3Forms' eigen spamcontrole
+          ...form,
+          // De afstand uit de OSRM-berekening meesturen als hij beschikbaar is.
+          ...(afstand ? { afstandKm: afstand.km, rijtijdMin: afstand.minuten } : {}),
+          botcheck: honeypot,
         }),
       });
       const data = await res.json().catch(() => ({}));
