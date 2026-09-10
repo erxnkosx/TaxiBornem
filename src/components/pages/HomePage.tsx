@@ -97,7 +97,7 @@ export default function HomePage() {
               {/* Floating stat card */}
               <div className="absolute -bottom-4 -left-4 bg-white rounded-[18px] p-4 shadow-xl border border-black/5 flex items-center gap-3">
                 <div className="w-10 h-10 bg-[#FFC107]/10 rounded-[12px] flex items-center justify-center">
-                  <Award className="w-5 h-5 text-[#FFC107]" />
+                  <Star className="w-5 h-5 fill-[#FFC107] text-[#FFC107]" />
                 </div>
                 <div>
                   <p className="font-bold text-[#181818] text-sm">4,9 / 5</p>
