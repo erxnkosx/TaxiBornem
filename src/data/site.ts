@@ -103,29 +103,46 @@ export const rates = {
   perKm: 2.7, // prijs per kilometer (€)
   waitingPerHour: 30, // wachttijd (€/uur)
   surcharges: {
-    night: 25, // 's nachts, 22:00–06:00 (%)
-    weekend: 15, // zaterdag & zondag (%)
-    holiday: 25, // officiële feestdagen (%)
+    night: 15, // 's nachts, 22:00–06:00 (%)
+    weekend: 7.5, // zaterdag & zondag (%)
+    holiday: 15, // officiële feestdagen (%)
     airportParking: 8, // luchthavenparkeren, ophaal aan terminal (€)
   },
 };
 
+/** Percentage in Belgisch formaat, met + ervoor: 7.5 → "+7,5%" */
+export function pct(waarde: number): string {
+  return "+" + String(waarde).replace(".", ",") + "%";
+}
+
+/** Hoogste losse toeslag — gebruikt in de "0 – x%" samenvatting. */
+export const maxSurchargePct = Math.max(
+  rates.surcharges.night,
+  rates.surcharges.weekend,
+  rates.surcharges.holiday,
+);
+
 // Toeslagen zoals ze getoond worden in "Toeslagen in één oogopslag".
+// De percentages komen uit rates.surcharges, dus je past ze daar aan — niet hier.
 export const surcharges = [
-  { icon: "moon", label: "Nachttoeslag", desc: "22:00 – 06:00", value: "+25%" },
-  { icon: "calendar", label: "Weekendtoeslag", desc: "Zaterdag & zondag", value: "+15%" },
-  { icon: "party", label: "Feestdagentoeslag", desc: "Officiële feestdagen", value: "+25%" },
+  { icon: "moon", label: "Nachttoeslag", desc: "22:00 – 06:00", value: pct(rates.surcharges.night) },
+  { icon: "calendar", label: "Weekendtoeslag", desc: "Zaterdag & zondag", value: pct(rates.surcharges.weekend) },
+  { icon: "party", label: "Feestdagentoeslag", desc: "Officiële feestdagen", value: pct(rates.surcharges.holiday) },
   { icon: "plane", label: "Luchthavenparkeren", desc: "Ophaal aan terminal", value: "+€8,00" },
   { icon: "baby", label: "Kinderzitje", desc: "Op aanvraag", value: "Gratis" },
   { icon: "clock", label: "Wachttijd", desc: "We wachten ter plaatse", value: "€30,00/u" },
 ];
 
 // Betaalmethoden zoals getoond op de tarievenpagina.
+// De icon-sleutel wordt in TarievenPage.tsx aan een icoon gekoppeld, zodat
+// je hier vrij mag herordenen of iets tussenvoegen zonder dat de iconen
+// verschuiven.
 export const paymentMethods = [
-  "Cash",
-  "Bancontact",
-  "Visa & Mastercard",
-  "Overschrijving voor zakelijke klanten",
+  { icon: "cash", label: "Cash" },
+  { icon: "card", label: "Bancontact" },
+  { icon: "qr", label: "Payconiq" },
+  { icon: "card", label: "Visa & Mastercard" },
+  { icon: "bank", label: "Overschrijving voor zakelijke klanten" },
 ];
 
 // Welke FAQ-vragen tonen op de tarievenpagina (verwijst naar faqItems hierboven).
@@ -142,11 +159,11 @@ export const faqItems = [
   },
   {
     q: "Welke betalingsmethoden zijn er?",
-    a: "Cash, Bancontact, Visa/Mastercard en overschrijving voor zakelijke klanten. Alle betaalmethoden worden vooraf besproken bij de prijsbevestiging.",
+    a: "Cash, Bancontact, Payconiq, Visa/Mastercard en overschrijving voor zakelijke klanten. Alle betaalmethoden worden vooraf besproken bij de prijsbevestiging.",
   },
   {
     q: "Zijn er toeslagen voor nachten of weekenden?",
-    a: "Een nachttoeslag van +25% geldt tussen 22:00 en 06:00. Weekendritten kennen een minimumtoeslag van +15%. Deze zijn altijd inbegrepen in het prijsvoorstel.",
+    a: "Een nachttoeslag van +15% geldt tussen 22:00 en 06:00. Weekendritten kennen een minimumtoeslag van +7,5% en op officiële feestdagen rekenen we +15%. Deze zijn altijd inbegrepen in het prijsvoorstel.",
   },
   {
     q: "Hoe werkt de prijsbevestiging precies?",
@@ -154,14 +171,34 @@ export const faqItems = [
   },
 ];
 
+// Vaste prijzen voor rechtstreeks luchthavenvervoer.
+// Deze liggen bewust ONDER het gewone kilometertarief (€5,00 + €2,70/km):
+// hoe verder de luchthaven, hoe groter het voordeel.
+//
+// LET OP: dit voordeel geldt UITSLUITEND voor een rechtstreekse rit van of
+// naar de luchthaven. Alle andere ritten (en luchthavenritten met tussenstops)
+// rekenen we af volgens het gewone kilometertarief. Zie airportPriceNotice.
+//
+//  Luchthaven            km    volgens tarief   vaste prijs   voordeel
+//  Zaventem              45    €126,50          €115          ~9%
+//  Antwerpen (Deurne)    28    €80,60           €75           ~7%
+//  Charleroi             93    €256,10          €199          ~22%
+//  Eindhoven            105    €288,50          €219          ~24%
+//  Schiphol             155    €423,50          €275          ~35%
+//  Köln/Bonn            225    €612,50          €349          ~43%
 export const destinations = [
-  { from: "Bornem", to: "Brussels Airport (Zaventem)", price: "€107", duration: "±40 min" },
-  { from: "Bornem", to: "Antwerpen Centraal", price: "€83", duration: "±35 min" },
-  { from: "Bornem", to: "Brussel-Centrum", price: "€110", duration: "±45 min" },
-  { from: "Bornem", to: "Gent-Sint-Pieters", price: "€129", duration: "±40 min" },
-  { from: "Bornem", to: "Charleroi Airport", price: "€256", duration: "±60 min" },
-  { from: "Bornem", to: "Mechelen", price: "€64", duration: "±30 min" },
+  { from: "Bornem", to: "Brussels Airport (Zaventem)", price: "€115", duration: "±40 min" },
+  { from: "Bornem", to: "Antwerpen Airport (Deurne)", price: "€75", duration: "±30 min" },
+  { from: "Bornem", to: "Charleroi Airport", price: "€199", duration: "±1u05" },
+  { from: "Bornem", to: "Eindhoven Airport", price: "€219", duration: "±1u15" },
+  { from: "Bornem", to: "Amsterdam Schiphol", price: "€275", duration: "±1u45" },
+  { from: "Bornem", to: "Köln/Bonn Airport", price: "€349", duration: "±2u15" },
 ];
+
+// Voorwaarde bij de vaste luchthavenprijzen. Wordt onder de kaarten getoond
+// op de homepagina en de tarievenpagina, zodat de regel maar op één plek staat.
+export const airportPriceNotice =
+  "Deze vaste prijzen gelden enkel voor een rechtstreekse rit van of naar de luchthaven, zonder tussenstops. Voor alle andere ritten geldt ons gewone kilometertarief.";
 
 export const reviews = [
   {
@@ -199,7 +236,7 @@ export const reviews = [
 ];
 
 export const stats = [
-  { value: "12+", label: "Jaar ervaring" },
+  { value: "1", label: "Vaste chauffeur" },
   { value: "50+", label: "Tevreden klanten" },
   { value: "4,9/5", label: "Google-beoordeling" },
   { value: "24/7", label: "Beschikbaar" },

@@ -1,9 +1,12 @@
 import { useState } from "react";
 import {
   MessageCircle, Car, ArrowRight, Moon, CalendarDays, PartyPopper,
-  Plane, Baby, Clock, Plus, Minus, Info, Banknote, CreditCard, Building2, Check,
+  Plane, Baby, Clock, Plus, Minus, Info, Banknote, CreditCard, Building2, QrCode, Check,
 } from "lucide-react";
-import { destinations, faqItems, rates, paymentMethods, tariffFaqIndexes, WHATSAPP_URL } from "../../data/site";
+import {
+  destinations, faqItems, rates, surcharges, paymentMethods, tariffFaqIndexes,
+  airportPriceNotice, pct, maxSurchargePct, WHATSAPP_URL,
+} from "../../data/site";
 import { cn } from "../../lib/cn";
 
 /** Icoon per toeslag — los van de data zodat site.ts geen React hoeft te kennen. */
@@ -16,16 +19,13 @@ const surchargeIcons: Record<string, typeof Moon> = {
   clock: Clock,
 };
 
-const surchargeList = [
-  { icon: "moon", label: "Nachttoeslag", desc: "22:00 – 06:00", value: "+25%" },
-  { icon: "calendar", label: "Weekendtoeslag", desc: "Zaterdag & zondag", value: "+15%" },
-  { icon: "party", label: "Feestdagentoeslag", desc: "Officiële feestdagen", value: "+25%" },
-  { icon: "plane", label: "Luchthavenparkeren", desc: "Ophaal aan terminal", value: "+€8,00" },
-  { icon: "baby", label: "Kinderzitje", desc: "Op aanvraag", value: "Gratis" },
-  { icon: "clock", label: "Wachttijd", desc: "We wachten ter plaatse", value: "€30,00/u" },
-];
-
-const betaalIcons = [Banknote, CreditCard, CreditCard, Building2];
+/** Icoon per betaalmethode — gekoppeld via de icon-sleutel uit site.ts. */
+const betaalIcons: Record<string, typeof Banknote> = {
+  cash: Banknote,
+  card: CreditCard,
+  qr: QrCode,
+  bank: Building2,
+};
 
 /** €-notatie in Belgisch formaat: €45,50 */
 function euro(bedrag: number): string {
@@ -44,8 +44,8 @@ export default function TarievenPage() {
   const totaal = ritPrijs * (1 + procent / 100) + (terminal ? rates.surcharges.airportParking : 0);
 
   const situaties = [
-    { actief: nacht, zet: setNacht, icon: Moon, label: "'s Nachts", extra: "+25%" },
-    { actief: weekend, zet: setWeekend, icon: CalendarDays, label: "Weekend", extra: "+15%" },
+    { actief: nacht, zet: setNacht, icon: Moon, label: "'s Nachts", extra: pct(rates.surcharges.night) },
+    { actief: weekend, zet: setWeekend, icon: CalendarDays, label: "Weekend", extra: pct(rates.surcharges.weekend) },
     { actief: terminal, zet: setTerminal, icon: Plane, label: "Aan de terminal", extra: "+€8" },
   ];
 
@@ -82,7 +82,7 @@ export default function TarievenPage() {
             {[
               { label: "Starttarief", value: euro(rates.base), sub: "bij elke rit" },
               { label: "Per kilometer", value: euro(rates.perKm), sub: "× het aantal km" },
-              { label: "Eventuele toeslag", value: "0 – 25%", sub: "nacht, weekend, feestdag" },
+              { label: "Eventuele toeslag", value: `0 – ${maxSurchargePct}%`, sub: "nacht, weekend, feestdag" },
             ].map((item, i) => (
               <div key={i} className="flex items-center gap-3 sm:gap-2 flex-1">
                 <div className="flex-1 bg-[#f7f7f7] rounded-[18px] px-6 py-7 text-center">
@@ -191,7 +191,7 @@ export default function TarievenPage() {
                 <p className="text-4xl font-bold text-[#FFC107] mb-2 tabular-nums">{euro(totaal)}</p>
                 <p className="text-[11px] text-white/40 leading-relaxed mb-5">
                   {euro(rates.base)} start + {km} km × {euro(rates.perKm)}
-                  {procent > 0 && ` + ${procent}%`}
+                  {procent > 0 && ` ${pct(procent)}`}
                   {terminal && ` + ${euro(rates.surcharges.airportParking)}`}
                 </p>
                 <a
@@ -223,7 +223,7 @@ export default function TarievenPage() {
             Toeslagen in één oogopslag
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {surchargeList.map((t, i) => {
+            {surcharges.map((t, i) => {
               const Icoon = surchargeIcons[t.icon] ?? Info;
               const gratis = t.value === "Gratis";
               return (
@@ -253,10 +253,11 @@ export default function TarievenPage() {
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10">
             <h2 className="text-2xl sm:text-3xl font-bold text-[#181818] tracking-tight mb-2">
-              Populaire ritten
+              Vaste luchthavenprijzen
             </h2>
-            <p className="text-sm text-[#6b6b6b]">
-              Vanafprijzen vanuit Bornem. Klik een rit aan om hem meteen aan te vragen.
+            <p className="text-sm text-[#6b6b6b] max-w-xl mx-auto">
+              Vaste prijzen vanuit Bornem, voordeliger dan het kilometertarief hierboven. Klik een rit aan
+              om hem meteen aan te vragen.
             </p>
           </div>
 
@@ -284,7 +285,7 @@ export default function TarievenPage() {
                   </div>
                 </div>
                 <div className="text-right flex-shrink-0">
-                  <p className="text-[11px] text-[#9b9b9b]">Vanaf</p>
+                  <p className="text-[11px] text-[#9b9b9b]">Vaste prijs</p>
                   <p className="text-xl font-bold text-[#181818]">{d.price}</p>
                   <p className="text-[11px] text-[#9b9b9b] mb-1">{d.duration}</p>
                   <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-[#6b6b6b] group-hover:text-[#c99700] transition-colors">
@@ -294,6 +295,14 @@ export default function TarievenPage() {
                 </div>
               </a>
             ))}
+          </div>
+
+          <div className="mt-6 flex items-start gap-3 bg-white rounded-[14px] border border-[#FFC107]/30 p-4">
+            <Plane className="w-4 h-4 text-[#c99700] flex-shrink-0 mt-0.5" />
+            <p className="text-xs text-[#6b6b6b] leading-relaxed">
+              <span className="font-semibold text-[#181818]">Enkel voor luchthavenvervoer. </span>
+              {airportPriceNotice}
+            </p>
           </div>
         </div>
       </section>
@@ -311,14 +320,14 @@ export default function TarievenPage() {
             </p>
             <div className="flex flex-col gap-2.5">
               {paymentMethods.map((m, i) => {
-                const Icoon = betaalIcons[i] ?? Check;
+                const Icoon = betaalIcons[m.icon] ?? Check;
                 return (
                   <div
                     key={i}
                     className="flex items-center gap-3.5 bg-[#f7f7f7] rounded-[14px] px-4 py-3.5"
                   >
                     <Icoon className="w-4 h-4 text-[#FFC107] flex-shrink-0" />
-                    <span className="text-sm text-[#181818]">{m}</span>
+                    <span className="text-sm text-[#181818]">{m.label}</span>
                   </div>
                 );
               })}

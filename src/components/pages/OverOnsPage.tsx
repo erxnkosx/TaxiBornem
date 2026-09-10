@@ -15,11 +15,12 @@ export default function OverOnsPage() {
                 <span className="text-[#6b6b6b]">Een vertrouwde partner.</span>
               </h1>
               <p className="text-base text-[#6b6b6b] leading-relaxed mb-6">
-                Wij startten in 2012 met één doel: de meest betrouwbare taxichauffeur van Bornem worden.
-                Wat begon als een soloproject groeide uit tot een vertrouwde naam in de regio, gebaseerd op stiptheid, discretie en een oprechte glimlach.
+                Achter Taxi Bornem staat één chauffeur: Hamid. Hij rijdt elke rit zelf, in een wagen
+                die proper is en op het afgesproken uur voor uw deur staat.
               </p>
               <p className="text-base text-[#6b6b6b] leading-relaxed mb-8">
-                Vandaag brengen we elke dag zakenmensen, gezinnen en reizigers veilig naar hun bestemming — altijd persoonlijk, altijd met zorg. Geen callcenter, geen anonieme service: u belt ons, en wij brengen u waar u moet zijn.
+                U belt of stuurt een bericht en u krijgt hem meteen aan de lijn. Geen callcenter, geen
+                wisselende chauffeurs. Dat scheelt als uw vlucht om zes uur 's ochtends vertrekt.
               </p>
               <div className="flex flex-col gap-3">
                 <div className="flex items-center gap-2">

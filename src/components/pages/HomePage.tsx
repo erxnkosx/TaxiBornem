@@ -1,5 +1,5 @@
-import { MessageCircle, Clock, Star, Car, ArrowRight, Shield, Award, Navigation2 } from "lucide-react";
-import { WHATSAPP_URL, services, destinations } from "../../data/site";
+import { MessageCircle, Clock, Star, Car, ArrowRight, Shield, Award, Navigation2, Plane } from "lucide-react";
+import { WHATSAPP_URL, services, destinations, airportPriceNotice } from "../../data/site";
 import GoogleReviews from "../GoogleReviews";
 import BookingForm from "../BookingForm";
 import FAQ from "../FAQ";
@@ -188,10 +188,11 @@ export default function HomePage() {
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <p className="taxi-kicker text-xs font-semibold uppercase tracking-widest mb-3">Populaire ritten</p>
-            <h2 className="text-3xl sm:text-4xl font-bold text-[#181818] tracking-tight">Vanafprijzen</h2>
-            <p className="text-[#6b6b6b] mt-3 text-sm max-w-md mx-auto">
-              Indicatieve startprijzen. De definitieve prijs wordt persoonlijk bevestigd door onze medewerkers.
+            <p className="taxi-kicker text-xs font-semibold uppercase tracking-widest mb-3">Luchthavenvervoer</p>
+            <h2 className="text-3xl sm:text-4xl font-bold text-[#181818] tracking-tight">Vaste luchthavenprijzen</h2>
+            <p className="text-[#6b6b6b] mt-3 text-sm max-w-lg mx-auto">
+              Eén vaste prijs per luchthaven, voordeliger dan ons kilometertarief. Alleen voor rechtstreeks
+              luchthavenvervoer — persoonlijk bevestigd door onze medewerkers.
             </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
@@ -210,12 +211,19 @@ export default function HomePage() {
                   </div>
                 </div>
                 <div className="text-right">
-                  <p className="text-xs text-[#6b6b6b]">Vanaf</p>
+                  <p className="text-xs text-[#6b6b6b]">Vaste prijs</p>
                   <p className="text-base font-bold text-[#181818]">{d.price}</p>
                   <p className="text-xs text-[#9b9b9b]">{d.duration}</p>
                 </div>
               </div>
             ))}
+          </div>
+
+          <div className="mt-6 flex flex-col items-center gap-2">
+            <Plane className="w-4 h-4 text-[#FFC107]" />
+            <p className="text-xs text-[#6b6b6b] max-w-xl leading-relaxed text-center">
+              {airportPriceNotice}
+            </p>
           </div>
         </div>
       </section>
