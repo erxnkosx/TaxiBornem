@@ -1,0 +1,25 @@
+# ─────────────────────────────────────────────────────────────────────
+#  Taxi Bornem — Cloudflare Pages headers
+#  Vervangt de <IfModule mod_headers> en mod_expires blokken uit .htaccess.
+# ─────────────────────────────────────────────────────────────────────
+
+# Beveiligingsheaders op alle pagina's
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  Referrer-Policy: strict-origin-when-cross-origin
+
+# Astro geeft assets een vingerafdruk in de bestandsnaam (bv. index.Bx3k.js),
+# dus die mogen een jaar in de cache. Wijzigt de inhoud, dan wijzigt de naam.
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Afbeeldingen en fonts: ook lang cachen
+/*.webp
+  Cache-Control: public, max-age=31536000
+/*.png
+  Cache-Control: public, max-age=31536000
+/*.svg
+  Cache-Control: public, max-age=31536000
+/*.woff2
+  Cache-Control: public, max-age=31536000

@@ -1,0 +1,10 @@
+# ─────────────────────────────────────────────────────────────────────
+#  Taxi Bornem — Cloudflare Pages redirects
+#  Vervangt de RewriteRules uit de oude .htaccess.
+#  https en de .html-extensie regelt Cloudflare Pages automatisch;
+#  hier hoeven we enkel het kale domein naar www te sturen, zodat
+#  www.taxibornem.be de enige versie blijft (klopt met canonical + sitemap).
+# ─────────────────────────────────────────────────────────────────────
+
+# Kaal domein -> www (301 = permanent)
+https://taxibornem.be/*    https://www.taxibornem.be/:splat    301!

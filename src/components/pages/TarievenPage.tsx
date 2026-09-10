@@ -287,7 +287,8 @@ export default function TarievenPage() {
                 <div className="text-right flex-shrink-0">
                   <p className="text-[11px] text-[#9b9b9b]">Vaste prijs</p>
                   <p className="text-xl font-bold text-[#181818]">{d.price}</p>
-                  <p className="text-[11px] text-[#9b9b9b] mb-1">{d.duration}</p>
+                  <p className="text-[11px] text-[#9b9b9b]">{d.duration}</p>
+                  <p className="text-[10px] text-[#9b9b9b] mb-1">excl. toeslagen</p>
                   <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-[#6b6b6b] group-hover:text-[#c99700] transition-colors">
                     Aanvragen
                     <ArrowRight className="w-3 h-3" />

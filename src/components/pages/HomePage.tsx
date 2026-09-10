@@ -214,6 +214,7 @@ export default function HomePage() {
                   <p className="text-xs text-[#6b6b6b]">Vaste prijs</p>
                   <p className="text-base font-bold text-[#181818]">{d.price}</p>
                   <p className="text-xs text-[#9b9b9b]">{d.duration}</p>
+                  <p className="text-[10px] text-[#9b9b9b]">excl. toeslagen</p>
                 </div>
               </div>
             ))}

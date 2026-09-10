@@ -12,10 +12,12 @@ export default defineConfig({
 
   // Nette URL's zonder trailing slash: /diensten i.p.v. /diensten/
   trailingSlash: 'never',
+
+  // 'file' genereert /diensten.html i.p.v. /diensten/index.html.
+  // Cloudflare Pages serveert die automatisch op /diensten (zonder .html),
+  // dus samen met trailingSlash: 'never' krijg je nette URL's zonder
+  // serverconfiguratie. Zie ook public/_redirects en public/_headers.
   build: {
-    // 'file' genereert /diensten.html i.p.v. /diensten/index.html.
-    // Nodig voor de .html-rewrite in public/.htaccess, zodat /diensten
-    // rechtstreeks werkt zonder redirect naar /diensten/.
     format: 'file',
   },
 

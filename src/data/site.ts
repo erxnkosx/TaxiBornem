@@ -198,7 +198,7 @@ export const destinations = [
 // Voorwaarde bij de vaste luchthavenprijzen. Wordt onder de kaarten getoond
 // op de homepagina en de tarievenpagina, zodat de regel maar op één plek staat.
 export const airportPriceNotice =
-  "Deze vaste prijzen gelden enkel voor een rechtstreekse rit van of naar de luchthaven, zonder tussenstops. Voor alle andere ritten geldt ons gewone kilometertarief.";
+  "Deze vaste prijzen gelden enkel voor een rechtstreekse rit van of naar de luchthaven, zonder tussenstops. Voor alle andere ritten geldt ons gewone kilometertarief. Eventuele toeslagen (nacht, weekend, feestdag of ophaling aan de terminal) komen hier nog bij.";
 
 export const reviews = [
   {
