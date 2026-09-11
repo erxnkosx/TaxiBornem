@@ -74,6 +74,10 @@ const schema = {
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {/* De site is alleen voor een lichte weergave ontworpen. Dit vertelt de
+        browser dat, zodat hij niet zelf dark mode forceert (bv. Chrome/Samsung
+        Internet met "force dark"). */}
+    <meta name="color-scheme" content="light only" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
     {/* Hero-afbeelding vooraf laden op de homepagina, zodat de LCP sneller is.

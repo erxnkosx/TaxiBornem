@@ -317,13 +317,22 @@ export function hamidMail(r: RitGegevens): { subject: string; html: string; text
    ───────────────────────────────────────────────────────────────────── */
 
 export function klantMail(r: RitGegevens): { subject: string; html: string; text: string } {
+  const isRetour = r.ritType === "heen-terug";
+
   const wanneer =
-    r.ritType === "heen-terug"
+    isRetour
       ? `${r.datum} om ${r.tijd} — retour ${r.terugDatum} om ${r.terugTijd}`
       : `${r.datum} om ${r.tijd}`;
 
   const binnen = `
-    <div style="font-family:Arial,Helvetica,sans-serif;font-size:11px;font-weight:bold;letter-spacing:1.5px;color:${GEEL};text-transform:uppercase;margin-bottom:6px;">Bevestiging</div>
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:6px;"><tr>
+      <td style="vertical-align:middle;font-family:Arial,Helvetica,sans-serif;font-size:11px;font-weight:bold;letter-spacing:1.5px;color:${GEEL};text-transform:uppercase;">Bevestiging</td>
+      ${
+        isRetour
+          ? `<td align="right" style="vertical-align:middle;"><span style="display:inline-block;background-color:${GEEL};color:${DONKER};font-family:Arial,Helvetica,sans-serif;font-size:11px;font-weight:bold;letter-spacing:0.5px;text-transform:uppercase;padding:5px 11px;border-radius:8px;">&#8646; Heen &amp; terug</span></td>`
+          : ""
+      }
+    </tr></table>
     <div style="font-family:Arial,Helvetica,sans-serif;font-size:24px;font-weight:bold;color:${DONKER};margin-bottom:8px;">Bedankt, ${escapeHtml(r.naam.split(" ")[0])}!</div>
     <div style="font-family:Arial,Helvetica,sans-serif;font-size:14px;color:${GRIJS};line-height:1.7;margin-bottom:6px;">
       We hebben uw aanvraag goed ontvangen. We bekijken ze persoonlijk en sturen u
@@ -342,7 +351,17 @@ export function klantMail(r: RitGegevens): { subject: string; html: string; text
           <td style="vertical-align:top;padding-right:10px;padding-top:1px;font-size:16px;line-height:1.2;">🏁</td>
           <td style="font-family:Arial,Helvetica,sans-serif;font-size:14px;color:${DONKER};">${escapeHtml(r.bestemming)}</td>
         </tr></table>
-        <div style="font-family:Arial,Helvetica,sans-serif;font-size:13px;color:${GRIJS};margin-top:12px;">${escapeHtml(wanneer)} · ${escapeHtml(r.personen)} ${Number(r.personen) === 1 ? "persoon" : "personen"}</div>
+        ${
+          isRetour
+            ? `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin-top:14px;border-top:1px solid ${RAND};">
+                 <tr>
+                   <td width="50%" style="padding:12px 0 0 0;vertical-align:top;">${label("Heenrit")}<div style="font-family:Arial,Helvetica,sans-serif;font-size:14px;color:${DONKER};font-weight:bold;">${escapeHtml(`${r.datum} om ${r.tijd}`)}</div></td>
+                   <td width="50%" style="padding:12px 0 0 0;vertical-align:top;">${label("Terugrit")}<div style="font-family:Arial,Helvetica,sans-serif;font-size:14px;color:${DONKER};font-weight:bold;">${escapeHtml(`${r.terugDatum} om ${r.terugTijd}`)}</div></td>
+                 </tr>
+               </table>
+               <div style="font-family:Arial,Helvetica,sans-serif;font-size:13px;color:${GRIJS};margin-top:12px;">${escapeHtml(r.personen)} ${Number(r.personen) === 1 ? "persoon" : "personen"}</div>`
+            : `<div style="font-family:Arial,Helvetica,sans-serif;font-size:13px;color:${GRIJS};margin-top:12px;">${escapeHtml(wanneer)} · ${escapeHtml(r.personen)} ${Number(r.personen) === 1 ? "persoon" : "personen"}</div>`
+        }
       </td></tr>
     </table>
 

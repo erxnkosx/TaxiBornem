@@ -1,3 +1,15 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
 @import './theme.css';
+
+/* De site is alleen voor lichte weergave ontworpen. color-scheme: only light
+   vertelt de browser dat, zodat native elementen (formuliervelden, dropdowns)
+   niet donker kleuren en "force dark"-modi minder ingrijpen. */
+:root {
+  color-scheme: only light;
+}
+
+html,
+body {
+  background-color: #ffffff;
+}
