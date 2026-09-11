@@ -182,12 +182,12 @@ export const faqItems = [
 //  Schiphol             155    €423,50          €275          ~35%
 //  Köln/Bonn            225    €612,50          €349          ~43%
 export const destinations = [
-  { from: "Bornem", to: "Brussels Airport (Zaventem)", price: "€115", duration: "±40 min" },
-  { from: "Bornem", to: "Antwerpen Airport (Deurne)", price: "€75", duration: "±30 min" },
+  { from: "Bornem", to: "Brussels Airport (Zaventem)", price: "€90", duration: "±40 min" },
+  { from: "Bornem", to: "Antwerpen Airport (Deurne)", price: "€80", duration: "±30 min" },
   { from: "Bornem", to: "Charleroi Airport", price: "€199", duration: "±1u05" },
-  { from: "Bornem", to: "Eindhoven Airport", price: "€219", duration: "±1u15" },
-  { from: "Bornem", to: "Amsterdam Schiphol", price: "€275", duration: "±1u45" },
-  { from: "Bornem", to: "Köln/Bonn Airport", price: "€349", duration: "±2u15" },
+  { from: "Bornem", to: "Eindhoven Airport", price: "€249", duration: "±1u15" },
+  { from: "Bornem", to: "Amsterdam Schiphol", price: "€349", duration: "±1u50" },
+  { from: "Bornem", to: "Köln/Bonn Airport", price: "€499", duration: "±2u30" },
 ];
 
 // Voorwaarde bij de vaste luchthavenprijzen. Wordt onder de kaarten getoond

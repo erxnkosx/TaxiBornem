@@ -224,9 +224,10 @@ export default function HomePage() {
             ))}
           </div>
 
-          <div className="mt-6 flex flex-col items-center gap-2">
-            <Plane className="w-4 h-4 text-[#FFC107]" />
-            <p className="text-xs text-[#6b6b6b] max-w-xl leading-relaxed text-center">
+          <div className="mt-8 max-w-2xl mx-auto flex items-start gap-3 bg-white rounded-[14px] border border-[#FFC107]/30 p-4 text-left">
+            <Plane className="w-4 h-4 text-[#c99700] flex-shrink-0 mt-0.5" />
+            <p className="text-xs text-[#6b6b6b] leading-relaxed">
+              <span className="font-semibold text-[#181818]">Enkel voor luchthavenvervoer. </span>
               {airportPriceNotice}
             </p>
           </div>

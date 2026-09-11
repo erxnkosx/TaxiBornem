@@ -269,10 +269,9 @@ export default function TarievenPage() {
                 className="taxi-route-card group bg-white rounded-[18px] p-5 border border-black/5 flex items-center justify-between gap-4 transition-all hover:border-[#FFC107]/40 hover:shadow-md hover:shadow-black/5"
               >
                 <div className="flex items-center gap-3.5 min-w-0">
-                  <div className="flex flex-col items-center gap-1 flex-shrink-0">
-                    <div className="w-2.5 h-2.5 rounded-full bg-[#FFC107]" />
-                    <div className="w-px h-4 bg-black/10" />
-                    <div className="w-2.5 h-2.5 rounded-full bg-[#181818]" />
+                  <div className="flex flex-col items-center gap-1.5 flex-shrink-0 text-base leading-none">
+                    <span aria-hidden="true">📍</span>
+                    <span aria-hidden="true">🏁</span>
                   </div>
                   <div className="min-w-0">
                     <p className="text-xs text-[#9b9b9b]">{d.from}</p>
