@@ -2,14 +2,16 @@
 @import 'tw-animate-css';
 @import './theme.css';
 
-/* De site is alleen voor lichte weergave ontworpen. color-scheme: only light
-   vertelt de browser dat, zodat native elementen (formuliervelden, dropdowns)
-   niet donker kleuren en "force dark"-modi minder ingrijpen. */
+/* De site is alleen voor lichte weergave ontworpen. color-scheme op zowel
+   :root als html/body vertelt de browser dat, zodat native elementen niet
+   donker kleuren en Chrome's "force dark" minder ingrijpt. Volledig blokkeren
+   kan niet — een gebruiker die force-dark bewust aanzet, houdt het laatste woord. */
 :root {
-  color-scheme: only light;
+  color-scheme: light;
 }
 
 html,
 body {
+  color-scheme: light;
   background-color: #ffffff;
 }
