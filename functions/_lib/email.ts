@@ -35,10 +35,10 @@ const ACHTERGROND = "#f4f4f4";
 const GROEN = "#25D366";
 
 // Absolute URL nodig: mailclients kunnen geen relatieve paden laden.
-// TIJDELIJK op pages.dev: www.taxibornem.be draait nu nog de oude site,
-// waar logo.webp niet op staat. Na de verhuizing terugzetten naar
-// https://www.taxibornem.be/logo.webp
-const LOGO_URL = "https://taxibornem.pages.dev/logo.webp";
+// PNG en niet WebP: veel mailclients (o.a. Outlook) tonen geen WebP.
+// TIJDELIJK op pages.dev: www.taxibornem.be draait nu nog de oude site.
+// Na de verhuizing terugzetten naar https://www.taxibornem.be/logo-email.png
+const LOGO_URL = "https://taxibornem.pages.dev/logo-email.png";
 const SITE = "taxibornem.be";
 const BEDRIJF = "Taxi Bornem";
 const TEL = "+32 472 70 62 45";
@@ -77,8 +77,21 @@ function shell(kicker: string, binnen: string, voetregel: string): string {
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light only">
+<meta name="supported-color-schemes" content="light only">
 <title>${escapeHtml(BEDRIJF)}</title>
 <style>
+  /* Forceer de lichte versie, ook als het toestel in donkere modus staat.
+     Clients die dark mode afdwingen (Outlook Android, Apple Mail) kleuren
+     anders de witte achtergrond zwart en de zwarte tekst wit. */
+  :root { color-scheme: light only; supported-color-schemes: light only; }
+  @media (prefers-color-scheme: dark) {
+    body, .m-shell, .m-card { background-color: #f4f4f4 !important; }
+    .m-card { background-color: #ffffff !important; }
+    .t-dark { color: #181818 !important; }
+    .t-grey { color: #6b6b6b !important; }
+    .t-light { color: #9b9b9b !important; }
+  }
+
   /* Compacter op mobiel. Outlook desktop negeert media queries en houdt
      de ruimere desktop-waarden aan — dat is prima. */
   @media only screen and (max-width: 480px) {
@@ -94,9 +107,9 @@ function shell(kicker: string, binnen: string, voetregel: string): string {
 </style>
 </head>
 <body style="margin:0;padding:0;background-color:${ACHTERGROND};">
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:${ACHTERGROND};padding:24px 12px;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" class="m-shell" style="background-color:${ACHTERGROND};padding:24px 12px;">
   <tr><td align="center">
-    <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;background-color:#ffffff;border-radius:20px;overflow:hidden;border:1px solid ${RAND};">
+    <table role="presentation" width="600" cellpadding="0" cellspacing="0" class="m-card" style="max-width:600px;width:100%;background-color:#ffffff;border-radius:20px;overflow:hidden;border:1px solid ${RAND};">
       <!-- Kop -->
       <tr><td class="m-head" style="padding:28px 32px 0 32px;">
         <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
@@ -313,7 +326,7 @@ export function klantMail(r: RitGegevens): { subject: string; html: string; text
     <div style="font-family:Arial,Helvetica,sans-serif;font-size:11px;font-weight:bold;letter-spacing:1.5px;color:${GEEL};text-transform:uppercase;margin-bottom:6px;">Bevestiging</div>
     <div style="font-family:Arial,Helvetica,sans-serif;font-size:24px;font-weight:bold;color:${DONKER};margin-bottom:8px;">Bedankt, ${escapeHtml(r.naam.split(" ")[0])}!</div>
     <div style="font-family:Arial,Helvetica,sans-serif;font-size:14px;color:${GRIJS};line-height:1.7;margin-bottom:6px;">
-      We hebben uw aanvraag goed ontvangen. Hamid bekijkt ze persoonlijk en stuurt u
+      We hebben uw aanvraag goed ontvangen. We bekijken ze persoonlijk en sturen u
       zo snel mogelijk een prijsvoorstel via WhatsApp of telefoon.
       <strong style="color:${DONKER};">Pas na uw akkoord is de rit definitief bevestigd</strong> — u zit dus nog nergens aan vast.
     </div>
