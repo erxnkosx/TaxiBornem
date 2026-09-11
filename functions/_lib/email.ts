@@ -344,7 +344,7 @@ export function klantMail(r: RitGegevens): { subject: string; html: string; text
     </tr></table>
     <div style="font-family:Arial,Helvetica,sans-serif;font-size:24px;font-weight:bold;color:${DONKER};margin-bottom:8px;">Bedankt, ${escapeHtml(r.naam.split(" ")[0])}!</div>
     <div style="font-family:Arial,Helvetica,sans-serif;font-size:14px;color:${GRIJS};line-height:1.7;margin-bottom:6px;">
-      We hebben uw aanvraag goed ontvangen. Hamid bekijkt ze persoonlijk en stuurt u
+      We hebben uw aanvraag goed ontvangen. We bekijken ze persoonlijk en sturen u
       zo snel mogelijk een prijsvoorstel via WhatsApp of telefoon.
       <strong style="color:${DONKER};">Pas na uw akkoord is de rit definitief bevestigd</strong> — u zit dus nog nergens aan vast.
     </div>
