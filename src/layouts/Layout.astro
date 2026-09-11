@@ -76,6 +76,12 @@ const schema = {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
+    {/* Hero-afbeelding vooraf laden op de homepagina, zodat de LCP sneller is.
+        Enkel hier — op andere pagina's staat deze afbeelding niet. */}
+    {currentPath === "/" && (
+      <link rel="preload" as="image" href="/car.webp" fetchpriority="high" />
+    )}
+
     <title>{title} | Taxi Bornem</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />

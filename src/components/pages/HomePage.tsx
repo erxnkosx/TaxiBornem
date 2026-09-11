@@ -91,6 +91,10 @@ export default function HomePage() {
                   src="/car.webp"
                   alt="Kia taxi van Taxi Bornem Hamid in Bornem"
                   className="w-full h-full object-cover"
+                  width={900}
+                  height={675}
+                  fetchPriority="high"
+                  decoding="async"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
               </div>

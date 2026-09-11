@@ -25,13 +25,13 @@ export default function PrivacybeleidPage() {
       icon: Shield,
       title: "Delen met derden",
       content:
-        "Wij verkopen of verhuren uw persoonsgegevens nooit. Enkel wanneer noodzakelijk kunnen gegevens gedeeld worden met boekhoudkundige of technische dienstverleners.",
+        "Wij verkopen of verhuren uw persoonsgegevens nooit. Voor de werking van onze dienst doen wij een beroep op een beperkt aantal verwerkers, die uw gegevens enkel in onze opdracht en volgens onze instructies verwerken: Resend (verzending van de bevestigings- en aanvraagmails), de kaartdiensten Photon/Komoot en OSRM (adressuggesties en het berekenen van de afstand — het ingevulde adres wordt hiervoor naar deze diensten verstuurd), Cloudflare (hosting van de website) en Hostinger (onze e-mailbox). Daarnaast kunnen gegevens worden gedeeld met onze boekhouder voor facturatie. Sommige van deze diensten verwerken gegevens buiten de EU; in dat geval gebeurt dit onder passende waarborgen zoals het EU-US Data Privacy Framework of standaardcontractbepalingen.",
     },
     {
       icon: Lock,
       title: "Bewaartermijn & beveiliging",
       content:
-        "Wij bewaren persoonsgegevens niet langer dan noodzakelijk en nemen passende technische en organisatorische maatregelen om uw gegevens te beschermen.",
+        "Gegevens van ritten die tot een factuur leiden, bewaren wij 7 jaar, zoals de Belgische boekhoudwetgeving verplicht. Aanvragen die niet tot een rit leiden, verwijderen wij uiterlijk 12 maanden na de aanvraag. Wij nemen passende technische en organisatorische maatregelen om uw gegevens te beschermen tegen verlies of ongeoorloofde toegang.",
     },
     {
       icon: Eye,
