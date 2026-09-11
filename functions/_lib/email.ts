@@ -88,6 +88,8 @@ function shell(kicker: string, binnen: string, voetregel: string): string {
     .m-box  { padding: 14px 16px !important; }
     .m-gap  { padding-top: 14px !important; }
     .m-logo { width: 128px !important; }
+    .m-wa   { padding: 12px 16px !important; font-size: 14px !important; }
+    .m-wa2  { padding: 11px 10px !important; font-size: 12px !important; }
   }
 </style>
 </head>
@@ -140,19 +142,28 @@ function waarde(t: string): string {
    ───────────────────────────────────────────────────────────────────── */
 
 export function hamidMail(r: RitGegevens): { subject: string; html: string; text: string } {
-  const wanneer =
-    r.ritType === "heen-terug"
-      ? `${r.datum} ${r.tijd} — retour ${r.terugDatum} ${r.terugTijd}`
-      : `${r.datum} om ${r.tijd}`;
+  const isRetour = r.ritType === "heen-terug";
+  const ritTypeLabel = isRetour ? "Heen & terug" : "Enkele rit";
 
-  const ritTypeLabel = r.ritType === "heen-terug" ? "Heen & terug" : "Enkele rit";
+  const ritOmschrijving = isRetour
+    ? `heen op ${r.datum} om ${r.tijd} en terug op ${r.terugDatum} om ${r.terugTijd}`
+    : `op ${r.datum} om ${r.tijd}`;
 
-  // WhatsApp-knop met het nummer van de klant al ingevuld en een klaar bericht.
+  // Drie klaar-gezette WhatsApp-berichten naar de klant.
   const waNummer = waNumber(r.telefoon);
-  const waTekst = encodeURIComponent(
-    `Hallo ${r.naam}, bedankt voor uw aanvraag bij Taxi Bornem. `,
-  );
-  const waLink = `https://wa.me/${waNummer}?text=${waTekst}`;
+  const voornaam = r.naam.split(" ")[0];
+
+  const waPrijs = `https://wa.me/${waNummer}?text=${encodeURIComponent(
+    `Hallo ${voornaam}, bedankt voor uw aanvraag bij Taxi Bornem voor de rit van ${r.ophalen} naar ${r.bestemming} (${ritOmschrijving}). De prijs bedraagt \u20ac___. Is dit akkoord voor u?`,
+  )}`;
+
+  const waAfwijzen = `https://wa.me/${waNummer}?text=${encodeURIComponent(
+    `Hallo ${voornaam}, bedankt voor uw aanvraag bij Taxi Bornem. Jammer genoeg zijn wij op het gevraagde moment niet beschikbaar. Onze excuses voor het ongemak.`,
+  )}`;
+
+  const waVrij = `https://wa.me/${waNummer}?text=${encodeURIComponent(
+    `Hallo ${voornaam}, `,
+  )}`;
 
   const afstandBlok =
     r.afstandKm != null
@@ -179,7 +190,14 @@ export function hamidMail(r: RitGegevens): { subject: string; html: string; text
     : "";
 
   const binnen = `
-    <div style="font-family:Arial,Helvetica,sans-serif;font-size:11px;font-weight:bold;letter-spacing:1.5px;color:${GEEL};text-transform:uppercase;margin-bottom:6px;">Reservatie</div>
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:6px;"><tr>
+      <td style="vertical-align:middle;font-family:Arial,Helvetica,sans-serif;font-size:11px;font-weight:bold;letter-spacing:1.5px;color:${GEEL};text-transform:uppercase;">Reservatie</td>
+      ${
+        isRetour
+          ? `<td align="right" style="vertical-align:middle;"><span style="display:inline-block;background-color:${GEEL};color:${DONKER};font-family:Arial,Helvetica,sans-serif;font-size:11px;font-weight:bold;letter-spacing:0.5px;text-transform:uppercase;padding:5px 11px;border-radius:8px;">&#8646; Heen &amp; terug</span></td>`
+          : ""
+      }
+    </tr></table>
     <div style="font-family:Arial,Helvetica,sans-serif;font-size:24px;font-weight:bold;color:${DONKER};margin-bottom:8px;">Nieuwe ritaanvraag</div>
     <div style="font-family:Arial,Helvetica,sans-serif;font-size:14px;color:${GRIJS};line-height:1.6;margin-bottom:20px;">Ontvangen via de website — bekijk de details en stuur de klant een prijsvoorstel via WhatsApp.</div>
 
@@ -215,38 +233,68 @@ export function hamidMail(r: RitGegevens): { subject: string; html: string; text
 
     <!-- Wanneer / type / personen -->
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-top:1px solid ${RAND};margin-top:20px;">
-      <tr>
-        <td width="40%" style="padding:20px 0 0 0;vertical-align:top;">${label("Wanneer")}${waarde(wanneer)}</td>
-        <td width="35%" style="padding:20px 0 0 0;vertical-align:top;">${label("Type rit")}${waarde(ritTypeLabel)}</td>
-        <td width="25%" style="padding:20px 0 0 0;vertical-align:top;">${label("Personen")}${waarde(r.personen)}</td>
-      </tr>
+      ${
+        isRetour
+          ? `<tr>
+               <td width="50%" style="padding:20px 0 0 0;vertical-align:top;">${label("Heenrit")}${waarde(`${r.datum} om ${r.tijd}`)}</td>
+               <td width="50%" style="padding:20px 0 0 0;vertical-align:top;">${label("Terugrit")}${waarde(`${r.terugDatum} om ${r.terugTijd}`)}</td>
+             </tr>
+             <tr>
+               <td width="50%" style="padding:16px 0 0 0;vertical-align:top;">${label("Type rit")}${waarde(ritTypeLabel)}</td>
+               <td width="50%" style="padding:16px 0 0 0;vertical-align:top;">${label("Personen")}${waarde(r.personen)}</td>
+             </tr>`
+          : `<tr>
+               <td width="40%" style="padding:20px 0 0 0;vertical-align:top;">${label("Wanneer")}${waarde(`${r.datum} om ${r.tijd}`)}</td>
+               <td width="35%" style="padding:20px 0 0 0;vertical-align:top;">${label("Type rit")}${waarde(ritTypeLabel)}</td>
+               <td width="25%" style="padding:20px 0 0 0;vertical-align:top;">${label("Personen")}${waarde(r.personen)}</td>
+             </tr>`
+      }
       ${opmerkingenBlok}
     </table>
 
-    <!-- WhatsApp-knop -->
+    <!-- WhatsApp-acties -->
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin-top:24px;">
       <tr><td>
-        <a href="${waLink}" style="display:block;background-color:${GROEN};color:#ffffff;font-family:Arial,Helvetica,sans-serif;font-size:15px;font-weight:bold;text-align:center;text-decoration:none;padding:15px 20px;border-radius:14px;">
-          Klant contacteren via WhatsApp
+        <a href="${waPrijs}" class="m-wa" style="display:block;background-color:${GROEN};color:#ffffff;font-family:Arial,Helvetica,sans-serif;font-size:15px;font-weight:bold;text-align:center;text-decoration:none;padding:15px 20px;border-radius:14px;">
+          Prijsvoorstel sturen via WhatsApp
         </a>
+      </td></tr>
+      <tr><td style="padding-top:8px;">
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+          <td width="50%" style="padding-right:4px;">
+            <a href="${waVrij}" class="m-wa2" style="display:block;background-color:#f4f4f4;color:${DONKER};font-family:Arial,Helvetica,sans-serif;font-size:13px;font-weight:bold;text-align:center;text-decoration:none;padding:12px 14px;border-radius:12px;">
+              Eigen bericht
+            </a>
+          </td>
+          <td width="50%" style="padding-left:4px;">
+            <a href="${waAfwijzen}" class="m-wa2" style="display:block;background-color:#f4f4f4;color:${DONKER};font-family:Arial,Helvetica,sans-serif;font-size:13px;font-weight:bold;text-align:center;text-decoration:none;padding:12px 14px;border-radius:12px;">
+              Niet beschikbaar
+            </a>
+          </td>
+        </tr></table>
       </td></tr>
     </table>
   `;
 
   const voet = `Deze aanvraag kwam binnen via het boekingsformulier op ${SITE}.<br>${escapeHtml(BEDRIJF)} · ${escapeHtml(TEL)} · ${escapeHtml(MAIL)}`;
 
+  const wanneerText = isRetour
+    ? `Heenrit: ${r.datum} om ${r.tijd}\nTerugrit: ${r.terugDatum} om ${r.terugTijd}`
+    : `Wanneer: ${r.datum} om ${r.tijd}`;
+
   // Platte-tekstversie voor clients die geen HTML tonen, en voor spamfilters.
   const text =
     `Nieuwe ritaanvraag via ${SITE}\n\n` +
+    (isRetour ? `>>> HEEN & TERUG <<<\n\n` : "") +
     `Naam: ${r.naam}\nTelefoon: ${r.telefoon}\n` +
     (r.email ? `E-mail: ${r.email}\n` : "") +
     `\nOphalen: ${r.ophalen}\nBestemming: ${r.bestemming}\n` +
     (r.afstandKm != null ? `Afstand: ± ${r.afstandKm} km (± ${r.rijtijdMin} min)\n` : "") +
-    `\nWanneer: ${wanneer}\nType: ${ritTypeLabel}\nPersonen: ${r.personen}\n` +
+    `\n${wanneerText}\nType: ${ritTypeLabel}\nPersonen: ${r.personen}\n` +
     (r.opmerkingen ? `\nOpmerkingen: ${r.opmerkingen}\n` : "") +
-    `\nWhatsApp klant: ${waLink}\n`;
+    `\nPrijsvoorstel sturen: ${waPrijs}\n`;
 
-  const subject = `Rit ${r.datum} ${r.tijd} — ${r.naam} (${r.ophalen} → ${r.bestemming})`;
+  const subject = `${isRetour ? "[RETOUR] " : ""}Rit ${r.datum} ${r.tijd} — ${r.naam} (${r.ophalen} → ${r.bestemming})`;
 
   return { subject, html: shell("Nieuwe aanvraag", binnen, voet), text };
 }
@@ -265,8 +313,8 @@ export function klantMail(r: RitGegevens): { subject: string; html: string; text
     <div style="font-family:Arial,Helvetica,sans-serif;font-size:11px;font-weight:bold;letter-spacing:1.5px;color:${GEEL};text-transform:uppercase;margin-bottom:6px;">Bevestiging</div>
     <div style="font-family:Arial,Helvetica,sans-serif;font-size:24px;font-weight:bold;color:${DONKER};margin-bottom:8px;">Bedankt, ${escapeHtml(r.naam.split(" ")[0])}!</div>
     <div style="font-family:Arial,Helvetica,sans-serif;font-size:14px;color:${GRIJS};line-height:1.7;margin-bottom:6px;">
-      We hebben uw aanvraag goed ontvangen. We bekijken ze persoonlijk en sturen u
-      zo snel mogelijk een prijsvoorstel via WhatsApp.
+      We hebben uw aanvraag goed ontvangen. Hamid bekijkt ze persoonlijk en stuurt u
+      zo snel mogelijk een prijsvoorstel via WhatsApp of telefoon.
       <strong style="color:${DONKER};">Pas na uw akkoord is de rit definitief bevestigd</strong> — u zit dus nog nergens aan vast.
     </div>
 
@@ -288,7 +336,7 @@ export function klantMail(r: RitGegevens): { subject: string; html: string; text
     <!-- WhatsApp-knop naar Hamid -->
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin-top:24px;">
       <tr><td>
-        <a href="https://wa.me/${HAMID_WA}?text=${encodeURIComponent(`Hallo, ik heb net een rit aangevraagd (${r.ophalen} naar ${r.bestemming}) en heb nog een vraag.`)}" style="display:block;background-color:${GROEN};color:#ffffff;font-family:Arial,Helvetica,sans-serif;font-size:15px;font-weight:bold;text-align:center;text-decoration:none;padding:15px 20px;border-radius:14px;">
+        <a href="https://wa.me/${HAMID_WA}?text=${encodeURIComponent(`Hallo, ik heb net een rit aangevraagd (${r.ophalen} naar ${r.bestemming}) en heb nog een vraag.`)}" class="m-wa" style="display:block;background-color:${GROEN};color:#ffffff;font-family:Arial,Helvetica,sans-serif;font-size:15px;font-weight:bold;text-align:center;text-decoration:none;padding:15px 20px;border-radius:14px;">
           Stuur ons een bericht via WhatsApp
         </a>
       </td></tr>
@@ -303,7 +351,7 @@ export function klantMail(r: RitGegevens): { subject: string; html: string; text
 
   const text =
     `Bedankt, ${r.naam.split(" ")[0]}!\n\n` +
-    `We hebben uw aanvraag goed ontvangen. Hamid stuurt u zo snel mogelijk een prijsvoorstel via WhatsApp of telefoon. Pas na uw akkoord is de rit definitief bevestigd.\n\n` +
+    `We hebben uw aanvraag goed ontvangen. We sturen u zo snel mogelijk een prijsvoorstel via WhatsApp. Pas na uw akkoord is de rit definitief bevestigd.\n\n` +
     `Uw aanvraag:\n${r.ophalen} -> ${r.bestemming}\n${wanneer} · ${r.personen} ${Number(r.personen) === 1 ? "persoon" : "personen"}\n\n` +
     `Dringend? Bel ${TEL}.\n\n${BEDRIJF}`;
 
