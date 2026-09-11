@@ -78,16 +78,28 @@ function shell(kicker: string, binnen: string, voetregel: string): string {
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light only">
 <title>${escapeHtml(BEDRIJF)}</title>
+<style>
+  /* Compacter op mobiel. Outlook desktop negeert media queries en houdt
+     de ruimere desktop-waarden aan — dat is prima. */
+  @media only screen and (max-width: 480px) {
+    .m-head { padding: 20px 20px 0 20px !important; }
+    .m-rule { padding: 14px 20px 0 20px !important; }
+    .m-body { padding: 18px 20px 24px 20px !important; }
+    .m-box  { padding: 14px 16px !important; }
+    .m-gap  { padding-top: 14px !important; }
+    .m-logo { width: 128px !important; }
+  }
+</style>
 </head>
 <body style="margin:0;padding:0;background-color:${ACHTERGROND};">
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:${ACHTERGROND};padding:24px 12px;">
   <tr><td align="center">
     <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;background-color:#ffffff;border-radius:20px;overflow:hidden;border:1px solid ${RAND};">
       <!-- Kop -->
-      <tr><td style="padding:28px 32px 0 32px;">
+      <tr><td class="m-head" style="padding:28px 32px 0 32px;">
         <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
           <td align="left" style="vertical-align:middle;">
-            <img src="${LOGO_URL}" alt="${escapeHtml(BEDRIJF)}" width="150" style="display:block;width:150px;height:auto;">
+            <img src="${LOGO_URL}" alt="${escapeHtml(BEDRIJF)}" width="150" class="m-logo" style="display:block;width:150px;height:auto;">
           </td>
           <td align="right" style="vertical-align:middle;font-family:Arial,Helvetica,sans-serif;font-size:11px;font-weight:bold;letter-spacing:1.5px;color:${LICHTGRIJS};text-transform:uppercase;">
             ${escapeHtml(kicker)}
@@ -95,11 +107,11 @@ function shell(kicker: string, binnen: string, voetregel: string): string {
         </tr></table>
       </td></tr>
       <!-- Gele scheidingslijn -->
-      <tr><td style="padding:20px 32px 0 32px;">
+      <tr><td class="m-rule" style="padding:20px 32px 0 32px;">
         <div style="height:3px;background-color:${GEEL};border-radius:2px;line-height:3px;font-size:0;">&nbsp;</div>
       </td></tr>
       <!-- Inhoud -->
-      <tr><td style="padding:24px 32px 32px 32px;font-family:Arial,Helvetica,sans-serif;">
+      <tr><td class="m-body" style="padding:24px 32px 32px 32px;font-family:Arial,Helvetica,sans-serif;">
         ${binnen}
       </td></tr>
     </table>
@@ -173,7 +185,7 @@ export function hamidMail(r: RitGegevens): { subject: string; html: string; text
 
     <!-- Contactblok -->
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#fafafa;border-radius:14px;padding:0;">
-      <tr><td style="padding:18px 20px;">
+      <tr><td class="m-box" style="padding:18px 20px;">
         <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
           <tr>
             <td width="55%" style="vertical-align:top;">${label("Naam")}${waarde(r.naam)}</td>
@@ -188,13 +200,13 @@ export function hamidMail(r: RitGegevens): { subject: string; html: string; text
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
       <tr><td style="padding:20px 0 0 0;">
         <table role="presentation" cellpadding="0" cellspacing="0"><tr>
-          <td style="vertical-align:top;padding-right:10px;padding-top:3px;"><div style="width:10px;height:10px;border-radius:50%;background-color:${GEEL};"></div></td>
+          <td style="vertical-align:top;padding-right:10px;padding-top:1px;font-size:18px;line-height:1.2;">📍</td>
           <td>${label("Ophalen")}<div style="font-family:Arial,Helvetica,sans-serif;font-size:15px;color:${DONKER};font-weight:bold;">${escapeHtml(r.ophalen)}</div></td>
         </tr></table>
       </td></tr>
       <tr><td style="padding:10px 0 0 0;">
         <table role="presentation" cellpadding="0" cellspacing="0"><tr>
-          <td style="vertical-align:top;padding-right:10px;padding-top:3px;"><div style="width:10px;height:10px;border-radius:2px;background-color:${DONKER};"></div></td>
+          <td style="vertical-align:top;padding-right:10px;padding-top:1px;font-size:18px;line-height:1.2;">🏁</td>
           <td>${label("Bestemming")}<div style="font-family:Arial,Helvetica,sans-serif;font-size:15px;color:${DONKER};font-weight:bold;">${escapeHtml(r.bestemming)}</div></td>
         </tr></table>
       </td></tr>
@@ -253,20 +265,20 @@ export function klantMail(r: RitGegevens): { subject: string; html: string; text
     <div style="font-family:Arial,Helvetica,sans-serif;font-size:11px;font-weight:bold;letter-spacing:1.5px;color:${GEEL};text-transform:uppercase;margin-bottom:6px;">Bevestiging</div>
     <div style="font-family:Arial,Helvetica,sans-serif;font-size:24px;font-weight:bold;color:${DONKER};margin-bottom:8px;">Bedankt, ${escapeHtml(r.naam.split(" ")[0])}!</div>
     <div style="font-family:Arial,Helvetica,sans-serif;font-size:14px;color:${GRIJS};line-height:1.7;margin-bottom:6px;">
-      We hebben uw aanvraag goed ontvangen. Hamid bekijkt ze persoonlijk en stuurt u
-      zo snel mogelijk een prijsvoorstel via WhatsApp of telefoon.
+      We hebben uw aanvraag goed ontvangen. We bekijken ze persoonlijk en sturen u
+      zo snel mogelijk een prijsvoorstel via WhatsApp.
       <strong style="color:${DONKER};">Pas na uw akkoord is de rit definitief bevestigd</strong> — u zit dus nog nergens aan vast.
     </div>
 
     <!-- Samenvatting van wat ze aanvroegen -->
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#fafafa;border-radius:14px;margin-top:20px;">
-      <tr><td style="padding:18px 20px;">
+      <tr><td class="m-box" style="padding:18px 20px;">
         <div style="font-family:Arial,Helvetica,sans-serif;font-size:11px;font-weight:bold;letter-spacing:1px;color:${LICHTGRIJS};text-transform:uppercase;margin-bottom:12px;">Uw aanvraag</div>
         <table role="presentation" cellpadding="0" cellspacing="0"><tr>
-          <td style="vertical-align:top;padding-right:10px;padding-top:3px;"><div style="width:9px;height:9px;border-radius:50%;background-color:${GEEL};"></div></td>
+          <td style="vertical-align:top;padding-right:10px;padding-top:1px;font-size:16px;line-height:1.2;">📍</td>
           <td style="padding-bottom:8px;font-family:Arial,Helvetica,sans-serif;font-size:14px;color:${DONKER};">${escapeHtml(r.ophalen)}</td>
         </tr><tr>
-          <td style="vertical-align:top;padding-right:10px;padding-top:3px;"><div style="width:9px;height:9px;border-radius:2px;background-color:${DONKER};"></div></td>
+          <td style="vertical-align:top;padding-right:10px;padding-top:1px;font-size:16px;line-height:1.2;">🏁</td>
           <td style="font-family:Arial,Helvetica,sans-serif;font-size:14px;color:${DONKER};">${escapeHtml(r.bestemming)}</td>
         </tr></table>
         <div style="font-family:Arial,Helvetica,sans-serif;font-size:13px;color:${GRIJS};margin-top:12px;">${escapeHtml(wanneer)} · ${escapeHtml(r.personen)} ${Number(r.personen) === 1 ? "persoon" : "personen"}</div>

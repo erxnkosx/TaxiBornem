@@ -1,4 +1,4 @@
-import { MessageCircle, CheckCircle2 } from "lucide-react";
+import { MessageCircle, CheckCircle2, Mail } from "lucide-react";
 import { WHATSAPP_URL } from "../../data/site";
 import { cn } from "../../lib/cn";
 
@@ -10,16 +10,24 @@ export default function SuccessPage() {
           <CheckCircle2 className="w-8 h-8 text-[#25D366]" />
         </div>
         <h1 className="text-2xl font-bold text-[#181818] mb-3">Aanvraag ontvangen!</h1>
-        <p className="text-[#6b6b6b] text-sm leading-relaxed mb-6">
-          We hebben uw ritaanvraag ontvangen en zal u zo snel mogelijk een{" "}
-          <strong className="text-[#181818]">persoonlijk prijsvoorstel sturen via WhatsApp</strong>.
+        <p className="text-[#6b6b6b] text-sm leading-relaxed mb-4">
+          We hebben uw ritaanvraag ontvangen en sturen u zo snel mogelijk een{" "}
+          <strong className="text-[#181818]">persoonlijk prijsvoorstel via WhatsApp</strong>.
         </p>
+
+        <div className="flex items-start gap-2.5 bg-[#25D366]/8 border border-[#25D366]/20 rounded-[14px] px-4 py-3 text-left mb-6">
+          <Mail className="w-4 h-4 text-[#25D366] mt-0.5 flex-shrink-0" />
+          <p className="text-xs text-[#6b6b6b] leading-relaxed">
+            Er is een <strong className="text-[#181818]">bevestiging naar uw e-mailadres</strong> gestuurd.
+            Geen mail ontvangen? Kijk even in uw spam-map.
+          </p>
+        </div>
 
         <div className="bg-[#f7f7f7] rounded-[18px] p-5 text-left mb-6">
           <div className="flex flex-col gap-3 text-sm">
             {[
               ["Aanvraag verzonden", "✓"],
-              ["We bekijke, uw aanvraag", "Binnenkort"],
+              ["We bekijken uw aanvraag", "Binnenkort"],
               ["Prijsvoorstel via WhatsApp", "Binnenkort"],
             ].map(([step, status], i) => (
               <div key={i} className="flex items-center justify-between">

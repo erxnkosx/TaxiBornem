@@ -42,8 +42,9 @@ export function validate(b: Partial<Booking>): Errors {
   else if (digits.length < 8 || digits.length > 15)
     e.telefoon = "Controleer uw telefoonnummer.";
 
-  // E-mail is optioneel; enkel valideren als er iets ingevuld is.
-  if (!isBlank(b.email) && !/^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i.test(b.email!.trim()))
+  // E-mail is verplicht: de klant krijgt hierop een bevestiging.
+  if (isBlank(b.email)) e.email = "Vul uw e-mailadres in.";
+  else if (!/^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i.test(b.email!.trim()))
     e.email = "Controleer uw e-mailadres.";
 
   if (isBlank(b.ophalen)) e.ophalen = "Vul het ophaaladres in.";
