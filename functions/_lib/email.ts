@@ -40,7 +40,7 @@ const GROEN = "#25D366";
 // https://www.taxibornem.be/logo.webp
 const LOGO_URL = "https://taxibornem.pages.dev/logo.webp";
 const SITE = "taxibornem.be";
-const BEDRIJF = "Taxi Bornem Hamid";
+const BEDRIJF = "Taxi Bornem";
 const TEL = "+32 472 70 62 45";
 const MAIL = "info@taxibornem.be";
 // Hamids nummer voor WhatsApp, in internationaal formaat zonder + of spaties.
