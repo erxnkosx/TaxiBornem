@@ -35,11 +35,29 @@ const ACHTERGROND = "#f4f4f4";
 const GROEN = "#25D366";
 
 // Absolute URL nodig: mailclients kunnen geen relatieve paden laden.
-const LOGO_URL = "https://www.taxibornem.be/logo.webp";
+// TIJDELIJK op pages.dev: www.taxibornem.be draait nu nog de oude site,
+// waar logo.webp niet op staat. Na de verhuizing terugzetten naar
+// https://www.taxibornem.be/logo.webp
+const LOGO_URL = "https://taxibornem.pages.dev/logo.webp";
 const SITE = "taxibornem.be";
 const BEDRIJF = "Taxi Bornem Hamid";
 const TEL = "+32 472 70 62 45";
 const MAIL = "info@taxibornem.be";
+// Hamids nummer voor WhatsApp, in internationaal formaat zonder + of spaties.
+const HAMID_WA = "32472706245";
+
+/**
+ * Zet een Belgisch telefoonnummer om naar het formaat dat wa.me nodig heeft:
+ * enkel cijfers, met landcode, zonder leidende 0.
+ * "0483 69 04 26" -> "32483690426"  ·  "+32 483..." -> "32483..."
+ */
+function waNumber(tel: string): string {
+  let d = tel.replace(/\D/g, "");
+  if (d.startsWith("0032")) d = d.slice(4);      // 0032... -> ...
+  else if (d.startsWith("32")) d = d.slice(2);   // 32...   -> ...
+  else if (d.startsWith("0")) d = d.slice(1);    // 0483... -> 483...
+  return "32" + d;
+}
 
 /** Voorkomt dat ingevulde tekst de HTML kan breken of scripts kan injecteren. */
 export function escapeHtml(v: string): string {
@@ -118,7 +136,7 @@ export function hamidMail(r: RitGegevens): { subject: string; html: string; text
   const ritTypeLabel = r.ritType === "heen-terug" ? "Heen & terug" : "Enkele rit";
 
   // WhatsApp-knop met het nummer van de klant al ingevuld en een klaar bericht.
-  const waNummer = r.telefoon.replace(/\D/g, "");
+  const waNummer = waNumber(r.telefoon);
   const waTekst = encodeURIComponent(
     `Hallo ${r.naam}, bedankt voor uw aanvraag bij Taxi Bornem. `,
   );
@@ -255,8 +273,17 @@ export function klantMail(r: RitGegevens): { subject: string; html: string; text
       </td></tr>
     </table>
 
+    <!-- WhatsApp-knop naar Hamid -->
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin-top:24px;">
+      <tr><td>
+        <a href="https://wa.me/${HAMID_WA}?text=${encodeURIComponent(`Hallo, ik heb net een rit aangevraagd (${r.ophalen} naar ${r.bestemming}) en heb nog een vraag.`)}" style="display:block;background-color:${GROEN};color:#ffffff;font-family:Arial,Helvetica,sans-serif;font-size:15px;font-weight:bold;text-align:center;text-decoration:none;padding:15px 20px;border-radius:14px;">
+          Stuur ons een bericht via WhatsApp
+        </a>
+      </td></tr>
+    </table>
+
     <div style="font-family:Arial,Helvetica,sans-serif;font-size:13px;color:${GRIJS};line-height:1.7;margin-top:20px;">
-      Dringend of een vraag? Bel ons gerust op <a href="tel:${TEL.replace(/\s/g, "")}" style="color:${DONKER};font-weight:bold;text-decoration:none;">${escapeHtml(TEL)}</a>.
+      Liever bellen? U bereikt ons op <a href="tel:${TEL.replace(/\s/g, "")}" style="color:${DONKER};font-weight:bold;text-decoration:none;">${escapeHtml(TEL)}</a>.
     </div>
   `;
 
