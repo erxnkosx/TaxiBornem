@@ -91,6 +91,15 @@ function shell(kicker: string, binnen: string, voetregel: string): string {
     .t-grey { color: #6b6b6b !important; }
     .t-light { color: #9b9b9b !important; }
   }
+  /* Outlook (Windows/Android) negeert bovenstaande en draait zelf kleuren om.
+     Deze [data-ogsc]/[data-ogsb]-selectors zijn de enige haak die Outlook
+     biedt om die omkleuring te overrulen. Zo blijft de kaart wit en de
+     tekst leesbaar in plaats van zwart-op-zwart. */
+  [data-ogsc] .m-shell, [data-ogsb] .m-shell { background-color: #f4f4f4 !important; }
+  [data-ogsc] .m-card, [data-ogsb] .m-card { background-color: #ffffff !important; }
+  [data-ogsc] .t-dark { color: #181818 !important; }
+  [data-ogsc] .t-grey { color: #6b6b6b !important; }
+  [data-ogsc] .t-light { color: #9b9b9b !important; }
 
   /* Compacter op mobiel. Outlook desktop negeert media queries en houdt
      de ruimere desktop-waarden aan — dat is prima. */
@@ -106,12 +115,12 @@ function shell(kicker: string, binnen: string, voetregel: string): string {
   }
 </style>
 </head>
-<body style="margin:0;padding:0;background-color:${ACHTERGROND};">
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0" class="m-shell" style="background-color:${ACHTERGROND};padding:24px 12px;">
+<body style="margin:0;padding:0;background-color:${ACHTERGROND} !important;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" class="m-shell" bgcolor="${ACHTERGROND}" style="background-color:${ACHTERGROND} !important;padding:24px 12px;">
   <tr><td align="center">
-    <table role="presentation" width="600" cellpadding="0" cellspacing="0" class="m-card" style="max-width:600px;width:100%;background-color:#ffffff;border-radius:20px;overflow:hidden;border:1px solid ${RAND};">
+    <table role="presentation" width="600" cellpadding="0" cellspacing="0" class="m-card" bgcolor="#ffffff" style="max-width:600px;width:100%;background-color:#ffffff !important;border-radius:20px;overflow:hidden;border:1px solid ${RAND};">
       <!-- Kop -->
-      <tr><td class="m-head" style="padding:28px 32px 0 32px;">
+      <tr><td class="m-head" bgcolor="#ffffff" style="padding:28px 32px 0 32px;background-color:#ffffff !important;">
         <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
           <td align="left" style="vertical-align:middle;">
             <img src="${LOGO_URL}" alt="${escapeHtml(BEDRIJF)}" width="150" class="m-logo" style="display:block;width:150px;height:auto;">
@@ -122,11 +131,11 @@ function shell(kicker: string, binnen: string, voetregel: string): string {
         </tr></table>
       </td></tr>
       <!-- Gele scheidingslijn -->
-      <tr><td class="m-rule" style="padding:20px 32px 0 32px;">
+      <tr><td class="m-rule" bgcolor="#ffffff" style="padding:20px 32px 0 32px;background-color:#ffffff !important;">
         <div style="height:3px;background-color:${GEEL};border-radius:2px;line-height:3px;font-size:0;">&nbsp;</div>
       </td></tr>
       <!-- Inhoud -->
-      <tr><td class="m-body" style="padding:24px 32px 32px 32px;font-family:Arial,Helvetica,sans-serif;">
+      <tr><td class="m-body" bgcolor="#ffffff" style="padding:24px 32px 32px 32px;background-color:#ffffff !important;font-family:Arial,Helvetica,sans-serif;">
         ${binnen}
       </td></tr>
     </table>
@@ -215,7 +224,7 @@ export function hamidMail(r: RitGegevens): { subject: string; html: string; text
     <div style="font-family:Arial,Helvetica,sans-serif;font-size:14px;color:${GRIJS};line-height:1.6;margin-bottom:20px;">Ontvangen via de website — bekijk de details en stuur de klant een prijsvoorstel via WhatsApp.</div>
 
     <!-- Contactblok -->
-    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#fafafa;border-radius:14px;padding:0;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" bgcolor="#fafafa" style="background-color:#fafafa !important;border-radius:14px;padding:0;">
       <tr><td class="m-box" style="padding:18px 20px;">
         <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
           <tr>
@@ -335,13 +344,13 @@ export function klantMail(r: RitGegevens): { subject: string; html: string; text
     </tr></table>
     <div style="font-family:Arial,Helvetica,sans-serif;font-size:24px;font-weight:bold;color:${DONKER};margin-bottom:8px;">Bedankt, ${escapeHtml(r.naam.split(" ")[0])}!</div>
     <div style="font-family:Arial,Helvetica,sans-serif;font-size:14px;color:${GRIJS};line-height:1.7;margin-bottom:6px;">
-      We hebben uw aanvraag goed ontvangen. We bekijken ze persoonlijk en sturen u
+      We hebben uw aanvraag goed ontvangen. Hamid bekijkt ze persoonlijk en stuurt u
       zo snel mogelijk een prijsvoorstel via WhatsApp of telefoon.
       <strong style="color:${DONKER};">Pas na uw akkoord is de rit definitief bevestigd</strong> — u zit dus nog nergens aan vast.
     </div>
 
     <!-- Samenvatting van wat ze aanvroegen -->
-    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#fafafa;border-radius:14px;margin-top:20px;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" bgcolor="#fafafa" style="background-color:#fafafa !important;border-radius:14px;margin-top:20px;">
       <tr><td class="m-box" style="padding:18px 20px;">
         <div style="font-family:Arial,Helvetica,sans-serif;font-size:11px;font-weight:bold;letter-spacing:1px;color:${LICHTGRIJS};text-transform:uppercase;margin-bottom:12px;">Uw aanvraag</div>
         <table role="presentation" cellpadding="0" cellspacing="0"><tr>
