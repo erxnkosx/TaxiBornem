@@ -16,7 +16,6 @@ export default function Navbar({ currentPath }: { currentPath: string }) {
   const navItems: { label: string; page: Page }[] = [
     { label: "Home", page: "home" },
     { label: "Diensten", page: "diensten" },
-    { label: "Tarieven", page: "tarieven" },
     { label: "Over ons", page: "over-ons" },
     { label: "Contact", page: "contact" },
   ];

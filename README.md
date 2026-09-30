@@ -22,12 +22,12 @@ npm run dev        # ontwikkelserver op localhost:4321
 ```
 src/
 ├─ data/site.ts          Alle inhoud op één plek: contactgegevens, diensten,
-│                        tarieven, reviews, FAQ, Web3Forms-sleutel.
+│                        reviews, FAQ, Web3Forms-sleutel.
 ├─ layouts/Layout.astro  Gedeelde <head>, meta-tags en schema-markup
 ├─ pages/                Eén bestand = één URL
 │  ├─ index.astro           /
 │  ├─ diensten.astro        /diensten
-│  ├─ tarieven.astro        /tarieven
+│  
 │  ├─ over-ons.astro        /over-ons
 │  ├─ contact.astro         /contact
 │  ├─ bedankt.astro         /bedankt      (na een aanvraag)

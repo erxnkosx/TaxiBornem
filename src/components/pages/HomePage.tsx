@@ -1,5 +1,5 @@
 import { MessageCircle, Clock, Star, Car, ArrowRight, Shield, Award, Navigation2, Plane } from "lucide-react";
-import { WHATSAPP_URL, services, destinations, airportPriceNotice } from "../../data/site";
+import { WHATSAPP_URL, services,} from "../../data/site";
 import GoogleReviews from "../GoogleReviews";
 import BookingForm from "../BookingForm";
 import FAQ from "../FAQ";
