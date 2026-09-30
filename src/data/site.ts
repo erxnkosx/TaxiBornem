@@ -3,13 +3,12 @@ import {
 } from "lucide-react";
 
 // ─── Constanten ────────────────────────────────────────────────────────────────
-export type Page = "home" | "diensten" | "tarieven" | "over-ons" | "contact" | "success" | "not-found";
+export type Page = "home" | "diensten" | "over-ons" | "contact" | "success" | "not-found";
 
 // Echte URL's per pagina — gebruikt door Navbar, Footer en alle CTA-knoppen.
 export const PATHS: Record<Page, string> = {
   home: "/",
   diensten: "/diensten",
-  tarieven: "/tarieven",
   "over-ons": "/over-ons",
   contact: "/contact",
   success: "/bedankt",
@@ -157,43 +156,10 @@ export const faqItems = [
     a: "Cash, Bancontact, Payconiq, Visa/Mastercard en overschrijving voor zakelijke klanten. Alle betaalmethoden worden vooraf besproken bij de prijsbevestiging.",
   },
   {
-    q: "Zijn er toeslagen voor nachten of weekenden?",
-    a: "Een nachttoeslag van +15% geldt tussen 22:00 en 06:00. Weekendritten kennen een minimumtoeslag van +7,5% en op officiële feestdagen rekenen we +15%. Deze zijn altijd inbegrepen in het prijsvoorstel.",
-  },
-  {
     q: "Hoe werkt de prijsbevestiging precies?",
     a: "Na uw boeking berekenen we de exacte prijs op basis van uw rit. U ontvangt een voorstel via WhatsApp. Pas na uw akkoord is de rit definitief geboekt. Geen verrassingen.",
   },
 ];
-
-// Vaste prijzen voor rechtstreeks luchthavenvervoer.
-// Deze liggen bewust ONDER het gewone kilometertarief (€5,00 + €2,70/km):
-// hoe verder de luchthaven, hoe groter het voordeel.
-//
-// LET OP: dit voordeel geldt UITSLUITEND voor een rechtstreekse rit van of
-// naar de luchthaven. Alle andere ritten (en luchthavenritten met tussenstops)
-// rekenen we af volgens het gewone kilometertarief. Zie airportPriceNotice.
-//
-//  Luchthaven            km    volgens tarief   vaste prijs   voordeel
-//  Zaventem              45    €126,50          €115          ~9%
-//  Antwerpen (Deurne)    28    €80,60           €75           ~7%
-//  Charleroi             93    €256,10          €199          ~22%
-//  Eindhoven            105    €288,50          €219          ~24%
-//  Schiphol             155    €423,50          €275          ~35%
-//  Köln/Bonn            225    €612,50          €349          ~43%
-export const destinations = [
-  { from: "Bornem", to: "Brussels Airport (Zaventem)", price: "€90", duration: "±40 min" },
-  { from: "Bornem", to: "Antwerpen Airport (Deurne)", price: "€80", duration: "±30 min" },
-  { from: "Bornem", to: "Charleroi Airport", price: "€199", duration: "±1u05" },
-  { from: "Bornem", to: "Eindhoven Airport", price: "€249", duration: "±1u15" },
-  { from: "Bornem", to: "Amsterdam Schiphol", price: "€349", duration: "±1u50" },
-  { from: "Bornem", to: "Köln/Bonn Airport", price: "€499", duration: "±2u30" },
-];
-
-// Voorwaarde bij de vaste luchthavenprijzen. Wordt onder de kaarten getoond
-// op de homepagina en de tarievenpagina, zodat de regel maar op één plek staat.
-export const airportPriceNotice =
-  "Deze vaste prijzen gelden enkel voor een rechtstreekse rit van of naar de luchthaven, zonder tussenstops. Voor alle andere ritten geldt ons gewone kilometertarief. Eventuele toeslagen (nacht, weekend, feestdag of ophaling aan de terminal) komen hier nog bij.";
 
 export const reviews = [
   {
