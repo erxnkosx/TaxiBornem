@@ -108,6 +108,41 @@ export const faqItems = [
   },
 ];
 
+export const reviews = [
+  {
+    name: "Sahin Kemaldar",
+    initials: "S",
+    rating: 5,
+    date: "3 maanden geleden",
+    text: "Ik heb onlangs gebruikgemaakt van deze taxiservice en ben zeer tevreden over de ervaring. De chauffeur was stipt op tijd, vriendelijk en professioneel. De rit zelf verliep vlot en comfortabel, en de wagen was proper en goed onderhouden.\n\nWat ik vooral apprecieerde, was de veilige rijstijl en de aangename sfeer tijdens de rit. Ik voelde me meteen op mijn gemak. Ook de prijs-kwaliteitverhouding was correct.\n\nZeker een aanrader voor wie op zoek is naar betrouwbaar en comfortabel vervoer!\n\nDankjewel Hamid 👍",
+    color: "#f4511e",
+  },
+  {
+    name: "Dominique De Roeck",
+    initials: "D",
+    rating: 5,
+    date: "3 maanden geleden",
+    text: "Toen een ander vooraf geboekt taxibedrijf op het afgesproken uur (3u15 's nachts) niet opdaagde en ook geen gehoor gaf hebben we in volle paniek Taxi Bornem gebeld en die stonden op een kwartier tijd aan onze deur. Letterlijk onze redder in nood !\nHeel hartelijk bedankt.",
+    color: "#455a64",
+  },
+  {
+    name: "Werner De Decker",
+    initials: "W",
+    rating: 5,
+    date: "2 maanden geleden",
+    text: "Ik heb vervoer van en naar vlieghaven Zaventem gedaan met deze firma. Met 4 personen en 4 middelgrote koffers. Goed op voorhand juiste uren en kostprijs afgesproken en alles verliep heel goed. Voordeel was ook dat de taxidienst heel kort bij mijn woonplaats is (bornem)... Zeer vriendelijke en behulpzame chauffeur en auto tiptop in orde. Ik kan deze service ten zeerste aanraden!",
+    color: "#33691e",
+  },
+  {
+    name: "Dorien Jaen",
+    initials: "D",
+    rating: 5,
+    date: "8 maanden geleden",
+    text: "Zeer vriendelijke mensen een top bediening\nOp voorhand alles gepland. We raden deze mensen ten zeerste aan. Ook door hen hadden we een top reis alles was tot in de puntjes en op tijd gepland.zo zorgeloos voor ons\nEerlijke prijs . We nemen met plezier de volgende diensten terug aan\nGrjes jean & dorien",
+    color: "#512da8",
+  },
+];
+
 export const stats = [
   { value: "1", label: "Vaste chauffeur" },
   { value: "50+", label: "Beoordelingen" },

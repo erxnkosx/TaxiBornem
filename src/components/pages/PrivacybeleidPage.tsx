@@ -52,6 +52,14 @@ export default function PrivacybeleidPage() {
               veilige en betrouwbare website (artikel 6(1)(f) GDPR).
             </li>
             <li>
+              <strong>Google Reviews:</strong> we tonen een selectie van publiek geplaatste reviews
+              met de openbare weergavenaam, beoordeling en reviewtekst. De bron is Google Reviews;
+              het doel is bezoekers informatie geven over klantervaringen. Rechtsgrond: ons
+              gerechtvaardigd belang om die ervaringen te tonen (artikel 6(1)(f) GDPR). U kunt
+              bezwaar maken via {EMAIL}; we beoordelen uw verzoek en verwijderen de review waar
+              dat nodig is.
+            </li>
+            <li>
               <strong>Google Maps:</strong> de kaart op de contactpagina wordt pas geladen nadat u
               daarvoor kiest. Rechtsgrond voor het laden van deze externe inhoud is uw toestemming.
               U kunt die keuze later intrekken via de cookievoorkeuren.
@@ -89,9 +97,8 @@ export default function PrivacybeleidPage() {
             verwerkt gegevens wanneer u zelf naar WhatsApp gaat en daar contact opneemt.
           </p>
           <p className="mt-3">
-            Deze website laadt geen Google-reviewprofielen of persoonlijke reviewcitaten in. De
-            Google Reviews-knop opent Google pas als u erop klikt. Elke externe dienst verwerkt
-            gegevens volgens zijn eigen voorwaarden en privacyverklaring.
+            De Google Reviews-knop opent daarnaast de Google-pagina pas wanneer u erop klikt. Elke
+            externe dienst verwerkt gegevens volgens zijn eigen voorwaarden en privacyverklaring.
           </p>
         </>
       ),
