@@ -188,51 +188,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Popular destinations */}
-      <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <p className="taxi-kicker text-xs font-semibold uppercase tracking-widest mb-3">Luchthavenvervoer</p>
-            <h2 className="text-3xl sm:text-4xl font-bold text-[#181818] tracking-tight">Vaste luchthavenprijzen</h2>
-            <p className="text-[#6b6b6b] mt-3 text-sm max-w-lg mx-auto">
-              Eén vaste prijs per luchthaven, voordeliger dan ons kilometertarief. Alleen voor rechtstreeks
-              luchthavenvervoer — persoonlijk bevestigd door onze medewerkers.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-            {destinations.map((d, i) => (
-              <div
-                key={i}
-                className="taxi-route-card flex items-center justify-between p-4 rounded-[18px] bg-[#f7f7f7] transition-all border border-transparent"
-              >
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 bg-white rounded-[10px] flex items-center justify-center shadow-sm">
-                    <Navigation2 className="w-4 h-4 text-[#FFC107]" />
-                  </div>
-                  <div>
-                    <p className="text-xs text-[#6b6b6b] font-medium">{d.from}</p>
-                    <p className="text-sm font-semibold text-[#181818]">{d.to}</p>
-                  </div>
-                </div>
-                <div className="text-right">
-                  <p className="text-xs text-[#6b6b6b]">Vaste prijs</p>
-                  <p className="text-base font-bold text-[#181818]">{d.price}</p>
-                  <p className="text-xs text-[#9b9b9b]">{d.duration}</p>
-                  <p className="text-[10px] text-[#9b9b9b]">excl. toeslagen</p>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="mt-8 max-w-2xl mx-auto flex items-start gap-3 bg-white rounded-[14px] border border-[#FFC107]/30 p-4 text-left">
-            <Plane className="w-4 h-4 text-[#c99700] flex-shrink-0 mt-0.5" />
-            <p className="text-xs text-[#6b6b6b] leading-relaxed">
-              <span className="font-semibold text-[#181818]">Enkel voor luchthavenvervoer. </span>
-              {airportPriceNotice}
-            </p>
-          </div>
-        </div>
-      </section>
 
       {/* Google Reviews */}
       <GoogleReviews />
