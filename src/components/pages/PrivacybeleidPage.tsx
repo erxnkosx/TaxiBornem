@@ -18,7 +18,7 @@ export default function PrivacybeleidPage() {
       content: (
         <>
           <p>
-            Taxi Bornem Hamid is verantwoordelijk voor de verwerking van uw persoonsgegevens.
+            Taxi Bornem is verantwoordelijk voor de verwerking van uw persoonsgegevens.
             BTW-nummer: {BTWNUMMER}. Postadres: Molenveldweg 31, 2880 Bornem, België.
           </p>
           <p className="mt-3">
@@ -190,7 +190,7 @@ export default function PrivacybeleidPage() {
               Privacybeleid
             </h1>
             <p className="text-lg text-[#6b6b6b] leading-relaxed">
-              Hier leest u welke persoonsgegevens Taxi Bornem Hamid verwerkt, waarom dat gebeurt,
+              Hier leest u welke persoonsgegevens Taxi Bornem verwerkt, waarom dat gebeurt,
               met wie gegevens worden gedeeld en welke rechten u heeft.
             </p>
             <p className="mt-3 text-sm text-[#6b6b6b]">Laatst bijgewerkt: 30 september 2026.</p>

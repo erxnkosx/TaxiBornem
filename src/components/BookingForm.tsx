@@ -358,10 +358,18 @@ export default function BookingForm() {
         </p>
       </div>
 
-      <p className="sm:col-span-2 text-xs leading-relaxed text-[#6b6b6b]">
-        Taxi Bornem Hamid gebruikt uw gegevens om uw ritaanvraag te behandelen en te beantwoorden.
-        <a href="/privacybeleid" className="ml-1 underline hover:text-[#181818]">Lees het privacybeleid</a>.
-      </p>
+      <label className="sm:col-span-2 flex items-start gap-2.5 text-xs leading-relaxed text-[#6b6b6b]">
+        <input
+          type="checkbox"
+          name="privacyAcknowledged"
+          required
+          className="mt-0.5 h-4 w-4 flex-shrink-0 accent-[#FFC107]"
+        />
+        <span>
+          Taxi Bornem gebruikt uw gegevens om uw ritaanvraag te behandelen en te beantwoorden.{" "}
+          <a href="/privacybeleid" className="underline hover:text-[#181818]">Lees het privacybeleid</a>.
+        </span>
+      </label>
 
       {/* Spamval: onzichtbaar voor bezoekers, onweerstaanbaar voor bots. */}
       <div className="hidden" aria-hidden="true">

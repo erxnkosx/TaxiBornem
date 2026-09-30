@@ -6,5 +6,10 @@
 #  www.taxibornem.be de enige versie blijft (klopt met canonical + sitemap).
 # ─────────────────────────────────────────────────────────────────────
 
+# De oude tarievenpagina is verwijderd; stuur oude URL-vormen naar de 404-pagina.
+/tarieven       /404.html   301
+/tarieven/      /404.html   301
+/tarieven.html  /404.html   301
+
 # Kaal domein -> www (301 = permanent)
 https://taxibornem.be/*    https://www.taxibornem.be/:splat    301!
