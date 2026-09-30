@@ -89,59 +89,6 @@ export const services = [
   },
 ];
 
-// ─── Tarieven ─────────────────────────────────────────────────────────────────
-// Losse getallen zodat de prijscalculator ermee kan rekenen.
-// Pas hier de tarieven aan; de tarievenpagina neemt ze automatisch over.
-export const rates = {
-  base: 5, // starttarief bij elke rit (€)
-  perKm: 2.7, // prijs per kilometer (€)
-  waitingPerHour: 30, // wachttijd (€/uur)
-  surcharges: {
-    night: 15, // 's nachts, 22:00–06:00 (%)
-    weekend: 7.5, // zaterdag & zondag (%)
-    holiday: 15, // officiële feestdagen (%)
-    airportParking: 8, // luchthavenparkeren, ophaal aan terminal (€)
-  },
-};
-
-/** Percentage in Belgisch formaat, met + ervoor: 7.5 → "+7,5%" */
-export function pct(waarde: number): string {
-  return "+" + String(waarde).replace(".", ",") + "%";
-}
-
-/** Hoogste losse toeslag — gebruikt in de "0 – x%" samenvatting. */
-export const maxSurchargePct = Math.max(
-  rates.surcharges.night,
-  rates.surcharges.weekend,
-  rates.surcharges.holiday,
-);
-
-// Toeslagen zoals ze getoond worden in "Toeslagen in één oogopslag".
-// De percentages komen uit rates.surcharges, dus je past ze daar aan — niet hier.
-export const surcharges = [
-  { icon: "moon", label: "Nachttoeslag", desc: "22:00 – 06:00", value: pct(rates.surcharges.night) },
-  { icon: "calendar", label: "Weekendtoeslag", desc: "Zaterdag & zondag", value: pct(rates.surcharges.weekend) },
-  { icon: "party", label: "Feestdagentoeslag", desc: "Officiële feestdagen", value: pct(rates.surcharges.holiday) },
-  { icon: "plane", label: "Luchthavenparkeren", desc: "Ophaal aan terminal", value: "+€8,00" },
-  { icon: "baby", label: "Kinderzitje", desc: "Op aanvraag", value: "Gratis" },
-  { icon: "clock", label: "Wachttijd", desc: "We wachten ter plaatse", value: "€30,00/u" },
-];
-
-// Betaalmethoden zoals getoond op de tarievenpagina.
-// De icon-sleutel wordt in TarievenPage.tsx aan een icoon gekoppeld, zodat
-// je hier vrij mag herordenen of iets tussenvoegen zonder dat de iconen
-// verschuiven.
-export const paymentMethods = [
-  { icon: "cash", label: "Cash" },
-  { icon: "card", label: "Bancontact" },
-  { icon: "qr", label: "Payconiq" },
-  { icon: "card", label: "Visa & Mastercard" },
-  { icon: "bank", label: "Overschrijving voor zakelijke klanten" },
-];
-
-// Welke FAQ-vragen tonen op de tarievenpagina (verwijst naar faqItems hierboven).
-// De cijfers zijn de posities in faqItems: 0 = eerste vraag, 2 = derde, enzovoort.
-export const tariffFaqIndexes = [0, 2, 4, 5];
 export const faqItems = [
   {
     q: "Hoe kan ik een taxi boeken?",
@@ -161,44 +108,9 @@ export const faqItems = [
   },
 ];
 
-export const reviews = [
-  {
-    name: "Sahin Kemaldar",
-    initials: "S",
-    rating: 5,
-    date: "3 maanden geleden",
-    text: "Ik heb onlangs gebruikgemaakt van deze taxiservice en ben zeer tevreden over de ervaring. De chauffeur was stipt op tijd, vriendelijk en professioneel. De rit zelf verliep vlot en comfortabel, en de wagen was proper en goed onderhouden.\n\nWat ik vooral apprecieerde, was de veilige rijstijl en de aangename sfeer tijdens de rit. Ik voelde me meteen op mijn gemak. Ook de prijs-kwaliteitverhouding was correct.\n\nZeker een aanrader voor wie op zoek is naar betrouwbaar en comfortabel vervoer!\n\nDankjewel Hamid 👍",
-    color: "#f4511e",
-  },
-  {
-    name: "Dominique De Roeck",
-    initials: "D",
-    rating: 5,
-    date: "3 maanden geleden",
-    text: "Toen een ander vooraf geboekt taxibedrijf op het afgesproken uur (3u15 's nachts) niet opdaagde en ook geen gehoor gaf hebben we in volle paniek Taxi Bornem gebeld en die stonden op een kwartier tijd aan onze deur. Letterlijk onze redder in nood !\nHeel hartelijk bedankt.",
-    color: "#455a64",
-  },
-  {
-    name: "Werner De Decker",
-    initials: "W",
-    rating: 5,
-    date: "2 maanden geleden",
-    text: "Ik heb vervoer van en naar vlieghaven Zaventem gedaan met deze firma. Met 4 personen en 4 middelgrote koffers. Goed op voorhand juiste uren en kostprijs afgesproken en alles verliep heel goed. Voordeel was ook dat de taxidienst heel kort bij mijn woonplaats is (bornem)... Zeer vriendelijke en behulpzame chauffeur en auto tiptop in orde. Ik kan deze service ten zeerste aanraden!",
-    color: "#33691e",
-  },
-  {
-    name: "Dorien Jaen",
-    initials: "D",
-    rating: 5,
-    date: "8 maanden geleden",
-    text: "Zeer vriendelijke mensen een top bediening\nOp voorhand alles gepland. We raden deze mensen ten zeerste aan. Ook door hen hadden we een top reis alles was tot in de puntjes en op tijd gepland.zo zorgeloos voor ons\nEerlijke prijs . We nemen met plezier de volgende diensten terug aan\nGrjes jean & dorien",
-    color: "#512da8",
-  },
-];
-
 export const stats = [
   { value: "1", label: "Vaste chauffeur" },
-  { value: "46", label: "Beoordelingen" },
+  { value: "50+", label: "Beoordelingen" },
   { value: "4,9/5", label: "Google-beoordeling" },
   { value: "24/7", label: "Beschikbaar" },
 ];

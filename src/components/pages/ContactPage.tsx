@@ -162,8 +162,8 @@ export default function ContactPage() {
                     <div className="relative h-full flex flex-col items-center justify-center text-center px-6 gap-3">
                       <MapPin className="w-6 h-6 text-[#FFC107]" />
                       <p className="text-xs text-[#6b6b6b] max-w-xs leading-relaxed">
-                        De kaart komt van Google. Laadt u hem, dan kan Google cookies op uw
-                        toestel plaatsen. Meer hierover in ons{" "}
+                        De kaart komt van Google. Bij het laden ontvangt Google uw IP-adres en
+                        technische browsergegevens en kan het cookies plaatsen. Meer hierover in ons{" "}
                         <a href="/cookiebeleid" className="underline hover:text-[#181818]">
                           cookiebeleid
                         </a>
@@ -175,7 +175,7 @@ export default function ContactPage() {
                         className="inline-flex items-center gap-2 px-4 py-2.5 bg-[#FFC107] text-[#181818] text-sm font-bold rounded-[12px] hover:bg-[#FFD54F] transition-colors"
                       >
                         <Play className="w-3.5 h-3.5" />
-                        Kaart laden
+                        Google Maps laden
                       </button>
                       {readConsent() === "refused" && (
                         <button

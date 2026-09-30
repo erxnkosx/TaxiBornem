@@ -151,6 +151,15 @@ export default function BookingForm() {
         aria-label="Rit aanvragen"
         className="grid grid-cols-1 sm:grid-cols-2 gap-4"
       >
+      <div className="sm:col-span-2 rounded-[14px] border border-black/10 bg-[#f7f7f7] px-4 py-3">
+        <p className="text-xs leading-relaxed text-[#6b6b6b]">
+          <strong className="text-[#181818]">Adresopzoeking:</strong> zodra u minstens drie tekens
+          typt, ontvangt Photon (Komoot) de zoektekst en technische verbindingsgegevens voor
+          adressuggesties. Als u beide adressen kiest, stuurt deze website de coördinaten ook naar
+          de openbare OSRM-routeserver voor een afstandsschatting.{" "}
+          <a href="/privacybeleid" className="underline hover:text-[#181818]">Meer over deze diensten</a>.
+        </p>
+      </div>
       <div className="sm:col-span-2">
       <label className={labelClass}>Rittype</label>
 
@@ -357,6 +366,16 @@ export default function BookingForm() {
           <strong className="text-[#181818]">We bekijken elke aanvraag persoonlijk</strong> en sturen u een prijsvoorstel via WhatsApp. Pas na uw akkoord is de rit bevestigd.
         </p>
       </div>
+
+      <p className="sm:col-span-2 text-xs leading-relaxed text-[#6b6b6b]">
+        Door uw aanvraag te verzenden, verwerkt Taxi Bornem Hamid (BE 1019.703.590) uw gegevens
+        om precontractuele stappen uit te voeren, uw ritaanvraag te behandelen en u te antwoorden.
+        Naam, telefoon, e-mail, adressen, type rit, ritdatum/-tijd en aantal personen zijn nodig;
+        terugritgegevens zijn alleen nodig bij een heen-en-terugrit. Opmerkingen zijn optioneel.
+        Aanvragen die niet tot een rit leiden, bewaren we maximaal 12 maanden. Factuur- en
+        boekhoudgegevens bewaren we 10 jaar.{" "}
+        <a href="/privacybeleid" className="underline hover:text-[#181818]">Lees het privacybeleid</a>.
+      </p>
 
       {/* Spamval: onzichtbaar voor bezoekers, onweerstaanbaar voor bots. */}
       <div className="hidden" aria-hidden="true">

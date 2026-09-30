@@ -1,7 +1,6 @@
 import {
   Cookie,
   Shield,
-  Settings,
   Globe,
   Database,
   Phone,
@@ -16,33 +15,43 @@ export default function CookiebeleidPage() {
   const sections = [
     {
       icon: Cookie,
-      title: "Wat zijn cookies?",
+      title: "Cookies en lokale opslag",
       content:
-        "Cookies zijn kleine tekstbestanden die op uw toestel worden opgeslagen wanneer u een website bezoekt. Ze zorgen ervoor dat websites correct functioneren en kunnen bepaalde voorkeuren onthouden.",
-    },
-    {
-      icon: Settings,
-      title: "Functionele cookies",
-      content:
-        "Functionele cookies zijn noodzakelijk voor de correcte werking van deze website. Zonder deze cookies kunnen bepaalde onderdelen van de website mogelijk niet correct functioneren.",
+        "Deze website gebruikt geen eigen trackingcookies. In de lokale opslag van uw browser bewaren we wel uw keuze voor Google Maps onder de sleutel taxibornem-cookieconsent. Dit is nodig om uw keuze te onthouden; de keuze verloopt na maximaal 180 dagen. De waarde wordt op uw toestel bewaard en niet gebruikt om u over websites heen te volgen.",
     },
     {
       icon: Database,
-      title: "Analytische cookies",
+      title: "Analyse en advertenties",
       content:
-        "Wij gebruiken geen Google Analytics of vergelijkbare meetsoftware. Er wordt dus niet bijgehouden welke pagina's u bekijkt of hoe lang u blijft.",
+        "We gebruiken geen Google Analytics, advertentiecookies of vergelijkbare meetsoftware.",
     },
     {
       icon: Globe,
-      title: "Cookies van derden",
-      content:
-        "De kaart op onze contactpagina komt van Google Maps en wordt pas geladen nadat u daar toestemming voor geeft. Doet u dat, dan kan Google eigen cookies plaatsen; die vallen onder het beleid van Google. Onze WhatsApp-knop en de link naar Google Reviews zijn gewone links: die versturen niets tot u erop klikt.",
+      title: "Google Maps en andere externe links",
+      content: (
+        <>
+          De Google Maps-kaart wordt pas ingeladen nadat u daarvoor kiest. Google ontvangt dan
+          onder meer uw IP-adres en technische browsergegevens en kan eigen cookies of opslag
+          gebruiken. Welke cookies Google precies plaatst, kan per browser en Google-dienst
+          verschillen; raadpleeg het{" "}
+          <a
+            className="underline"
+            href="https://policies.google.com/privacy?hl=nl"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            privacybeleid van Google
+          </a>
+          . WhatsApp en Google Reviews zijn gewone externe links: er wordt pas met die diensten
+          verbonden wanneer u erop klikt.
+        </>
+      ),
     },
     {
       icon: Shield,
-      title: "Cookies beheren of verwijderen",
+      title: "Uw keuze wijzigen of wissen",
       content:
-        "U kunt uw keuze op elk moment wijzigen met de knop onderaan deze pagina. Daarnaast kunt u cookies altijd beheren, blokkeren of verwijderen via de instellingen van uw browser.",
+        "U kunt uw keuze op elk moment wijzigen met de knop onderaan deze pagina. U kunt de lokale opslag ook wissen via de privacy- of sitegegevensinstellingen van uw browser. Als u de keuze wist, vragen we u opnieuw voordat Google Maps wordt geladen.",
     },
     {
       icon: Shield,
@@ -66,11 +75,11 @@ export default function CookiebeleidPage() {
             <h1 className="text-4xl sm:text-5xl font-bold text-[#181818] tracking-tight mb-6">
               Cookiebeleid
             </h1>
+            <p className="text-sm text-[#6b6b6b] mb-4">Laatst bijgewerkt: 30 september 2026.</p>
 
             <p className="text-lg text-[#6b6b6b] leading-relaxed">
-              Deze website plaatst zelf geen cookies. Enkel externe inhoud die u
-              uitdrukkelijk toestaat — vandaag is dat alleen de kaart op onze
-              contactpagina — kan cookies plaatsen.
+              We gebruiken geen trackingcookies. Uw keuze voor de externe Google Maps-kaart
+              bewaren we maximaal 180 dagen in de lokale opslag van uw browser.
             </p>
           </div>
 
@@ -78,11 +87,11 @@ export default function CookiebeleidPage() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-14">
             <div className="taxi-card bg-[#f7f7f7] rounded-[24px] p-6">
               <p className="text-[#FFC107] font-bold text-sm mb-2">
-                Cookievrij
+                Geen tracking
               </p>
 
               <p className="text-[#181818] font-medium">
-                Geen eigen cookies. De website werkt zonder.
+                Geen analytische of advertentiecookies.
               </p>
             </div>
 
@@ -92,7 +101,7 @@ export default function CookiebeleidPage() {
               </p>
 
               <p className="text-[#181818] font-medium">
-                Duidelijke uitleg over welke cookies gebruikt worden.
+                U ziet wanneer Google Maps verbinding maakt.
               </p>
             </div>
 
@@ -102,7 +111,7 @@ export default function CookiebeleidPage() {
               </p>
 
               <p className="text-[#181818] font-medium">
-                U beslist zelf welke cookies u aanvaardt.
+                U kiest zelf of Google Maps mag laden.
               </p>
             </div>
           </div>
@@ -152,7 +161,7 @@ export default function CookiebeleidPage() {
             </h2>
 
             <p className="text-[#6b6b6b] mb-5 text-sm">
-              Hier past u aan of externe inhoud zoals de Google Maps-kaart mag laden.
+              Hier wijzigt u uw keuze om Google Maps al dan niet te laden.
             </p>
 
             <button

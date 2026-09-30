@@ -105,7 +105,7 @@ export default function HomePage() {
                 </div>
                 <div>
                   <p className="font-bold text-[#181818] text-sm">4,9 / 5</p>
-                  <p className="text-xs text-[#6b6b6b]">46 Google-reviews</p>
+                  <p className="text-xs text-[#6b6b6b]">50+ Google-reviews</p>
                 </div>
               </div>
               <div className="absolute -top-4 -right-4 bg-white rounded-[18px] p-4 shadow-xl border border-black/5 flex items-center gap-3">

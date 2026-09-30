@@ -2,13 +2,14 @@
  * Toestemming voor externe inhoud (op dit moment enkel de Google Maps-kaart
  * op de contactpagina).
  *
- * De keuze zelf bewaren we in localStorage, niet in een cookie. Dat mag
- * zonder toestemming: het is strikt noodzakelijk om de keuze van de bezoeker
- * te kunnen respecteren. Zolang er geen keuze is, wordt er niets van Google
+ * De keuze bewaren we maximaal 180 dagen in localStorage, niet in een cookie.
+ * Zo kunnen we de keuze respecteren zonder de Google-kaart voor die bezoeker
+ * opnieuw te laden. Zolang er geen geldige keuze is, wordt niets van Google
  * geladen.
  */
 
 const KEY = "taxibornem-cookieconsent";
+const GELDIGHEID_MS = 180 * 24 * 60 * 60 * 1000;
 
 export type Consent = "accepted" | "refused";
 
@@ -22,8 +23,29 @@ export const CONSENT_OPEN = "cookieconsent:open";
 export function readConsent(): Consent | null {
   if (typeof window === "undefined") return null;
   try {
-    const v = window.localStorage.getItem(KEY);
-    return v === "accepted" || v === "refused" ? v : null;
+    const raw = window.localStorage.getItem(KEY);
+    if (!raw) return null;
+
+    // Verwijder ook oude, niet-verlopende waarden zodat de bezoeker opnieuw
+    // een actuele keuze kan maken.
+    let saved: { consent?: unknown; expiresAt?: unknown };
+    try {
+      saved = JSON.parse(raw);
+    } catch {
+      window.localStorage.removeItem(KEY);
+      return null;
+    }
+    const geldig =
+      (saved.consent === "accepted" || saved.consent === "refused") &&
+      typeof saved.expiresAt === "number" &&
+      saved.expiresAt > Date.now();
+
+    if (!geldig) {
+      window.localStorage.removeItem(KEY);
+      return null;
+    }
+
+    return saved.consent as Consent;
   } catch {
     // Privémodus of storage geblokkeerd: dan behandelen we het als "nog niets
     // gekozen" en laden we niets. Veiligste kant.
@@ -34,7 +56,10 @@ export function readConsent(): Consent | null {
 /** Keuze bewaren en de rest van de pagina verwittigen. */
 export function writeConsent(consent: Consent): void {
   try {
-    window.localStorage.setItem(KEY, consent);
+    window.localStorage.setItem(
+      KEY,
+      JSON.stringify({ consent, expiresAt: Date.now() + GELDIGHEID_MS }),
+    );
   } catch {
     // Niets kunnen bewaren is niet fataal: de keuze geldt dan voor dit bezoek.
   }

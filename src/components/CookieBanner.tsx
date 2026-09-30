@@ -31,7 +31,7 @@ export default function CookieBanner() {
     <div
       role="dialog"
       aria-live="polite"
-      aria-label="Cookiemelding"
+      aria-label="Toestemming voor Google Maps"
       className="fixed bottom-24 sm:bottom-6 left-4 right-4 sm:right-auto sm:max-w-md z-[60] bg-white rounded-[20px] border border-black/10 shadow-xl shadow-black/10 p-5"
     >
       <button
@@ -48,10 +48,11 @@ export default function CookieBanner() {
           <Cookie className="w-4 h-4 text-[#c99700]" />
         </div>
         <div>
-          <p className="text-sm font-bold text-[#181818] mb-1">Externe inhoud toestaan?</p>
+          <p className="text-sm font-bold text-[#181818] mb-1">Google Maps laden?</p>
           <p className="text-xs text-[#6b6b6b] leading-relaxed">
-            Deze website plaatst zelf geen cookies. Alleen de kaart op onze contactpagina komt
-            van Google, en Google kan daarbij cookies op uw toestel plaatsen. U beslist.
+            De kaart wordt pas geladen als u daarvoor kiest. Google ontvangt dan uw IP-adres en
+            technische browsergegevens en kan cookies plaatsen. Uw keuze wordt maximaal 180 dagen
+            op dit toestel onthouden.
           </p>
         </div>
       </div>
@@ -60,25 +61,23 @@ export default function CookieBanner() {
         <button
           type="button"
           onClick={() => kies("accepted")}
-          className="flex-1 px-4 py-2.5 bg-[#FFC107] text-[#181818] text-sm font-bold rounded-[12px] hover:bg-[#FFD54F] transition-colors"
+          className="flex-1 px-4 py-2.5 bg-[#f4f4f4] border border-black/10 text-[#181818] text-sm font-semibold rounded-[12px] hover:bg-[#e8e8e8] transition-colors"
         >
-          Toestaan
+          Google Maps laden
         </button>
         <button
           type="button"
           onClick={() => kies("refused")}
-          className="flex-1 px-4 py-2.5 bg-[#f4f4f4] text-[#181818] text-sm font-semibold rounded-[12px] hover:bg-[#e8e8e8] transition-colors"
+          className="flex-1 px-4 py-2.5 bg-[#f4f4f4] border border-black/10 text-[#181818] text-sm font-semibold rounded-[12px] hover:bg-[#e8e8e8] transition-colors"
         >
-          Weigeren
+          Nu niet
         </button>
       </div>
 
-      <a
-        href="/cookiebeleid"
-        className="block mt-3 text-[11px] text-[#9b9b9b] underline hover:text-[#6b6b6b] transition-colors"
-      >
-        Lees ons cookiebeleid
-      </a>
+      <div className="mt-3 flex gap-3 text-[11px] text-[#9b9b9b]">
+        <a href="/cookiebeleid" className="underline hover:text-[#6b6b6b]">Cookiebeleid</a>
+        <a href="/privacybeleid" className="underline hover:text-[#6b6b6b]">Privacybeleid</a>
+      </div>
     </div>
   );
 }

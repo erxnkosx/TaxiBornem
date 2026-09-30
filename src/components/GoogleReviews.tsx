@@ -1,5 +1,5 @@
 import { Star, ArrowRight } from "lucide-react";
-import { GOOGLE_REVIEWS_URL, reviews } from "../data/site";
+import { GOOGLE_REVIEWS_URL } from "../data/site";
 
 export default function GoogleReviews() {
   return (
@@ -22,7 +22,7 @@ export default function GoogleReviews() {
                 ))}
               </div>
               <span className="text-2xl font-bold text-[#181818]">4,9</span>
-              <span className="text-sm text-[#6b6b6b]">op basis van 46 Google Reviews</span>
+              <span className="text-sm text-[#6b6b6b]">op basis van 50+ Google Reviews</span>
             </div>
           </div>
           <a
@@ -36,38 +36,11 @@ export default function GoogleReviews() {
           </a>
         </div>
 
-        {/* Review cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {reviews.map((r, i) => (
-            <div
-              key={i}
-              className="taxi-card bg-[#f7f7f7] rounded-[18px] p-5 flex flex-col gap-3 transition-all duration-200"
-            >
-              <div className="flex items-start justify-between">
-                <div className="flex items-center gap-3">
-                  <div
-                    className="w-9 h-9 rounded-full flex items-center justify-center text-white text-sm font-bold flex-shrink-0"
-                    style={{ backgroundColor: r.color }}
-                  >
-                    {r.initials}
-                  </div>
-                  <div>
-                    <p className="font-semibold text-[#181818] text-sm">{r.name}</p>
-                    <p className="text-xs text-[#6b6b6b]">{r.date}</p>
-                  </div>
-                </div>
-                <svg viewBox="0 0 24 24" className="w-5 h-5 flex-shrink-0 opacity-60" aria-label="Google">
-                  <path d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z" fill="#4285F4"/>
-                </svg>
-              </div>
-              <div className="flex">
-                {Array.from({ length: r.rating }).map((_, j) => (
-                  <Star key={j} className="w-3.5 h-3.5 fill-[#FFC107] text-[#FFC107]" />
-                ))}
-              </div>
-              <p className="text-sm text-[#444] leading-relaxed whitespace-pre-line">{r.text}</p>
-            </div>
-          ))}
+        <div className="rounded-[18px] bg-[#f7f7f7] p-6">
+          <p className="text-sm leading-relaxed text-[#6b6b6b]">
+            We tonen hier alleen het geaggregeerde cijfer. Namen en persoonlijke reviewteksten
+            blijven op Google; die externe pagina opent pas wanneer u zelf op de link hierboven klikt.
+          </p>
         </div>
       </div>
     </section>
