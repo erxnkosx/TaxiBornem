@@ -91,7 +91,7 @@ export default function PrivacybeleidPage() {
           </p>
           <p className="mt-3">
             Na verzending verstuurt Resend de aanvraagmail naar ons en de bevestiging naar uw
-            e-mailadres. Cloudflare levert en beveiligt de website; Hostinger host onze mailbox.
+            e-mailadres. Cloudflare levert en beveiligt de website; EasyHost host onze mailbox.
             Onze boekhouder kan gegevens ontvangen die voor de boekhouding nodig zijn. Google
             ontvangt gegevens wanneer u de kaart toestaat of zelf een Google-link opent. Meta
             verwerkt gegevens wanneer u zelf naar WhatsApp gaat en daar contact opneemt.
