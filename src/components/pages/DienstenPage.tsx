@@ -128,35 +128,6 @@ export default function DienstenPage() {
           </div>
         </div>
       </section>
-
-      {/* ── Waarom Taxi Bornem ─────────────────────────────────────── */}
-      <section className="py-24 bg-white">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-14">
-            <h2 className="text-3xl sm:text-4xl font-bold text-[#181818] tracking-tight">
-              Waarom Taxi Bornem?
-            </h2>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-            {[
-              { icon: Shield, title: "Stiptheid", desc: "Op tijd, altijd. Wij volgen verkeer en vluchten op de voet." },
-              { icon: Award, title: "Discretie", desc: "Wij zijn discreet over wie we vervoeren en waarheen. Dat spreekt voor zich." },
-              { icon: Star, title: "Comfort", desc: "Verzorgde Kia, schoon en comfortabel voor elke rit." },
-            ].map((v, i) => (
-              <div
-                key={i}
-                className="taxi-card flex flex-col items-center text-center px-7 py-9 rounded-[20px] bg-[#f7f7f7]"
-              >
-                <div className="w-14 h-14 bg-[#FFC107]/12 rounded-[16px] flex items-center justify-center mb-5">
-                  <v.icon className="w-6 h-6 text-[#FFC107]" />
-                </div>
-                <h3 className="font-bold text-[#181818] text-lg mb-2.5">{v.title}</h3>
-                <p className="text-[15px] text-[#6b6b6b] leading-[1.7]">{v.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
     </div>
   );
 }
