@@ -15,11 +15,11 @@ export default function OverOnsPage() {
                 <span className="text-[#6b6b6b]">Een vertrouwde partner.</span>
               </h1>
               <p className="text-base text-[#6b6b6b] leading-relaxed mb-6">
-                Achter Taxi Bornem staat één chauffeur: Hamid. Hij rijdt elke rit zelf, in een wagen
-                die proper is en op het afgesproken uur voor uw deur staat.
+                Bij Taxi Bornem rijdt elke rit met dezelfde vaste chauffeur, in een wagen die proper
+                is en op het afgesproken uur voor uw deur staat.
               </p>
               <p className="text-base text-[#6b6b6b] leading-relaxed mb-8">
-                U belt of stuurt een bericht en u krijgt hem meteen aan de lijn. Geen callcenter, geen
+                U belt of stuurt een bericht en u krijgt ons meteen aan de lijn. Geen callcenter, geen
                 wisselende chauffeurs. Dat scheelt als uw vlucht om zes uur 's ochtends vertrekt.
               </p>
               <div className="flex flex-col gap-3">
@@ -42,9 +42,12 @@ export default function OverOnsPage() {
             <div className="relative">
               <div className="taxi-image-frame relative rounded-[24px] overflow-hidden aspect-[16/10] shadow-xl shadow-black/10 max-w-xl mx-auto">
                 <img
-                  src="/hamid-portret.webp"
-                  alt="Hamid, professionele taxichauffeur in Bornem"
+                  src="/chauffeur-portret.webp"
+                  alt="Chauffeur van Taxi Bornem"
                   className="w-full h-full object-cover"
+                  width={1448}
+                  height={1086}
+                  decoding="async"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#181818]/60 via-transparent to-transparent" />
                 <div className="absolute bottom-0 left-0 right-0 p-6">

@@ -1,0 +1,39 @@
+---
+// Bouwt één pagina per dienst en per gemeente uit src/data/landing.ts,
+// bv. /luchthavenvervoer en /taxi-puurs-sint-amands.
+import Layout from "../layouts/Layout.astro";
+import LandingPage from "../components/pages/LandingPage";
+import BookingForm from "../components/BookingForm";
+import { landingPages, type LandingPageData } from "../data/landing";
+import { breadcrumbSchema, faqSchema, serviceSchema } from "../lib/schema";
+
+export function getStaticPaths() {
+  return landingPages.map((page) => ({ params: { slug: page.slug }, props: { page } }));
+}
+
+const { page } = Astro.props as { page: LandingPageData };
+
+const trail =
+  page.kind === "dienst"
+    ? [
+        { name: "Home", path: "/" },
+        { name: "Diensten", path: "/diensten" },
+        { name: page.label, path: `/${page.slug}` },
+      ]
+    : [
+        { name: "Home", path: "/" },
+        { name: page.label, path: `/${page.slug}` },
+      ];
+---
+
+<Layout
+  title={page.metaTitle}
+  description={page.metaDescription}
+  navPath={page.kind === "dienst" ? "/diensten" : undefined}
+  preloadImage={page.image}
+  extraSchema={[serviceSchema(page), breadcrumbSchema(trail), faqSchema(page.faq)]}
+>
+  <LandingPage page={page}>
+    <BookingForm slot="booking" client:visible />
+  </LandingPage>
+</Layout>

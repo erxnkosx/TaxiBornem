@@ -18,7 +18,7 @@ export const PATHS: Record<Page, string> = {
 export const PHONE = "+32 472 70 62 45";
 export const PHONE_RAW = "+32472706245";
 export const BTWNUMMER= "BE 1019.703.590";
-export const WHATSAPP_URL = "https://wa.me/32472706245?text=Hallo%20Hamid%2C%20ik%20wil%20graag%20een%20taxi%20boeken.";
+export const WHATSAPP_URL = "https://wa.me/32472706245?text=Hallo%20Taxi%20Bornem%2C%20ik%20wil%20graag%20een%20taxi%20boeken.";
 export const EMAIL = "info@taxibornem.be";
 export const GOOGLE_REVIEWS_URL = "https://maps.google.com/?cid=5113066939281304031";
 

@@ -1,15 +1,12 @@
 # ─────────────────────────────────────────────────────────────────────
 #  Taxi Bornem — Cloudflare Pages redirects
-#  Vervangt de RewriteRules uit de oude .htaccess.
-#  https en de .html-extensie regelt Cloudflare Pages automatisch;
-#  hier hoeven we enkel het kale domein naar www te sturen, zodat
-#  www.taxibornem.be de enige versie blijft (klopt met canonical + sitemap).
+#
+#  Cloudflare Pages regelt https en de .html-extensie zelf (/diensten
+#  i.p.v. /diensten.html), dus hier hoeft niets in.
+#
+#  Kaal domein -> www: dat kan NIET in dit bestand (Cloudflare Pages
+#  ondersteunt hier alleen redirects op pad, niet op domein). Regel dat
+#  bij de DNS-provider: een doorverwijzing (301) van taxibornem.be naar
+#  https://www.taxibornem.be in Easyhost, of een Redirect Rule als het
+#  domein ooit naar Cloudflare DNS verhuist.
 # ─────────────────────────────────────────────────────────────────────
-
-# De oude tarievenpagina is verwijderd; stuur oude URL-vormen naar de 404-pagina.
-/tarieven       /404.html   301
-/tarieven/      /404.html   301
-/tarieven.html  /404.html   301
-
-# Kaal domein -> www (301 = permanent)
-https://taxibornem.be/*    https://www.taxibornem.be/:splat    301!

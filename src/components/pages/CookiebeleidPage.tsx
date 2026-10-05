@@ -5,13 +5,14 @@ import {
   Database,
   Phone,
   MessageCircle,
-  SlidersHorizontal,
 } from "lucide-react";
+import type { ReactNode } from "react";
 
 import { PHONE_RAW, WHATSAPP_URL } from "../../data/site";
-import { openConsentBanner } from "../../lib/cookieConsent";
 
-export default function CookiebeleidPage() {
+// Statische pagina; de knop om de cookievoorkeuren te openen komt als
+// interactief eilandje binnen via de prop `settingsButton`.
+export default function CookiebeleidPage({ settingsButton }: { settingsButton?: ReactNode }) {
   const sections = [
     {
       icon: Cookie,
@@ -164,14 +165,7 @@ export default function CookiebeleidPage() {
               Hier wijzigt u uw keuze om Google Maps al dan niet te laden.
             </p>
 
-            <button
-              type="button"
-              onClick={openConsentBanner}
-              className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-[#FFC107] text-[#181818] font-semibold rounded-[18px] hover:bg-[#FFD54F] transition-colors"
-            >
-              <SlidersHorizontal className="w-4 h-4" />
-              Cookievoorkeuren openen
-            </button>
+            {settingsButton}
           </div>
 
           <h2 className="text-2xl font-bold text-[#181818] mb-4">

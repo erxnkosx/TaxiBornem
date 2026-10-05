@@ -34,7 +34,7 @@ export default function Navbar({ currentPath }: { currentPath: string }) {
         <a href="/" className="flex items-center gap-2.5 group" aria-label="Taxi Bornem — startpagina">
           <img
             src="/logo.webp"
-            alt="Taxi Bornem Hamid"
+            alt="Taxi Bornem"
             className="h-16 w-auto"
             width={320}
             height={160}

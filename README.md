@@ -1,7 +1,7 @@
 # Taxi Bornem Hamid — website
 
 Statische site gebouwd met [Astro](https://astro.build) en React-componenten,
-bestemd voor **www.taxibornem.be**. Gehost op Hostinger (Premium-plan).
+bestemd voor **www.taxibornem.be**. Gehost op Cloudflare Pages.
 
 ## Snel starten
 
@@ -21,23 +21,49 @@ npm run dev        # ontwikkelserver op localhost:4321
 
 ```
 src/
-├─ data/site.ts          Alle inhoud op één plek: contactgegevens, diensten,
-│                        reviews, FAQ, Web3Forms-sleutel.
-├─ layouts/Layout.astro  Gedeelde <head>, meta-tags en schema-markup
+├─ data/site.ts          Contactgegevens, diensten (kort), reviews, FAQ
+├─ data/landing.ts       Volledige teksten van de dienst- en gemeentepagina's
+├─ layouts/Layout.astro  Gedeelde <head>, meta-tags, Open Graph en schema-markup
+├─ lib/schema.ts         schema.org-blokken (bedrijf, diensten, FAQ, broodkruimels)
 ├─ pages/                Eén bestand = één URL
 │  ├─ index.astro           /
 │  ├─ diensten.astro        /diensten
-│  
+│  ├─ [slug].astro          /luchthavenvervoer, /zakelijk-vervoer, /prive-ritten,
+│  │                        /lange-afstanden, /taxi-puurs-sint-amands,
+│  │                        /taxi-willebroek, /taxi-temse
 │  ├─ over-ons.astro        /over-ons
 │  ├─ contact.astro         /contact
-│  ├─ bedankt.astro         /bedankt      (na een aanvraag)
+│  ├─ bedankt.astro         /bedankt      (na een aanvraag, noindex)
 │  └─ 404.astro             onbekende URL's
 ├─ components/           Navbar, Footer, BookingForm, FAQ, …
-│  └─ pages/             De inhoud per pagina
-└─ lib/
-   ├─ validation.ts      Validatieregels voor het formulier
-   └─ web3forms.ts       Maakt de aanvraag op voor verzending
+│  └─ pages/             De opmaak per pagina (LandingPage = sjabloon)
+└─ lib/                  Validatie, cookie-toestemming, schema's
 ```
+
+## SEO: hoe de site in elkaar zit
+
+- **Statische HTML, kleine eilandjes JavaScript.** De pagina's worden zonder
+  JavaScript gerenderd. Alleen interactieve onderdelen laden JS: de navigatie,
+  het boekingsformulier, de tijdlijn, de kaart en de cookiebanner
+  (`client:load`, `client:visible`, `client:idle` in de `.astro`-bestanden).
+  Een component zonder `client:`-directive levert alleen HTML op; hooks
+  (`useState`, `onClick`) werken daar dus niet.
+- **FAQ's en uitklapblokken** gebruiken `<details>`, zodat de tekst altijd in
+  de HTML staat.
+- **Schema.org:** elke pagina krijgt het `LocalBusiness`-blok uit
+  `lib/schema.ts`; dienst- en gemeentepagina's daarnaast een dienst-,
+  FAQ- en broodkruimelblok.
+- **Kaal domein → www** regel je bij de DNS-provider (Easyhost), niet in
+  `public/_redirects`: Cloudflare Pages ondersteunt daar geen domein-redirects.
+- Het `pages.dev`-adres krijgt een `noindex` via `public/_headers`.
+
+### Een nieuwe dienst- of gemeentepagina toevoegen
+
+Voeg een object toe aan `dienstPages` of `gemeentePages` in
+`src/data/landing.ts`. De pagina, de sitemap, de footer, de interne links en
+de schema-markup volgen automatisch. Schrijf voor elke gemeente echt eigen
+tekst (deelgemeenten, ritten, wat er te doen is); pagina's die alleen een
+andere plaatsnaam hebben, werken niet in Google.
 
 ## Inhoud aanpassen
 
@@ -84,8 +110,7 @@ biedt Web3Forms een betaalde Submissions-API. Ook een overstap naar een eigen
 mailoplossing (bv. bij een zwaarder hostingplan) kan later, zonder de rest van
 de site te herbouwen — enkel `src/components/BookingForm.tsx` verandert dan.
 
-## Deploy naar Hostinger
+## Deploy
 
-De site wordt lokaal of via GitHub Actions gebouwd (`npm run build`), waarna de
-inhoud van de map `dist/` via FTP naar `public_html/` op Hostinger gaat. Zie de
-losse deploy-handleiding.
+Cloudflare Pages bouwt de site automatisch bij elke push naar GitHub
+(`npm run build`, uitvoermap `dist/`).

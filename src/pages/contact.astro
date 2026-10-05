@@ -1,8 +1,18 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import ContactPage from "../components/pages/ContactPage";
+import BookingForm from "../components/BookingForm";
+import ContactMap from "../components/ContactMap";
+import { breadcrumbSchema } from "../lib/schema";
 ---
 
-<Layout title="Contact & Taxi Boeken" description="Contacteer Taxi Bornem Hamid. Bel, mail of stuur een WhatsApp — of vraag uw rit direct aan via het boekingsformulier.">
-  <ContactPage client:load />
+<Layout
+  title="Contact en taxi boeken"
+  description="Contacteer Taxi Bornem. Bel, mail of stuur een WhatsApp, of vraag uw rit direct aan via het boekingsformulier. 24/7 bereikbaar."
+  extraSchema={breadcrumbSchema([{ name: "Home", path: "/" }, { name: "Contact", path: "/contact" }])}
+>
+  <ContactPage>
+    <BookingForm slot="booking" client:load />
+    <ContactMap slot="map" client:visible />
+  </ContactPage>
 </Layout>

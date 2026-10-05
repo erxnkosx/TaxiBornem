@@ -501,3 +501,29 @@ body {
   outline: 2px solid #ffc107;
   outline-offset: 2px;
 }
+/* ─── FAQ & uitklapblokken (native <details>) ──────────────────────────────── */
+.taxi-faq > summary::-webkit-details-marker,
+.taxi-details > summary::-webkit-details-marker {
+  display: none;
+}
+
+.taxi-faq > summary:focus-visible,
+.taxi-details > summary:focus-visible {
+  outline: 2px solid var(--taxi-yellow);
+  outline-offset: -2px;
+}
+
+.taxi-faq[open] {
+  border-color: rgba(255, 193, 7, 0.3);
+}
+
+/* ─── Routetabel op de landingspagina's ───────────────────────────────────── */
+.taxi-route-row {
+  position: relative;
+}
+
+.taxi-route-row .taxi-route-track {
+  background: repeating-linear-gradient(90deg,
+      rgba(24, 24, 24, 0.18) 0 6px,
+      transparent 6px 11px);
+}

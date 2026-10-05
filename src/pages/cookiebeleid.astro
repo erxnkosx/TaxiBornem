@@ -1,11 +1,14 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import CookiebeleidPage from "../components/pages/CookiebeleidPage";
+import CookieSettingsButton from "../components/CookieSettingsButton";
 ---
 
 <Layout
   title="Cookiebeleid"
   description="Welke cookies deze website gebruikt, waarom, en hoe u ze zelf beheert of verwijdert."
 >
-  <CookiebeleidPage client:load />
+  <CookiebeleidPage>
+    <CookieSettingsButton slot="settingsButton" client:visible />
+  </CookiebeleidPage>
 </Layout>

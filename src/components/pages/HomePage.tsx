@@ -1,11 +1,14 @@
-import { MessageCircle, Clock, Star, Car, ArrowRight, Shield, Award, Navigation2, Plane } from "lucide-react";
-import { WHATSAPP_URL, services,} from "../../data/site";
+import type { ReactNode } from "react";
+import { MessageCircle, Clock, Star, Car, ArrowRight, Shield, MapPin } from "lucide-react";
+import { WHATSAPP_URL, services } from "../../data/site";
+import { gemeentePages } from "../../data/landing";
 import GoogleReviews from "../GoogleReviews";
-import BookingForm from "../BookingForm";
 import FAQ from "../FAQ";
-import BookingTimeline from "../BookingTimeline";
 
-export default function HomePage() {
+// Statische pagina: wordt op de server naar HTML omgezet zonder JavaScript.
+// De interactieve stukken (boekingsformulier en tijdlijn) komen als aparte
+// "eilandjes" binnen via de props `booking` en `timeline` (zie index.astro).
+export default function HomePage({ booking, timeline }: { booking?: ReactNode; timeline?: ReactNode }) {
   return (
     <div>
       {/* Hero */}
@@ -40,15 +43,13 @@ export default function HomePage() {
               </p>
 
               <div className="flex flex-col sm:flex-row gap-3 mb-10">
-                <button
-                  onClick={() => {
-                    document.getElementById("boek")?.scrollIntoView({ behavior: "smooth" });
-                  }}
+                <a
+                  href="#boek"
                   className="taxi-primary-btn px-6 py-3.5 bg-[#181818] text-white font-semibold rounded-[18px] hover:bg-[#2a2a2a] transition-all text-sm flex items-center justify-center gap-2 shadow-lg shadow-black/10"
                 >
                   <Car className="w-4 h-4" />
                   Boek een rit
-                </button>
+                </a>
                 <a
                   href={WHATSAPP_URL}
                   target="_blank"
@@ -89,7 +90,7 @@ export default function HomePage() {
               <div className="taxi-image-frame relative rounded-[24px] overflow-hidden shadow-2xl shadow-black/15 aspect-[4/3]">
                 <img
                   src="/car.webp"
-                  alt="Kia taxi van Taxi Bornem Hamid in Bornem"
+                  alt="Kia-taxi van Taxi Bornem in Bornem"
                   className="w-full h-full object-cover"
                   width={900}
                   height={675}
@@ -141,13 +142,13 @@ export default function HomePage() {
             <p className="text-[#6b6b6b] mt-3 text-sm">Vul het formulier in en ontvang snel een prijsvoorstel via WhatsApp.</p>
           </div>
           <div className="taxi-panel bg-white rounded-[24px] p-6 sm:p-8 shadow-sm border border-black/5">
-            <BookingForm />
+            {booking}
           </div>
         </div>
       </section>
 
       {/* Timeline */}
-      <BookingTimeline />
+      {timeline}
 
       {/* Services */}
       <section className="taxi-grid-bg py-24 bg-[#f7f7f7]">
@@ -156,24 +157,31 @@ export default function HomePage() {
             <p className="taxi-kicker text-xs font-semibold uppercase tracking-widest mb-3">Onze diensten</p>
             <h2 className="text-3xl sm:text-4xl font-bold text-[#181818] tracking-tight">Wat wij aanbieden</h2>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
-            {services.slice(0, 3).map((s, i) => (
-              <div key={i} className="taxi-card bg-white rounded-[18px] p-6 border border-black/5 transition-all duration-200 group">
-              <div className="flex items-center justify-between mb-4">
-                <div className="w-11 h-11 bg-[#f4f4f4] rounded-[14px] flex items-center justify-center group-hover:bg-[#FFC107]/10 transition-colors">
-                  <s.icon className="w-5 h-5 text-[#181818] group-hover:text-[#FFC107] transition-colors" />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+            {services.map((s) => (
+              <a
+                key={s.slug}
+                href={`/${s.slug}`}
+                className="taxi-card bg-white rounded-[18px] p-6 border border-black/5 transition-all duration-200 group flex flex-col"
+              >
+                <div className="flex items-center justify-between mb-4">
+                  <div className="w-11 h-11 bg-[#f4f4f4] rounded-[14px] flex items-center justify-center group-hover:bg-[#FFC107]/10 transition-colors">
+                    <s.icon className="w-5 h-5 text-[#181818] group-hover:text-[#FFC107] transition-colors" />
+                  </div>
+                  {s.tag && (
+                    <span className="px-3 py-1 bg-[#FFC107] text-[#181818] text-[10px] font-bold rounded-full uppercase tracking-wide leading-none -translate-y-3">
+                      {s.tag}
+                    </span>
+                  )}
                 </div>
-
-                {s.tag && (
-                  <span className="px-3 py-1 bg-[#FFC107] text-[#181818] text-[10px] font-bold rounded-full uppercase tracking-wide leading-none -translate-y-3">
-                    {s.tag}
-                  </span>
-                )}
-              </div>
                 <h3 className="font-bold text-[#181818] text-base mb-0.5">{s.title}</h3>
                 <p className="text-xs text-[#6b6b6b] uppercase tracking-wide mb-3">{s.subtitle}</p>
-                <p className="text-sm text-[#6b6b6b] leading-relaxed">{s.description}</p>
-              </div>
+                <p className="text-sm text-[#6b6b6b] leading-relaxed mb-4">{s.description}</p>
+                <span className="mt-auto inline-flex items-center gap-1.5 text-sm font-semibold text-[#181818] group-hover:text-[#c99700] transition-colors">
+                  Meer over {s.title.toLowerCase()}
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </span>
+              </a>
             ))}
           </div>
           <div className="text-center">
@@ -188,6 +196,45 @@ export default function HomePage() {
         </div>
       </section>
 
+
+      {/* Werkgebied */}
+      <section className="py-24 bg-white border-b border-black/5">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 items-start">
+            <div className="lg:col-span-2">
+              <p className="taxi-kicker text-xs font-semibold uppercase tracking-widest mb-3">Werkgebied</p>
+              <h2 className="text-3xl sm:text-4xl font-bold text-[#181818] tracking-tight mb-5">
+                Taxi in Bornem en de buurgemeenten
+              </h2>
+              <p className="text-[15px] text-[#6b6b6b] leading-[1.7] mb-4">
+                De standplaats is Bornem. Wij rijden in het centrum en in de deelgemeenten Hingene,
+                Mariekerke en Weert, en net zo goed in de gemeenten errond.
+              </p>
+              <p className="text-[15px] text-[#6b6b6b] leading-[1.7]">
+                Vanuit de regio rijden we naar Antwerpen, Mechelen, Brussel en alle grote luchthavens
+                in België, Nederland en Duitsland.
+              </p>
+            </div>
+            <div className="lg:col-span-3 grid grid-cols-1 sm:grid-cols-3 gap-4">
+              {gemeentePages.map((g) => (
+                <a
+                  key={g.slug}
+                  href={`/${g.slug}`}
+                  className="taxi-route-card bg-[#f7f7f7] rounded-[18px] p-6 border border-black/5 flex flex-col gap-3 transition-all duration-200"
+                >
+                  <MapPin className="w-5 h-5 text-[#FFC107]" />
+                  <span className="font-bold text-[#181818]">{g.label}</span>
+                  <span className="text-sm text-[#6b6b6b] leading-relaxed">{g.highlights[0].text}</span>
+                  <span className="mt-auto inline-flex items-center gap-1.5 text-sm font-semibold text-[#181818]">
+                    Bekijk
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </span>
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Google Reviews */}
       <GoogleReviews />

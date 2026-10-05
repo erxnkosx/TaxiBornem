@@ -1,11 +1,10 @@
-import { useState } from "react";
-import { Plus, X, ArrowRight, Shield, Award, Star, Info, Check } from "lucide-react";
+import { Plus, ArrowRight, Info, Check, MapPin } from "lucide-react";
 import { services } from "../../data/site";
+import { gemeentePages } from "../../data/landing";
 
+// Statisch: "Meer over deze dienst" is een native <details>, dus de tekst
+// staat altijd in de HTML en werkt zonder JavaScript.
 export default function DienstenPage() {
-  // Welke dienst heeft z'n "Meer info" open? De eerste (index 0) staat standaard open.
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
-
   return (
     <div className="pt-16">
       {/* ── Hero ─────────────────────────────────────────────── */}
@@ -31,7 +30,6 @@ export default function DienstenPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-7">
             {services.map((s, i) => {
-              const isOpen = openIndex === i;
               return (
                 <article
                   key={i}
@@ -43,7 +41,7 @@ export default function DienstenPage() {
                       <div className="relative aspect-[16/10] overflow-hidden">
                         <img
                           src={s.image}
-                          alt={`${s.title} — Taxi Bornem Hamid`}
+                          alt={`${s.title} — Taxi Bornem`}
                           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                           loading="lazy"
                           width={1000}
@@ -76,23 +74,20 @@ export default function DienstenPage() {
                       {s.subtitle}
                     </p>
                     <h2 className="font-bold text-[#181818] text-xl tracking-tight mb-3">
-                      {s.title}
+                      <a href={`/${s.slug}`} className="hover:text-[#c99700] transition-colors">
+                        {s.title}
+                      </a>
                     </h2>
                     <p className="text-[15px] text-[#6b6b6b] leading-[1.7]">{s.description}</p>
 
                     {/* Meer info */}
-                    <button
-                      onClick={() => setOpenIndex(isOpen ? null : i)}
-                      aria-expanded={isOpen}
-                      className="mt-7 w-full flex items-center justify-between gap-4 py-4 border-t border-black/[0.07] text-sm font-semibold text-[#181818] hover:text-[#FFC107] transition-colors"
-                    >
-                      {isOpen ? "Minder info" : "Meer over deze dienst"}
-                      <span className="w-7 h-7 rounded-full bg-[#f4f4f4] flex items-center justify-center flex-shrink-0">
-                        {isOpen ? <X className="w-3.5 h-3.5" /> : <Plus className="w-3.5 h-3.5" />}
-                      </span>
-                    </button>
-
-                    {isOpen && (
+                    <details className="taxi-details group/details mt-7" open={i === 0}>
+                      <summary className="w-full flex items-center justify-between gap-4 py-4 border-t border-black/[0.07] text-sm font-semibold text-[#181818] hover:text-[#c99700] transition-colors cursor-pointer list-none">
+                        Kort samengevat
+                        <span className="w-7 h-7 rounded-full bg-[#f4f4f4] flex items-center justify-center flex-shrink-0">
+                          <Plus className="w-3.5 h-3.5 transition-transform duration-200 group-open/details:rotate-45" />
+                        </span>
+                      </summary>
                       <div className="pb-2">
                         <ul className="flex flex-col gap-3.5 mb-5">
                           {s.details.map((d, di) => (
@@ -111,20 +106,52 @@ export default function DienstenPage() {
                           </div>
                         )}
                       </div>
-                    )}
+                    </details>
 
                     {/* CTA */}
-                    <a
-                      href={`/contact?dienst=${s.slug}`}
-                      className="mt-8 inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-[#181818] text-white text-sm font-semibold rounded-[16px] hover:bg-[#2a2a2a] active:bg-[#111] transition-colors"
-                    >
-                      {s.title} boeken
-                      <ArrowRight className="w-4 h-4" />
-                    </a>
+                    <div className="mt-8 flex flex-col sm:flex-row gap-3">
+                      <a
+                        href={`/${s.slug}`}
+                        className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-[#181818] text-white text-sm font-semibold rounded-[16px] hover:bg-[#2a2a2a] active:bg-[#111] transition-colors"
+                      >
+                        Alles over {s.title.toLowerCase()}
+                        <ArrowRight className="w-4 h-4" />
+                      </a>
+                      <a
+                        href={`/contact?dienst=${s.slug}`}
+                        className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3.5 border border-black/10 text-[#181818] text-sm font-semibold rounded-[16px] hover:bg-[#f7f7f7] transition-colors"
+                      >
+                        Direct boeken
+                      </a>
+                    </div>
                   </div>
                 </article>
               );
             })}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Werkgebied ───────────────────────────────────────── */}
+      <section className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row md:items-center gap-6 md:gap-10">
+          <div className="md:w-1/3">
+            <h2 className="text-2xl font-bold text-[#181818] tracking-tight mb-2">Alle diensten, ook in uw gemeente</h2>
+            <p className="text-sm text-[#6b6b6b] leading-relaxed">
+              Vanuit Bornem rijden we elke dag in de buurgemeenten.
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-3">
+            {gemeentePages.map((g) => (
+              <a
+                key={g.slug}
+                href={`/${g.slug}`}
+                className="inline-flex items-center gap-2 px-4 py-2.5 bg-[#f7f7f7] border border-black/5 rounded-[14px] text-sm font-semibold text-[#181818] hover:border-[#FFC107]/40 hover:bg-white transition-colors"
+              >
+                <MapPin className="w-4 h-4 text-[#FFC107]" />
+                {g.label}
+              </a>
+            ))}
           </div>
         </div>
       </section>

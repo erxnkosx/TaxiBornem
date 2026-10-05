@@ -1,21 +1,19 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import HomePage from "../components/pages/HomePage";
+import BookingForm from "../components/BookingForm";
+import BookingTimeline from "../components/BookingTimeline";
 import { faqItems } from "../data/site";
-
-const faqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: faqItems.map((item) => ({
-    "@type": "Question",
-    name: item.q,
-    acceptedAnswer: {
-      "@type": "Answer",
-      text: item.a,
-    },
-  })),
-};
+import { faqSchema } from "../lib/schema";
 ---
 
-<Layout title="Taxi in Bornem — 24/7 stipt vervoer" description="Betrouwbare taxi in Bornem en omgeving. Stipt, professioneel en persoonlijk — 24u/24, 7 dagen op 7. Boek uw rit bij Hamid." extraSchema={faqSchema}>  <HomePage client:load />
+<Layout
+  title="Taxi in Bornem, 24/7 met vaste prijs"
+  description="Betrouwbare taxi in Bornem en omgeving: luchthavenvervoer, zakelijke en privéritten. Stipt en persoonlijk, 24u/24 en 7 dagen op 7. Vaste prijs vooraf via WhatsApp."
+  extraSchema={faqSchema(faqItems)}
+>
+  <HomePage>
+    <BookingForm slot="booking" client:visible />
+    <BookingTimeline slot="timeline" client:visible />
+  </HomePage>
 </Layout>

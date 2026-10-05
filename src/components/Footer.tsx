@@ -1,20 +1,21 @@
 import {Phone, MessageCircle, Mail, MapPin, Star, ShieldCheck, Cookie, Building2} from "lucide-react";
 import { PHONE, PHONE_RAW, WHATSAPP_URL, EMAIL, BTWNUMMER } from "../data/site";
+import { dienstPages, gemeentePages } from "../data/landing";
 
 export default function Footer() {
   return (
     <footer className="taxi-footer bg-[#181818] text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-10 mb-12">
           {/* Brand */}
-          <div className="md:col-span-2">
+          <div className="col-span-2 md:col-span-3 lg:col-span-2">
             <div className="flex items-center gap-2.5 mb-4">
 
             {/* Logo */}
             <a href="/" className="flex items-center gap-2.5 group" aria-label="Taxi Bornem — startpagina">
               <img
                 src="/logo.webp"
-                alt="Taxi Bornem Hamid"
+                alt="Taxi Bornem"
                 className="h-16 w-auto rounded overflow-hidden"
                 width={320}
                 height={160}
@@ -81,8 +82,35 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Hours */}
+          {/* Diensten */}
           <div>
+            <p className="text-xs font-semibold text-white/30 uppercase tracking-widest mb-4">Diensten</p>
+            <div className="flex flex-col gap-2.5">
+              {dienstPages.map((d) => (
+                <a key={d.slug} href={`/${d.slug}`} className="text-sm text-white/50 hover:text-white transition-colors">
+                  {d.label}
+                </a>
+              ))}
+            </div>
+          </div>
+
+          {/* Werkgebied */}
+          <div>
+            <p className="text-xs font-semibold text-white/30 uppercase tracking-widest mb-4">Werkgebied</p>
+            <div className="flex flex-col gap-2.5">
+              <a href="/" className="text-sm text-white/50 hover:text-white transition-colors">
+                Taxi Bornem
+              </a>
+              {gemeentePages.map((g) => (
+                <a key={g.slug} href={`/${g.slug}`} className="text-sm text-white/50 hover:text-white transition-colors">
+                  {g.label}
+                </a>
+              ))}
+            </div>
+          </div>
+
+          {/* Hours */}
+          <div className="col-span-2 md:col-span-1">
             <p className="text-xs font-semibold text-white/30 uppercase tracking-widest mb-4">Openingsuren</p>
             <div className="flex flex-col gap-2">
               <div className="flex items-center gap-2">
@@ -99,7 +127,7 @@ export default function Footer() {
                 className="mt-3 inline-flex items-center gap-2 px-4 py-2 bg-[#FFC107] text-[#181818] text-sm font-semibold rounded-[14px] hover:bg-[#FFD54F] transition-colors"
               >
                 <MessageCircle className="w-3.5 h-3.5" />
-                Stuur een bericht
+                WhatsApp
               </a>
             </div>
           </div>
