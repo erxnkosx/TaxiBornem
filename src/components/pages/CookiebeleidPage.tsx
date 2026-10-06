@@ -18,13 +18,13 @@ export default function CookiebeleidPage({ settingsButton }: { settingsButton?: 
       icon: Cookie,
       title: "Cookies en lokale opslag",
       content:
-        "Deze website gebruikt geen eigen trackingcookies. In de lokale opslag van uw browser bewaren we wel uw keuze voor Google Maps onder de sleutel taxibornem-cookieconsent. Dit is nodig om uw keuze te onthouden; de keuze verloopt na maximaal 180 dagen. De waarde wordt op uw toestel bewaard en niet gebruikt om u over websites heen te volgen.",
+        "We bewaren uw afzonderlijke keuzes voor Google Maps en statistieken maximaal 180 dagen in de lokale opslag van uw browser. Deze noodzakelijke opslag onthoudt uw voorkeuren. Eerdere toestemming voor Maps geldt niet als toestemming voor statistieken.",
     },
     {
       icon: Database,
       title: "Analyse en advertenties",
       content:
-        "We gebruiken geen Google Analytics, advertentiecookies of vergelijkbare meetsoftware.",
+        "Als Google Analytics is geactiveerd, laden we deze dienst alleen nadat u statistieken toestaat. We meten paginaweergaven, het starten van het formulier, verzendfouten, succesvol ingediende aanvragen en klikken op bellen of WhatsApp. Google Analytics gebruikt hiervoor _ga- en _ga_*-cookies met een ingestelde levensduur van maximaal 180 dagen. We sturen geen ingevulde namen, contactgegevens, ritadressen of opmerkingen mee. Advertentiepersonalisatie en Google Signals zijn uitgeschakeld. We gebruiken geen advertentietags.",
     },
     {
       icon: Globe,
@@ -52,7 +52,7 @@ export default function CookiebeleidPage({ settingsButton }: { settingsButton?: 
       icon: Shield,
       title: "Uw keuze wijzigen of wissen",
       content:
-        "U kunt uw keuze op elk moment wijzigen met de knop onderaan deze pagina. U kunt de lokale opslag ook wissen via de privacy- of sitegegevensinstellingen van uw browser. Als u de keuze wist, vragen we u opnieuw voordat Google Maps wordt geladen.",
+        "U kunt uw keuze op elk moment wijzigen met de knop onderaan deze pagina. U kunt de lokale opslag ook wissen via de privacy- of sitegegevensinstellingen van uw browser. Als u de keuzes wist, vragen we opnieuw toestemming. Bij het intrekken van statistiekentoestemming stoppen we de meting en verwijderen we de bereikbare Analytics-cookies op dit domein. Reeds verstuurde gegevens worden daarmee niet automatisch bij Google gewist.",
     },
     {
       icon: Shield,
@@ -76,11 +76,10 @@ export default function CookiebeleidPage({ settingsButton }: { settingsButton?: 
             <h1 className="text-4xl sm:text-5xl font-bold text-[#181818] tracking-tight mb-6">
               Cookiebeleid
             </h1>
-            <p className="text-sm text-[#6b6b6b] mb-4">Laatst bijgewerkt: 30 september 2026.</p>
+            <p className="text-sm text-[#6b6b6b] mb-4">Laatst bijgewerkt: 6 oktober 2026.</p>
 
             <p className="text-lg text-[#6b6b6b] leading-relaxed">
-              We gebruiken geen trackingcookies. Uw keuze voor de externe Google Maps-kaart
-              bewaren we maximaal 180 dagen in de lokale opslag van uw browser.
+              U kiest afzonderlijk voor Google Maps en, indien geactiveerd, Google Analytics. Deze diensten laden pas na uw toestemming. Uw keuzes bewaren we maximaal 180 dagen.
             </p>
           </div>
 
@@ -88,11 +87,11 @@ export default function CookiebeleidPage({ settingsButton }: { settingsButton?: 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-14">
             <div className="taxi-card bg-[#f7f7f7] rounded-[24px] p-6">
               <p className="text-[#FFC107] font-bold text-sm mb-2">
-                Geen tracking
+                Uw toestemming
               </p>
 
               <p className="text-[#181818] font-medium">
-                Geen analytische of advertentiecookies.
+                Statistieken laden alleen als u ze toestaat.
               </p>
             </div>
 
@@ -102,7 +101,7 @@ export default function CookiebeleidPage({ settingsButton }: { settingsButton?: 
               </p>
 
               <p className="text-[#181818] font-medium">
-                U ziet wanneer Google Maps verbinding maakt.
+                Duidelijke uitleg over Maps en statistieken.
               </p>
             </div>
 
@@ -112,7 +111,7 @@ export default function CookiebeleidPage({ settingsButton }: { settingsButton?: 
               </p>
 
               <p className="text-[#181818] font-medium">
-                U kiest zelf of Google Maps mag laden.
+                U kunt beide keuzes afzonderlijk wijzigen.
               </p>
             </div>
           </div>
@@ -162,7 +161,7 @@ export default function CookiebeleidPage({ settingsButton }: { settingsButton?: 
             </h2>
 
             <p className="text-[#6b6b6b] mb-5 text-sm">
-              Hier wijzigt u uw keuze om Google Maps al dan niet te laden.
+              Hier wijzigt u uw voorkeuren voor Google Maps en statistieken.
             </p>
 
             {settingsButton}

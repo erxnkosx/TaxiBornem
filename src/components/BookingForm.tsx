@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import { trackAnalytics, trackSuccessfulBooking } from "../lib/analytics";
 import { MessageCircle, ArrowRight, Check, Navigation2, AlertCircle } from "lucide-react";
 import { WHATSAPP_URL } from "../data/site";
 import { validate, type Errors } from "../lib/validation";
@@ -23,6 +24,7 @@ export default function BookingForm() {
   const [errors, setErrors] = useState<Errors>({});
   const [formError, setFormError] = useState("");
   const [honeypot, setHoneypot] = useState("");
+  const started = useRef(false);
 
   // Gekozen coördinaten uit de adres-suggesties (null zolang er geen exacte
   // match geselecteerd is, of zodra de tekst nadien nog wijzigt).
@@ -114,13 +116,16 @@ export default function BookingForm() {
       const data = await res.json().catch(() => ({}));
 
       if (res.ok && data.success) {
+        await trackSuccessfulBooking();
         window.location.href = "/bedankt";
         return;
       }
       setFormError(
         data.message ?? "Er ging iets mis bij het verzenden. Probeer het opnieuw of app ons rechtstreeks."
       );
+      trackAnalytics("booking_error");
     } catch {
+      trackAnalytics("booking_error");
       setFormError("Geen verbinding. Controleer uw internet, of app ons rechtstreeks.");
     }
     setSubmitting(false);
@@ -147,6 +152,12 @@ export default function BookingForm() {
 
   return (
       <form
+        onChange={() => {
+          if (!started.current) {
+            started.current = true;
+            trackAnalytics("booking_start");
+          }
+        }}
         onSubmit={handleSubmit}
         aria-label="Rit aanvragen"
         className="grid grid-cols-1 sm:grid-cols-2 gap-4"

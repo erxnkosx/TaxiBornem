@@ -64,6 +64,14 @@ export default function PrivacybeleidPage() {
               daarvoor kiest. Rechtsgrond voor het laden van deze externe inhoud is uw toestemming.
               U kunt die keuze later intrekken via de cookievoorkeuren.
             </li>
+            <li>
+              <strong>Statistieken:</strong> als Google Analytics is geactiveerd en u toestemming geeft,
+              meten we bezochte pagina’s, verwijzende websites (alleen het domein), formuliergebruik
+              en contactklikken. Google verwerkt ook technische browser- en apparaatgegevens.
+              De grondslag is uw toestemming, die u kunt intrekken via Cookievoorkeuren.
+              We sturen geen ingevulde contact- of ritgegevens mee en gebruiken geen Google Signals
+              of advertentiepersonalisatie. Zie ons cookiebeleid en het <a className="underline" href="https://policies.google.com/privacy?hl=nl">privacybeleid van Google</a>.
+            </li>
           </ul>
           <p className="mt-3">
             Naam, telefoonnummer, e-mailadres, adressen en ritdatum/-tijd zijn nodig om een
@@ -93,7 +101,7 @@ export default function PrivacybeleidPage() {
             Na verzending verstuurt Resend de aanvraagmail naar ons en de bevestiging naar uw
             e-mailadres. Cloudflare levert en beveiligt de website; EasyHost host onze mailbox.
             Onze boekhouder kan gegevens ontvangen die voor de boekhouding nodig zijn. Google
-            ontvangt gegevens wanneer u de kaart toestaat of zelf een Google-link opent. Meta
+            ontvangt gegevens wanneer u de kaart of statistieken toestaat, of zelf een Google-link opent. Meta
             verwerkt gegevens wanneer u zelf naar WhatsApp gaat en daar contact opneemt.
           </p>
           <p className="mt-3">
@@ -116,7 +124,7 @@ export default function PrivacybeleidPage() {
             10 jaar, zoals de Belgische bewaarplicht voorschrijft.
           </li>
           <li>
-            De keuze voor Google Maps wordt maximaal 180 dagen in de lokale opslag van uw browser
+            Uw keuzes voor Google Maps en statistieken worden maximaal 180 dagen in de lokale opslag van uw browser
             bewaard. Daarna vragen we u opnieuw om een keuze.
           </li>
           <li>
@@ -193,7 +201,7 @@ export default function PrivacybeleidPage() {
               Hier leest u welke persoonsgegevens Taxi Bornem verwerkt, waarom dat gebeurt,
               met wie gegevens worden gedeeld en welke rechten u heeft.
             </p>
-            <p className="mt-3 text-sm text-[#6b6b6b]">Laatst bijgewerkt: 30 september 2026.</p>
+            <p className="mt-3 text-sm text-[#6b6b6b]">Laatst bijgewerkt: 6 oktober 2026.</p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-14">

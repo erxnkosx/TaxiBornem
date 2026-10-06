@@ -46,12 +46,21 @@ const fullTitle = `${title} | Taxi Bornem`;
 
 const schemas = [businessSchema, ...(extraSchema ? [extraSchema].flat() : [])];
 const heroImage = preloadImage ?? (currentPath === "/" ? "/car.webp" : undefined);
+const analyticsId = (import.meta.env.PUBLIC_GA_MEASUREMENT_ID ?? "").trim();
+if (analyticsId && !/^G-[A-Z0-9]+$/.test(analyticsId)) {
+  throw new Error("PUBLIC_GA_MEASUREMENT_ID moet een geldig G- meet-ID zijn.");
+}
 ---
 
 <!doctype html>
 <html lang="nl-BE">
   <head>
     <meta charset="utf-8" />
+    {analyticsId && <meta name="ga-measurement-id" content={analyticsId} />}
+    <script>
+      import { initAnalytics } from "../lib/analytics";
+      initAnalytics();
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     {/* De site is alleen voor een lichte weergave ontworpen. Dit vertelt de
         browser dat, zodat hij niet zelf dark mode forceert. */}
