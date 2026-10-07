@@ -220,6 +220,7 @@ export default function BookingForm() {
           value={form.telefoon}
           onChange={(e) => set("telefoon", e.target.value)}
         />
+        <p className="mt-1.5 text-[11px] text-[#9b9b9b]">Buitenlands nummer? Begin met de landcode, bv. +34 of +31.</p>
         <Fout veld="telefoon" />
       </div>
       <div className="sm:col-span-2">

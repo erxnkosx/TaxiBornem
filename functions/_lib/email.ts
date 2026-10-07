@@ -47,16 +47,26 @@ const MAIL = "info@taxibornem.be";
 const HAMID_WA = "32472706245";
 
 /**
- * Zet een Belgisch telefoonnummer om naar het formaat dat wa.me nodig heeft:
- * enkel cijfers, met landcode, zonder leidende 0.
- * "0483 69 04 26" -> "32483690426"  ·  "+32 483..." -> "32483..."
+ * Zet een telefoonnummer om naar het formaat dat wa.me nodig heeft:
+ * enkel cijfers, met landcode, zonder + of leidende 0.
+ *
+ * Buitenlandse nummers blijven buitenlands:
+ *   "+34 612 34 56 78"  -> "34612345678"   (Spanje)
+ *   "0031 6 12345678"   -> "31612345678"   (Nederland)
+ * Belgische nummers krijgen 32 ervoor:
+ *   "0483 69 04 26"     -> "32483690426"
+ *   "+32 483 69 04 26"  -> "32483690426"
+ *   "483 69 04 26"      -> "32483690426"
  */
-function waNumber(tel: string): string {
-  let d = tel.replace(/\D/g, "");
-  if (d.startsWith("0032")) d = d.slice(4);      // 0032... -> ...
-  else if (d.startsWith("32")) d = d.slice(2);   // 32...   -> ...
-  else if (d.startsWith("0")) d = d.slice(1);    // 0483... -> 483...
-  return "32" + d;
+export function waNumber(tel: string): string {
+  const raw = tel.trim();
+  const d = raw.replace(/\D/g, "");
+
+  if (raw.startsWith("+")) return d;                 // +34..., +32... : landcode staat er al
+  if (d.startsWith("00")) return d.slice(2);         // 0034..., 0032...
+  if (d.startsWith("0")) return "32" + d.slice(1);   // 0483... : Belgisch nationaal nummer
+  if (/^4\d{8}$/.test(d)) return "32" + d;           // 483...  : Belgische gsm zonder 0
+  return d;                                          // 34612..., 32483... : landcode zonder +
 }
 
 /** Voorkomt dat ingevulde tekst de HTML kan breken of scripts kan injecteren. */
