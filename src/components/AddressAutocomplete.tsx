@@ -16,6 +16,12 @@ interface Props {
   dataVeld?: string;
 }
 
+// Gedeeld geheugen voor beide adresvelden: dezelfde zoekterm wordt maar één
+// keer opgevraagd. Photon is een gratis server en soms traag.
+const cache = new Map<string, GeoPoint[]>();
+// Langer dan dit wachten we niet op suggesties; het veld blijft gewoon werken.
+const MAX_WACHTTIJD_MS = 4000;
+
 export default function AddressAutocomplete({
   id,
   value,
@@ -29,6 +35,8 @@ export default function AddressAutocomplete({
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [fout, setFout] = useState(false);
+  const [traag, setTraag] = useState(false);
+  const controllerRef = useRef<AbortController | null>(null);
   const debounceRef = useRef<number | undefined>(undefined);
   const requestId = useRef(0);
   const boxRef = useRef<HTMLDivElement>(null);
@@ -65,20 +73,48 @@ export default function AddressAutocomplete({
     window.clearTimeout(debounceRef.current);
 
     if (v.trim().length < 3) {
+      requestId.current++;
+      controllerRef.current?.abort();
+      setLoading(false);
+      setTraag(false);
       setSuggestions([]);
       setOpen(false);
       setFout(false);
       return;
     }
 
+    const sleutel = v.trim().toLowerCase();
+    const bekend = cache.get(sleutel);
+    if (bekend) {
+      // Al eerder opgezocht: meteen tonen, zonder te wachten.
+      requestId.current++;
+      controllerRef.current?.abort();
+      setSuggestions(bekend);
+      setLoading(false);
+      setFout(false);
+      setTraag(false);
+      setOpen(true);
+      return;
+    }
+
     debounceRef.current = window.setTimeout(async () => {
       const myRequest = ++requestId.current;
+      // Een vorige, nog lopende opzoeking is niet meer nodig.
+      controllerRef.current?.abort();
+      const controller = new AbortController();
+      controllerRef.current = controller;
+      let teLang = false;
+      const timer = window.setTimeout(() => {
+        teLang = true;
+        controller.abort();
+      }, MAX_WACHTTIJD_MS);
+
       setLoading(true);
       setFout(false);
-      setOpen(true); 
+      setTraag(false);
+      setOpen(true);
 
       try {
-
         const params = new URLSearchParams({
           q: v,
           limit: "5",
@@ -86,7 +122,8 @@ export default function AddressAutocomplete({
           lon: "4.24",
         });
         const res = await fetch(
-          `https://photon.komoot.io/api/?${params.toString()}&bbox=2.3,49.4,6.5,51.6`
+          `https://photon.komoot.io/api/?${params.toString()}&bbox=2.3,49.4,6.5,51.6`,
+          { signal: controller.signal },
         );
         if (!res.ok) throw new Error(`Photon gaf status ${res.status}`);
         const data = await res.json();
@@ -96,17 +133,23 @@ export default function AddressAutocomplete({
           .map(parseFeature)
           .filter((p: GeoPoint | null): p is GeoPoint => p !== null);
 
+        cache.set(sleutel, points);
         setSuggestions(points);
       } catch (err) {
         if (myRequest === requestId.current) {
-          console.error("Adres-opzoeking via Photon mislukt:", err);
+          if (teLang) {
+            setTraag(true);
+          } else {
+            console.error("Adres-opzoeking via Photon mislukt:", err);
+            setFout(true);
+          }
           setSuggestions([]);
-          setFout(true);
         }
       } finally {
+        window.clearTimeout(timer);
         if (myRequest === requestId.current) setLoading(false);
       }
-    }, 350);
+    }, 300);
   }
 
   function handleSelect(point: GeoPoint) {
@@ -145,12 +188,17 @@ export default function AddressAutocomplete({
           {loading && (
             <div className="px-4 py-2 text-xs text-[#9b9b9b]">Zoeken…</div>
           )}
+          {!loading && traag && (
+            <div className="px-4 py-2 text-xs text-[#6b6b6b]">
+              Suggesties laden traag. Typ het volledige adres gewoon zelf in, dat werkt ook.
+            </div>
+          )}
           {!loading && fout && (
             <div className="px-4 py-2 text-xs text-[#d4183d]">
               Kon geen adressen ophalen. Typ gewoon verder — dit veld blijft gewoon werken.
             </div>
           )}
-          {!loading && !fout && suggestions.length === 0 && (
+          {!loading && !fout && !traag && suggestions.length === 0 && (
             <div className="px-4 py-2 text-xs text-[#9b9b9b]">Geen adressen gevonden.</div>
           )}
         </div>
