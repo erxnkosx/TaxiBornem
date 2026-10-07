@@ -13,7 +13,7 @@ import { faqSchema } from "../lib/schema";
   extraSchema={faqSchema(faqItems)}
 >
   <HomePage>
-    <BookingForm slot="booking" client:visible />
+    <BookingForm slot="booking" client:load />
     <BookingTimeline slot="timeline" client:visible />
   </HomePage>
 </Layout>

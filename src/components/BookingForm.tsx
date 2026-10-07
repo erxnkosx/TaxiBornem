@@ -21,6 +21,10 @@ export default function BookingForm() {
     opmerkingen: "",
   });
   const [submitting, setSubmitting] = useState(false);
+  // Pas na het laden van JavaScript kan het formulier echt verzenden. Tot dan
+  // blijft de knop uit, zodat een aanvraag nooit verloren gaat.
+  const [klaar, setKlaar] = useState(false);
+  useEffect(() => setKlaar(true), []);
   const [errors, setErrors] = useState<Errors>({});
   const [formError, setFormError] = useState("");
   const [honeypot, setHoneypot] = useState("");
@@ -409,7 +413,7 @@ export default function BookingForm() {
       <div className="sm:col-span-2 flex flex-col sm:flex-row gap-3">
         <button
           type="submit"
-          disabled={submitting}
+          disabled={submitting || !klaar}
           className="flex-1 py-3.5 bg-[#181818] text-white text-sm font-semibold rounded-[18px] hover:bg-[#2a2a2a] disabled:opacity-60 transition-all duration-150 flex items-center justify-center gap-2"
         >
           {submitting ? (
