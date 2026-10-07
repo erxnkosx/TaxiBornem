@@ -65,9 +65,10 @@ if (analyticsId && !/^G-[A-Z0-9]+$/.test(analyticsId)) {
     {/* De site is alleen voor een lichte weergave ontworpen. Dit vertelt de
         browser dat, zodat hij niet zelf dark mode forceert. */}
     <meta name="color-scheme" content="light" />
-    <link rel="icon" type="image/png" href="/favicon.png" sizes="192x192" />
-    <link rel="icon" type="image/x-icon" href="/favicon.ico" sizes="16x16 32x32 48x48 96x96" />
-    <link rel="apple-touch-icon" href="/favicon.png" />
+    {/* Vierkant icoon op basis van het logo, ook klein leesbaar (o.a. in Google). */}
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" type="image/png" href="/icon-192.png" sizes="192x192" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
     {heroImage && <link rel="preload" as="image" href={heroImage} fetchpriority="high" />}
 

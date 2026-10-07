@@ -1,9 +1,10 @@
 import type { ReactNode } from "react";
-import { ArrowRight, Check, ChevronRight, Clock, MapPin, MessageCircle, Phone, Star } from "lucide-react";
+import { ArrowRight, Check, ChevronRight, Clock, MessageCircle, Phone, Star } from "lucide-react";
 import { GOOGLE_REVIEWS_URL, PHONE, PHONE_RAW, WHATSAPP_URL, services } from "../../data/site";
-import { dienstPages, gemeentePages, type LandingPageData } from "../../data/landing";
+import type { LandingPageData } from "../../data/landing";
 import FAQ from "../FAQ";
 import GoogleReviews from "../GoogleReviews";
+import WerkgebiedSection from "../WerkgebiedSection";
 
 interface Props {
   page: LandingPageData;
@@ -15,8 +16,6 @@ interface Props {
 // src/data/landing.ts; deze component zorgt alleen voor de opmaak.
 export default function LandingPage({ page, booking }: Props) {
   const isDienst = page.kind === "dienst";
-  const otherDiensten = dienstPages.filter((d) => d.slug !== page.slug);
-  const otherGemeenten = gemeentePages.filter((g) => g.slug !== page.slug);
   const plaats = isDienst ? "Bornem" : page.label.replace(/^Taxi /, "");
 
   const crumbs = isDienst
@@ -244,15 +243,16 @@ export default function LandingPage({ page, booking }: Props) {
         </div>
       </section>
 
-      {/* ── Diensten in deze gemeente ────────────────────────── */}
-      {!isDienst && (
-        <section className="py-20 bg-[#f7f7f7] border-t border-black/5">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-2xl sm:text-3xl font-bold text-[#181818] tracking-tight mb-8">
-              Onze diensten in {plaats}
-            </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              {services.map((s) => (
+      {/* ── Diensten (zelfde kaarten op dienst- en gemeentepagina's) ── */}
+      <section className="py-20 bg-[#f7f7f7] border-t border-black/5">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-2xl sm:text-3xl font-bold text-[#181818] tracking-tight mb-8">
+            {isDienst ? "Andere diensten" : `Onze diensten in ${plaats}`}
+          </h2>
+          <div className={`grid grid-cols-1 sm:grid-cols-2 ${isDienst ? "lg:grid-cols-3" : "lg:grid-cols-4"} gap-4`}>
+            {services
+              .filter((s) => s.slug !== page.slug)
+              .map((s) => (
                 <a
                   key={s.slug}
                   href={`/${s.slug}`}
@@ -263,10 +263,9 @@ export default function LandingPage({ page, booking }: Props) {
                   <span className="text-sm text-[#6b6b6b] leading-relaxed">{s.description}</span>
                 </a>
               ))}
-            </div>
           </div>
-        </section>
-      )}
+        </div>
+      </section>
 
       {/* ── Reviews (altijd allemaal, zelfde blok als op de homepage) ── */}
       <div className="border-t border-black/5">
@@ -280,50 +279,8 @@ export default function LandingPage({ page, booking }: Props) {
         tone="grey"
       />
 
-      {/* ── Verder kijken ────────────────────────────────────── */}
-      <section className="py-16 bg-white border-t border-black/5">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 gap-10">
-          <div>
-            <h2 className="font-bold text-[#181818] text-lg mb-4">{isDienst ? "Andere diensten" : "Ook in de buurt"}</h2>
-            <div className="flex flex-wrap gap-2.5">
-              {(isDienst ? otherDiensten : otherGemeenten).map((l) => (
-                <a
-                  key={l.slug}
-                  href={`/${l.slug}`}
-                  className="inline-flex items-center gap-2 px-4 py-2.5 bg-[#f7f7f7] border border-black/5 rounded-[14px] text-sm font-semibold text-[#181818] hover:border-[#FFC107]/40 hover:bg-white transition-colors"
-                >
-                  {!isDienst && <MapPin className="w-4 h-4 text-[#FFC107]" />}
-                  {l.label}
-                </a>
-              ))}
-              {!isDienst && (
-                <a
-                  href="/"
-                  className="inline-flex items-center gap-2 px-4 py-2.5 bg-[#f7f7f7] border border-black/5 rounded-[14px] text-sm font-semibold text-[#181818] hover:border-[#FFC107]/40 hover:bg-white transition-colors"
-                >
-                  <MapPin className="w-4 h-4 text-[#FFC107]" />
-                  Taxi Bornem
-                </a>
-              )}
-            </div>
-          </div>
-          <div>
-            <h2 className="font-bold text-[#181818] text-lg mb-4">{isDienst ? "Werkgebied" : "Alle diensten"}</h2>
-            <div className="flex flex-wrap gap-2.5">
-              {(isDienst ? gemeentePages : dienstPages).map((l) => (
-                <a
-                  key={l.slug}
-                  href={`/${l.slug}`}
-                  className="inline-flex items-center gap-2 px-4 py-2.5 bg-[#f7f7f7] border border-black/5 rounded-[14px] text-sm font-semibold text-[#181818] hover:border-[#FFC107]/40 hover:bg-white transition-colors"
-                >
-                  {isDienst && <MapPin className="w-4 h-4 text-[#FFC107]" />}
-                  {l.label}
-                </a>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* ── Werkgebied (zelfde blok als op de homepage) ──────── */}
+      <WerkgebiedSection current={isDienst ? undefined : page.slug} />
     </div>
   );
 }

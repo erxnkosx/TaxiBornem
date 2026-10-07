@@ -43,6 +43,8 @@ export interface LandingPageData {
   faq: LandingFaq[];
   /** Waarde voor /contact?dienst=… */
   dienstSlug?: string;
+  /** Korte tekst op de werkgebied-kaart (enkel gemeenten). Zelfde opbouw voor elke gemeente. */
+  teaser?: string;
 }
 
 
@@ -371,6 +373,7 @@ export const dienstPages: LandingPageData[] = [
 export const gemeentePages: LandingPageData[] = [
   {
     slug: "taxi-puurs-sint-amands",
+    teaser: "Vanuit Bornem in ongeveer 10 minuten, ook in Breendonk, Liezele, Ruisbroek, Lippelo en Oppuurs.",
     kind: "gemeente",
     label: "Taxi Puurs-Sint-Amands",
     metaTitle: "Taxi Puurs-Sint-Amands, 24/7 met vaste prijs",
@@ -451,6 +454,7 @@ export const gemeentePages: LandingPageData[] = [
   },
   {
     slug: "taxi-willebroek",
+    teaser: "Vanuit Bornem in ongeveer 15 minuten, ook in Blaasveld, Heindonk en Tisselt.",
     kind: "gemeente",
     label: "Taxi Willebroek",
     metaTitle: "Taxi Willebroek, 24/7 met vaste prijs vooraf",
@@ -531,6 +535,7 @@ export const gemeentePages: LandingPageData[] = [
   },
   {
     slug: "taxi-temse",
+    teaser: "Vanuit Bornem in ongeveer 10 minuten via de Temsebrug, ook in Elversele, Steendorp en Tielrode.",
     kind: "gemeente",
     label: "Taxi Temse",
     metaTitle: "Taxi Temse, net over de Schelde, 24/7",
