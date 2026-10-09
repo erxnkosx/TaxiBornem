@@ -38,7 +38,7 @@ const GROEN = "#25D366";
 // PNG en niet WebP: veel mailclients (o.a. Outlook) tonen geen WebP.
 // TIJDELIJK op pages.dev: www.taxibornem.be draait nu nog de oude site.
 // Na de verhuizing terugzetten naar https://www.taxibornem.be/logo-email.png
-const LOGO_URL = "https://taxibornem.pages.dev/logo-email.png";
+const LOGO_URL = "https://www.taxibornem.be/logo-email.png";
 const SITE = "taxibornem.be";
 const BEDRIJF = "Taxi Bornem";
 const TEL = "+32 472 70 62 45";
@@ -183,18 +183,18 @@ export function hamidMail(r: RitGegevens): { subject: string; html: string; text
 
   // Drie klaar-gezette WhatsApp-berichten naar de klant.
   const waNummer = waNumber(r.telefoon);
-  const voornaam = r.naam.split(" ")[0];
+  const naam = r.naam;
 
   const waPrijs = `https://wa.me/${waNummer}?text=${encodeURIComponent(
-    `Hallo ${voornaam}, bedankt voor uw aanvraag bij Taxi Bornem voor de rit van ${r.ophalen} naar ${r.bestemming} (${ritOmschrijving}). De prijs bedraagt \u20ac___. Is dit akkoord voor u?`,
+    `Hallo ${naam}, bedankt voor uw aanvraag bij Taxi Bornem voor de rit van ${r.ophalen} naar ${r.bestemming} (${ritOmschrijving}). De prijs bedraagt \u20ac___. Is dit akkoord voor u?`,
   )}`;
 
   const waAfwijzen = `https://wa.me/${waNummer}?text=${encodeURIComponent(
-    `Hallo ${voornaam}, bedankt voor uw aanvraag bij Taxi Bornem. Jammer genoeg zijn wij op het gevraagde moment niet beschikbaar. Onze excuses voor het ongemak.`,
+    `Hallo ${naam}, bedankt voor uw aanvraag bij Taxi Bornem. Jammer genoeg zijn wij op het gevraagde moment niet beschikbaar. Onze excuses voor het ongemak.`,
   )}`;
 
   const waVrij = `https://wa.me/${waNummer}?text=${encodeURIComponent(
-    `Hallo ${voornaam}, `,
+    `Hallo ${naam}, `,
   )}`;
 
   const afstandBlok =
@@ -352,7 +352,7 @@ export function klantMail(r: RitGegevens): { subject: string; html: string; text
           : ""
       }
     </tr></table>
-    <div style="font-family:Arial,Helvetica,sans-serif;font-size:24px;font-weight:bold;color:${DONKER};margin-bottom:8px;">Bedankt, ${escapeHtml(r.naam.split(" ")[0])}!</div>
+    <div style="font-family:Arial,Helvetica,sans-serif;font-size:24px;font-weight:bold;color:${DONKER};margin-bottom:8px;">Bedankt, ${escapeHtml(r.naam)}!</div>
     <div style="font-family:Arial,Helvetica,sans-serif;font-size:14px;color:${GRIJS};line-height:1.7;margin-bottom:6px;">
       We hebben uw aanvraag goed ontvangen. We bekijken ze persoonlijk en sturen u
       zo snel mogelijk een prijsvoorstel via WhatsApp of telefoon.
@@ -401,7 +401,7 @@ export function klantMail(r: RitGegevens): { subject: string; html: string; text
   const voet = `${escapeHtml(BEDRIJF)} · ${escapeHtml(TEL)} · ${escapeHtml(MAIL)}<br>Deze mail werd automatisch verzonden ter bevestiging van uw aanvraag op ${SITE}.`;
 
   const text =
-    `Bedankt, ${r.naam.split(" ")[0]}!\n\n` +
+    `Bedankt, ${r.naam}!\n\n` +
     `We hebben uw aanvraag goed ontvangen. We sturen u zo snel mogelijk een prijsvoorstel via WhatsApp. Pas na uw akkoord is de rit definitief bevestigd.\n\n` +
     `Uw aanvraag:\n${r.ophalen} -> ${r.bestemming}\n${wanneer} · ${r.personen} ${Number(r.personen) === 1 ? "persoon" : "personen"}\n\n` +
     `Dringend? Bel ${TEL}.\n\n${BEDRIJF}`;
