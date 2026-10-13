@@ -44,7 +44,7 @@ export default function CookieBanner() {
         className="absolute top-3 right-3 min-h-11 min-w-11 flex items-center justify-center rounded-xl hover:bg-[#FFF6D6] focus-visible:outline-2 focus-visible:outline-[#FFC107]">
         <ArrowLeft className="w-4 h-4" />
       </button>}
-      <div className={customize ? "" : "lg:flex lg:items-center lg:gap-8"}>
+      <div className={customize ? "" : "lg:flex lg:items-end lg:gap-8"}>
       <div className={customize ? "" : "lg:flex-1 lg:min-w-0"}>
       {/* Op mobiel een kleiner logo, zodat de banner niet te hoog wordt. */}
       <div className={`flex items-center gap-2 mb-2 sm:mb-3 ${customize ? "pr-10" : "lg:mb-2"}`}>
@@ -67,13 +67,14 @@ export default function CookieBanner() {
       <p className="text-xs text-slate-500 mt-1">Uw keuze geldt maximaal 180 dagen. <a href="/privacybeleid" className="underline underline-offset-2">Privacybeleid</a></p>
       </div>}
       </div>
-      <div className={customize ? "" : "lg:w-[20rem] lg:shrink-0"}>
-      <div className={`grid grid-cols-2 gap-2 mt-3 sm:mt-4 ${customize ? "" : "lg:mt-0"}`}>
+      {/* Desktop: "Zelf kiezen", "Cookiebeleid" en de knoppen op één lijn, onderaan rechts. */}
+      <div className={customize ? "" : "lg:flex lg:flex-row-reverse lg:items-center lg:gap-6 lg:shrink-0"}>
+      <div className={`grid grid-cols-2 gap-2 mt-3 sm:mt-4 ${customize ? "" : "lg:mt-0 lg:grid-cols-[9.5rem_9.5rem]"}`}>
         <button type="button" className={button} onClick={() => save(true, true)}>Alles accepteren</button>
         <button type="button" className={button} onClick={() => save(false, false)}>Alles weigeren</button>
         {customize && <button type="button" className={`${button} col-span-2 !border-[#FFC107] !bg-[#FFC107] !text-[#181818] hover:!bg-[#FFD54F]`} onClick={() => save(maps, statistics)}>Keuzes opslaan</button>}
       </div>
-      <div className="flex flex-wrap items-center justify-between gap-x-4 mt-1 sm:mt-2 text-xs">
+      <div className={`flex flex-wrap items-center justify-between gap-x-4 mt-1 sm:mt-2 text-xs ${customize ? "" : "lg:mt-0 lg:gap-x-5"}`}>
         {!customize && <button type="button" className="min-h-11 font-semibold underline underline-offset-4 decoration-[#FFC107] decoration-2 hover:text-[#725600] focus-visible:outline-2 focus-visible:outline-[#FFC107] rounded" onClick={() => setCustomize(true)}>Zelf kiezen</button>}
         <a href="/cookiebeleid" className="inline-flex items-center min-h-11 text-[#68645c] underline underline-offset-2">Cookiebeleid</a>
       </div>
