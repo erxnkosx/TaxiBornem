@@ -33,9 +33,10 @@ export default function CookieBanner() {
   const button = "min-h-11 min-w-0 px-3 py-2 bg-[#181818] border border-[#181818] text-white text-xs font-semibold rounded-xl hover:bg-[#333333] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#FFC107]";
   // Desktop: een brede, lage balk onderaan in het midden (tekst links, knoppen rechts),
   // zodat de knoppen in de hero vrij blijven. "Zelf kiezen" toont weer de smalle kaart.
+  // 1024–1279: volle breedte · 1280–1535: links van de WhatsApp-knop · vanaf 1536: gecentreerd.
   const placement = customize
     ? "lg:w-[26rem]"
-    : "lg:w-[calc(100vw-3rem)] xl:w-[min(56rem,calc(100vw-31rem))]";
+    : "lg:w-[calc(100vw-3rem)] lg:py-3.5 lg:px-6 xl:left-6 xl:right-[16.5rem] xl:translate-x-0 xl:w-auto xl:max-w-[64rem] xl:mx-auto 2xl:left-1/2 2xl:right-auto 2xl:-translate-x-1/2 2xl:w-[64rem] 2xl:mx-0";
   return (
     <div role="dialog" aria-labelledby="consent-title"
       aria-describedby="consent-description"
@@ -44,10 +45,10 @@ export default function CookieBanner() {
         className="absolute top-3 right-3 min-h-11 min-w-11 flex items-center justify-center rounded-xl hover:bg-[#FFF6D6] focus-visible:outline-2 focus-visible:outline-[#FFC107]">
         <ArrowLeft className="w-4 h-4" />
       </button>}
-      <div className={customize ? "" : "lg:flex lg:items-end lg:gap-8"}>
+      <div className={customize ? "" : "lg:flex lg:items-end lg:gap-6"}>
       <div className={customize ? "" : "lg:flex-1 lg:min-w-0"}>
       {/* Op mobiel een kleiner logo, zodat de banner niet te hoog wordt. */}
-      <div className={`flex items-center gap-2 mb-2 sm:mb-3 ${customize ? "pr-10" : "lg:mb-2"}`}>
+      <div className={`flex items-center gap-2 mb-2 sm:mb-3 ${customize ? "pr-10" : "lg:mb-1"}`}>
         <img src="/logo.webp" alt="" width={40} height={40} className="h-8 w-8 sm:h-10 sm:w-10 shrink-0 object-contain" />
         <span className="text-[10px] font-bold tracking-[0.12em] uppercase">Taxi Bornem <span className="text-[#8a8170] font-medium">/ Privacy</span></span>
       </div>
@@ -70,7 +71,7 @@ export default function CookieBanner() {
       </div>
       {/* Desktop: "Zelf kiezen", "Cookiebeleid" en de knoppen op één lijn, onderaan rechts. */}
       <div className={customize ? "" : "lg:flex lg:flex-row-reverse lg:items-center lg:gap-6 lg:shrink-0"}>
-      <div className={`grid grid-cols-2 gap-2 mt-3 sm:mt-4 ${customize ? "" : "lg:mt-0 lg:grid-cols-[9.5rem_9.5rem]"}`}>
+      <div className={`grid grid-cols-2 gap-2 mt-3 sm:mt-4 ${customize ? "" : "lg:mt-0 lg:grid-cols-[8.5rem_8.5rem]"}`}>
         <button type="button" className={button} onClick={() => save(true, true)}>Alles accepteren</button>
         <button type="button" className={button} onClick={() => save(false, false)}>Alles weigeren</button>
         {customize && <button type="button" className={`${button} col-span-2 !border-[#FFC107] !bg-[#FFC107] !text-[#181818] hover:!bg-[#FFD54F]`} onClick={() => save(maps, statistics)}>Keuzes opslaan</button>}
