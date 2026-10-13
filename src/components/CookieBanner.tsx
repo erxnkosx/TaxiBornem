@@ -53,7 +53,8 @@ export default function CookieBanner() {
       </div>
       <h2 id="consent-title" className={`text-base sm:text-lg font-bold tracking-tight ${customize ? "pr-10 sm:pr-0" : ""}`}>{customize ? "Wat mogen we laden?" : "Uw bezoek, uw keuze."}</h2>
       <p id="consent-description" className="mt-1 text-xs text-[#68645c] leading-relaxed">
-        {analyticsReady ? "Cookies voor statistieken en Google Maps? U beslist." : "Google Maps laden? U beslist."}
+        {analyticsReady ? "Cookies voor statistieken en Google Maps? U beslist." : "Google Maps laden? U beslist."}{" "}
+        Meer in ons <a href="/cookiebeleid" className="underline underline-offset-2 hover:text-[#181818]">cookiebeleid</a>.
       </p>
       {customize && <div className="mt-3 border-t border-slate-100 pt-2">
       <label className="flex items-start gap-3 py-3 text-xs leading-relaxed cursor-pointer">
@@ -74,10 +75,9 @@ export default function CookieBanner() {
         <button type="button" className={button} onClick={() => save(false, false)}>Alles weigeren</button>
         {customize && <button type="button" className={`${button} col-span-2 !border-[#FFC107] !bg-[#FFC107] !text-[#181818] hover:!bg-[#FFD54F]`} onClick={() => save(maps, statistics)}>Keuzes opslaan</button>}
       </div>
-      <div className={`flex flex-wrap items-center justify-between gap-x-4 mt-1 sm:mt-2 text-xs ${customize ? "" : "lg:mt-0 lg:gap-x-5"}`}>
-        {!customize && <button type="button" className="min-h-11 font-semibold underline underline-offset-4 decoration-[#FFC107] decoration-2 hover:text-[#725600] focus-visible:outline-2 focus-visible:outline-[#FFC107] rounded" onClick={() => setCustomize(true)}>Zelf kiezen</button>}
-        <a href="/cookiebeleid" className="inline-flex items-center min-h-11 text-[#68645c] underline underline-offset-2">Cookiebeleid</a>
-      </div>
+      {!customize && <div className="flex items-center mt-1 sm:mt-2 lg:mt-0 text-xs">
+        <button type="button" className="min-h-11 font-semibold underline underline-offset-4 decoration-[#FFC107] decoration-2 hover:text-[#725600] focus-visible:outline-2 focus-visible:outline-[#FFC107] rounded" onClick={() => setCustomize(true)}>Zelf kiezen</button>
+      </div>}
       </div>
       </div>
     </div>
