@@ -31,18 +31,24 @@ export default function CookieBanner() {
   };
   if (!open) return null;
   const button = "min-h-11 min-w-0 px-3 py-2 bg-[#181818] border border-[#181818] text-white text-xs font-semibold rounded-xl hover:bg-[#333333] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#FFC107]";
+  // Desktop: een brede, lage balk onderaan in het midden (tekst links, knoppen rechts),
+  // zodat de knoppen in de hero vrij blijven. "Zelf kiezen" toont weer de smalle kaart.
+  const placement = customize
+    ? "lg:w-[26rem]"
+    : "lg:w-[calc(100vw-3rem)] xl:w-[min(56rem,calc(100vw-31rem))]";
   return (
     <div role="dialog" aria-labelledby="consent-title"
       aria-describedby="consent-description"
-      className="fixed bottom-[max(0.75rem,env(safe-area-inset-bottom))] left-3 right-3 sm:left-5 sm:right-auto sm:w-[26rem] lg:left-auto lg:right-6 lg:bottom-[5.5rem] max-h-[80dvh] overflow-y-auto z-[60] bg-[#fffdf7] rounded-[22px] border border-[#181818]/10 border-t-4 border-t-[#FFC107] shadow-[0_8px_32px_rgba(0,0,0,0.16)] p-4 sm:p-5 text-[#181818]">
+      className={`fixed bottom-[max(0.75rem,env(safe-area-inset-bottom))] left-3 right-3 sm:left-5 sm:right-auto sm:w-[26rem] lg:left-1/2 lg:-translate-x-1/2 lg:bottom-6 ${placement} max-h-[80dvh] overflow-y-auto z-[60] bg-[#fffdf7] rounded-[22px] border border-[#181818]/10 border-t-4 border-t-[#FFC107] shadow-[0_8px_32px_rgba(0,0,0,0.16)] p-4 sm:p-5 text-[#181818]`}>
       {customize && <button type="button" onClick={() => setCustomize(false)} aria-label="Terug naar cookiekeuzes"
         className="absolute top-3 right-3 min-h-11 min-w-11 flex items-center justify-center rounded-xl hover:bg-[#FFF6D6] focus-visible:outline-2 focus-visible:outline-[#FFC107]">
         <ArrowLeft className="w-4 h-4" />
       </button>}
-      {/* Op mobiel geen logo-rij: de banner mag de bel- en WhatsApp-knoppen niet bedekken.
-          Op desktop staat de banner rechts, net boven de WhatsApp-knop, weg van de knoppen in de hero. */}
-      <div className={`hidden sm:flex items-center gap-2 mb-3 ${customize ? "pr-10" : ""}`}>
-        <img src="/logo.webp" alt="" width={40} height={40} className="h-10 w-10 shrink-0 object-contain" />
+      <div className={customize ? "" : "lg:flex lg:items-center lg:gap-8"}>
+      <div className={customize ? "" : "lg:flex-1 lg:min-w-0"}>
+      {/* Op mobiel een kleiner logo, zodat de banner niet te hoog wordt. */}
+      <div className={`flex items-center gap-2 mb-2 sm:mb-3 ${customize ? "pr-10" : "lg:mb-2"}`}>
+        <img src="/logo.webp" alt="" width={40} height={40} className="h-8 w-8 sm:h-10 sm:w-10 shrink-0 object-contain" />
         <span className="text-[10px] font-bold tracking-[0.12em] uppercase">Taxi Bornem <span className="text-[#8a8170] font-medium">/ Privacy</span></span>
       </div>
       <h2 id="consent-title" className={`text-base sm:text-lg font-bold tracking-tight ${customize ? "pr-10 sm:pr-0" : ""}`}>{customize ? "Wat mogen we laden?" : "Uw bezoek, uw keuze."}</h2>
@@ -60,7 +66,9 @@ export default function CookieBanner() {
       </label>}
       <p className="text-xs text-slate-500 mt-1">Uw keuze geldt maximaal 180 dagen. <a href="/privacybeleid" className="underline underline-offset-2">Privacybeleid</a></p>
       </div>}
-      <div className="grid grid-cols-2 gap-2 mt-3 sm:mt-4">
+      </div>
+      <div className={customize ? "" : "lg:w-[20rem] lg:shrink-0"}>
+      <div className={`grid grid-cols-2 gap-2 mt-3 sm:mt-4 ${customize ? "" : "lg:mt-0"}`}>
         <button type="button" className={button} onClick={() => save(true, true)}>Alles accepteren</button>
         <button type="button" className={button} onClick={() => save(false, false)}>Alles weigeren</button>
         {customize && <button type="button" className={`${button} col-span-2 !border-[#FFC107] !bg-[#FFC107] !text-[#181818] hover:!bg-[#FFD54F]`} onClick={() => save(maps, statistics)}>Keuzes opslaan</button>}
@@ -68,6 +76,8 @@ export default function CookieBanner() {
       <div className="flex flex-wrap items-center justify-between gap-x-4 mt-1 sm:mt-2 text-xs">
         {!customize && <button type="button" className="min-h-11 font-semibold underline underline-offset-4 decoration-[#FFC107] decoration-2 hover:text-[#725600] focus-visible:outline-2 focus-visible:outline-[#FFC107] rounded" onClick={() => setCustomize(true)}>Zelf kiezen</button>}
         <a href="/cookiebeleid" className="inline-flex items-center min-h-11 text-[#68645c] underline underline-offset-2">Cookiebeleid</a>
+      </div>
+      </div>
       </div>
     </div>
   );
