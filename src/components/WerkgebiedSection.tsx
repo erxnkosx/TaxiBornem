@@ -8,7 +8,7 @@ import { gemeentePages } from "../data/landing";
 const bornem = {
   slug: "",
   label: "Taxi Bornem",
-  teaser: "Onze standplaats, met het centrum en de deelgemeenten Hingene, Mariekerke en Weert.",
+  teaser: "Onze standplaats in Klein-Brabant, met het centrum, Hingene, Wintam, Eikevliet, Mariekerke en Weert.",
 };
 
 interface Props {
@@ -30,11 +30,12 @@ export default function WerkgebiedSection({ current, className = "" }: Props) {
           <div className="lg:col-span-2">
             <p className="taxi-kicker text-xs font-semibold uppercase tracking-widest mb-3">Werkgebied</p>
             <h2 className="text-3xl sm:text-4xl font-bold text-[#181818] tracking-tight mb-5">
-              Taxi in Bornem en de buurgemeenten
+              Taxi in Bornem, Klein-Brabant en omgeving
             </h2>
             <p className="text-[15px] text-[#6b6b6b] leading-[1.7] mb-4">
-              De standplaats is Bornem. Wij rijden in het centrum en in de deelgemeenten Hingene,
-              Mariekerke en Weert, en net zo goed in de gemeenten errond.
+              De standplaats is Bornem, in het hart van Klein-Brabant. Wij rijden in het centrum en in
+              alle deelgemeenten: Hingene, Wintam, Eikevliet, Mariekerke en Weert. En net zo goed in de
+              gemeenten errond, van Puurs-Sint-Amands en Willebroek tot Temse aan de overkant van de Schelde.
             </p>
             <p className="text-[15px] text-[#6b6b6b] leading-[1.7]">
               Vanuit de regio rijden we naar Antwerpen, Mechelen, Brussel en alle grote luchthavens

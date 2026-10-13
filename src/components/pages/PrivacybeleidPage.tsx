@@ -8,7 +8,7 @@ import {
   Database,
   Globe,
 } from "lucide-react";
-import { BTWNUMMER, EMAIL, PHONE, PHONE_RAW, WHATSAPP_URL } from "../../data/site";
+import { ADDRESS_LINE, BTWNUMMER, EMAIL, PHONE, PHONE_RAW, WHATSAPP_URL } from "../../data/site";
 
 export default function PrivacybeleidPage() {
   const sections = [
@@ -19,7 +19,7 @@ export default function PrivacybeleidPage() {
         <>
           <p>
             Taxi Bornem is verantwoordelijk voor de verwerking van uw persoonsgegevens.
-            BTW-nummer: {BTWNUMMER}. Postadres: Molenveldweg 31, 2880 Bornem, België.
+            BTW-nummer: {BTWNUMMER}. Postadres: {ADDRESS_LINE}, België.
           </p>
           <p className="mt-3">
             U kunt ons bereiken via <a className="underline" href={"mailto:" + EMAIL}>{EMAIL}</a> of

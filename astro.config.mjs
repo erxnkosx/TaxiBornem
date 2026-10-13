@@ -5,6 +5,11 @@ import react from '@astrojs/react';
 
 import sitemap from '@astrojs/sitemap';
 
+const SITE_UPDATED = '2026-10-13';
+const PAGE_UPDATED = {
+  // 'https://www.taxibornem.be/diensten': '2026-11-01',
+};
+
 // https://astro.build/config
 export default defineConfig({
   // Definitieve URL — gebruikt voor canonical links, sitemap en Open Graph.
@@ -27,7 +32,14 @@ export default defineConfig({
   integrations: [
     react(),
     sitemap({
-      filter: (page) => !page.includes('bedankt'),
+      filter: (page) => !page.includes('/bedankt'),
+      // lastmod = datum van de laatste echte inhoudswijziging. Pas SITE_UPDATED
+      // (of een datum per pagina in PAGE_UPDATED) aan wanneer de tekst verandert,
+      // nooit automatisch de builddatum: dan negeert Google het.
+      serialize(item) {
+        item.lastmod = PAGE_UPDATED[item.url] ?? SITE_UPDATED;
+        return item;
+      },
     }),
   ],
 });

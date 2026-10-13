@@ -22,6 +22,17 @@ export const WHATSAPP_URL = "https://wa.me/32472706245?text=Hallo%20Taxi%20Borne
 export const EMAIL = "info@taxibornem.be";
 export const GOOGLE_REVIEWS_URL = "https://maps.google.com/?cid=5113066939281304031";
 
+// Eén adres voor de hele site (footer, contact, privacy, schema) — moet exact
+// overeenkomen met het Google-bedrijfsprofiel.
+export const ADDRESS = {
+  street: "Molenveldweg 31",
+  postalCode: "2880",
+  city: "Bornem",
+  region: "Antwerpen",
+  country: "BE",
+};
+export const ADDRESS_LINE = `${ADDRESS.street}, ${ADDRESS.postalCode} ${ADDRESS.city}`;
+
 // ─── Data ─────────────────────────────────────────────────────────────────────
 export const services = [
   {

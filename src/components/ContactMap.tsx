@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { MapPin, Play } from "lucide-react";
+import { ADDRESS_LINE, GOOGLE_REVIEWS_URL } from "../data/site";
 import {
   readConsent,
   writeConsent,
@@ -30,10 +31,10 @@ export default function ContactMap() {
       <div className="p-4 border-b border-black/5 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <MapPin className="w-4 h-4 text-[#FFC107]" />
-          <span className="text-sm font-semibold text-[#181818]">Bornem, Antwerpen</span>
+          <span className="text-sm font-semibold text-[#181818]">{ADDRESS_LINE}</span>
         </div>
         <a
-          href="https://maps.google.com/?q=Bornem,Belgium"
+          href={GOOGLE_REVIEWS_URL}
           target="_blank"
           rel="noopener noreferrer"
           className="text-xs font-medium text-[#6b6b6b] hover:text-[#181818] transition-colors"
@@ -43,8 +44,8 @@ export default function ContactMap() {
       </div>
       {kaartGeladen ? (
         <iframe
-          title="Bornem op Google Maps"
-          src="https://maps.google.com/maps?q=Bornem,Belgium&t=&z=13&ie=UTF8&iwloc=&output=embed"
+          title="Taxi Bornem op Google Maps"
+          src={`https://maps.google.com/maps?q=${encodeURIComponent(`Taxi Bornem, ${ADDRESS_LINE}`)}&t=&z=14&ie=UTF8&iwloc=&output=embed`}
           className="w-full h-56 border-0"
           loading="lazy"
         />

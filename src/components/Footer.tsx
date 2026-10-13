@@ -1,5 +1,5 @@
 import {Phone, MessageCircle, Mail, MapPin, Star, ShieldCheck, Cookie, Building2} from "lucide-react";
-import { PHONE, PHONE_RAW, WHATSAPP_URL, EMAIL, BTWNUMMER } from "../data/site";
+import { PHONE, PHONE_RAW, WHATSAPP_URL, EMAIL, BTWNUMMER, ADDRESS_LINE } from "../data/site";
 import { dienstPages, gemeentePages } from "../data/landing";
 
 export default function Footer() {
@@ -60,7 +60,7 @@ export default function Footer() {
               </a>
               <span className="flex items-center gap-2">
                 <MapPin className="w-3.5 h-3.5" />
-                2880 Bornem, Antwerpen
+                {ADDRESS_LINE}
               </span>
             </div>
           </div>

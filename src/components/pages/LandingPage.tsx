@@ -3,6 +3,7 @@ import { ArrowRight, Check, ChevronRight, Clock, MessageCircle, Phone, Star } fr
 import { GOOGLE_REVIEWS_URL, PHONE, PHONE_RAW, WHATSAPP_URL, services } from "../../data/site";
 import type { LandingPageData } from "../../data/landing";
 import FAQ from "../FAQ";
+import { HERO_SIZES, heroSrcSet } from "../../lib/images";
 import GoogleReviews from "../GoogleReviews";
 import WerkgebiedSection from "../WerkgebiedSection";
 
@@ -98,6 +99,8 @@ export default function LandingPage({ page, booking }: Props) {
               <div className="taxi-image-frame relative rounded-[24px] overflow-hidden shadow-2xl shadow-black/15 aspect-[16/10]">
                 <img
                   src={page.image}
+                  srcSet={heroSrcSet(page.image)}
+                  sizes={HERO_SIZES}
                   alt={page.imageAlt}
                   className="w-full h-full object-cover"
                   width={1000}
@@ -159,6 +162,20 @@ export default function LandingPage({ page, booking }: Props) {
                       </li>
                     ))}
                   </ul>
+                )}
+                {sec.links && (
+                  <div className="mt-5 flex flex-wrap gap-x-6 gap-y-2">
+                    {sec.links.map((l) => (
+                      <a
+                        key={l.href}
+                        href={l.href}
+                        className="inline-flex items-center gap-1.5 text-[15px] font-semibold text-[#181818] underline decoration-[#FFC107] decoration-2 underline-offset-4 hover:text-[#725600]"
+                      >
+                        {l.label}
+                        <ArrowRight className="w-3.5 h-3.5" />
+                      </a>
+                    ))}
+                  </div>
                 )}
               </div>
             ))}

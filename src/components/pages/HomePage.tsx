@@ -1,7 +1,8 @@
 import type { ReactNode } from "react";
-import { MessageCircle, Clock, Star, Car, ArrowRight, Shield } from "lucide-react";
-import { WHATSAPP_URL, services } from "../../data/site";
+import { MessageCircle, Clock, Star, Car, ArrowRight, Shield, Phone } from "lucide-react";
+import { PHONE, PHONE_RAW, WHATSAPP_URL, services } from "../../data/site";
 import WerkgebiedSection from "../WerkgebiedSection";
+import { HERO_SIZES, heroSrcSet } from "../../lib/images";
 import GoogleReviews from "../GoogleReviews";
 import FAQ from "../FAQ";
 
@@ -42,7 +43,14 @@ export default function HomePage({ booking, timeline }: { booking?: ReactNode; t
                 Stipt, betrouwbaar en persoonlijk. Taxi Bornem brengt u comfortabel en veilig naar elke bestemming, 24 uur per dag, 7 dagen per week.
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-3 mb-10">
+              <div className="flex flex-col sm:flex-row sm:flex-wrap gap-3 mb-10">
+                <a
+                  href={`tel:${PHONE_RAW}`}
+                  className="px-6 py-3.5 bg-[#FFC107] text-[#181818] font-bold rounded-[18px] hover:bg-[#FFD54F] transition-colors text-sm flex items-center justify-center gap-2 shadow-lg shadow-yellow-500/20"
+                >
+                  <Phone className="w-4 h-4" />
+                  Bel {PHONE}
+                </a>
                 <a
                   href="#boek"
                   className="taxi-primary-btn px-6 py-3.5 bg-[#181818] text-white font-semibold rounded-[18px] hover:bg-[#2a2a2a] transition-all text-sm flex items-center justify-center gap-2 shadow-lg shadow-black/10"
@@ -90,6 +98,8 @@ export default function HomePage({ booking, timeline }: { booking?: ReactNode; t
               <div className="taxi-image-frame relative rounded-[24px] overflow-hidden shadow-2xl shadow-black/15 aspect-[4/3]">
                 <img
                   src="/car.webp"
+                  srcSet={heroSrcSet("/car.webp")}
+                  sizes={HERO_SIZES}
                   alt="Kia-taxi van Taxi Bornem in Bornem"
                   className="w-full h-full object-cover"
                   width={900}

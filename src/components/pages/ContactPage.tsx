@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import { Phone, MessageCircle, Mail, MapPin, Clock } from "lucide-react";
-import { PHONE, PHONE_RAW, WHATSAPP_URL, EMAIL } from "../../data/site";
+import { PHONE, PHONE_RAW, WHATSAPP_URL, EMAIL, ADDRESS_LINE } from "../../data/site";
 import GoogleReviews from "../GoogleReviews";
 
 // Statische pagina; het boekingsformulier en de kaart komen als interactieve
@@ -51,10 +51,10 @@ export default function ContactPage({ booking, map }: { booking?: ReactNode; map
                 },
                 {
                   icon: MapPin,
-                  label: "Locatie",
-                  value: "2880 Bornem, Antwerpen",
+                  label: "Adres",
+                  value: ADDRESS_LINE,
                   link: null,
-                  sub: "België",
+                  sub: "Antwerpen, België",
                 },
                 {
                   icon: Clock,

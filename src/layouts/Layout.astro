@@ -13,6 +13,7 @@ import Footer from "../components/Footer";
 import WhatsAppButton from "../components/WhatsAppButton";
 import CookieBanner from "../components/CookieBanner";
 import { SITE, businessSchema } from "../lib/schema";
+import { HERO_SIZES, heroSrcSet } from "../lib/images";
 
 interface Props {
   title: string;
@@ -70,7 +71,9 @@ if (analyticsId && !/^G-[A-Z0-9]+$/.test(analyticsId)) {
     <link rel="icon" type="image/png" href="/icon-192.png" sizes="192x192" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
-    {heroImage && <link rel="preload" as="image" href={heroImage} fetchpriority="high" />}
+    {heroImage && (
+      <link rel="preload" as="image" href={heroImage} imagesrcset={heroSrcSet(heroImage)} imagesizes={HERO_SIZES} fetchpriority="high" />
+    )}
 
     <title>{fullTitle}</title>
     <meta name="description" content={description} />

@@ -4,13 +4,13 @@ import HomePage from "../components/pages/HomePage";
 import BookingForm from "../components/BookingForm";
 import BookingTimeline from "../components/BookingTimeline";
 import { faqItems } from "../data/site";
-import { faqSchema } from "../lib/schema";
+import { faqSchema, websiteSchema } from "../lib/schema";
 ---
 
 <Layout
   title="Taxi in Bornem, 24/7 met vaste prijs"
   description="Betrouwbare taxi in Bornem en omgeving: luchthavenvervoer, zakelijke en privéritten. Stipt en persoonlijk, 24u/24 en 7 dagen op 7. Vaste prijs vooraf via WhatsApp."
-  extraSchema={faqSchema(faqItems)}
+  extraSchema={[websiteSchema, faqSchema(faqItems)]}
 >
   <HomePage>
     <BookingForm slot="booking" client:load />

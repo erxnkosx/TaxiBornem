@@ -2,7 +2,7 @@
 // Eén centrale bedrijfsbeschrijving met een vaste @id. Alle andere blokken
 // (diensten, broodkruimels) verwijzen daarnaar, zodat Google ze aan elkaar koppelt.
 
-import { EMAIL, GOOGLE_REVIEWS_URL, PHONE_RAW } from "../data/site";
+import { ADDRESS, EMAIL, GOOGLE_REVIEWS_URL, PHONE_RAW } from "../data/site";
 import { dienstPages, type LandingFaq, type LandingPageData } from "../data/landing";
 
 export const SITE = "https://www.taxibornem.be";
@@ -12,7 +12,7 @@ const city = (name: string) => ({ "@type": "City", name });
 
 export const businessSchema = {
   "@context": "https://schema.org",
-  "@type": "LocalBusiness",
+  "@type": ["TaxiService", "LocalBusiness"],
   "@id": BUSINESS_ID,
   name: "Taxi Bornem",
   description:
@@ -29,15 +29,16 @@ export const businessSchema = {
   knowsLanguage: ["nl", "en", "ar"],
   address: {
     "@type": "PostalAddress",
-    addressLocality: "Bornem",
-    postalCode: "2880",
-    addressRegion: "Antwerpen",
-    addressCountry: "BE",
+    streetAddress: ADDRESS.street,
+    addressLocality: ADDRESS.city,
+    postalCode: ADDRESS.postalCode,
+    addressRegion: ADDRESS.region,
+    addressCountry: ADDRESS.country,
   },
   geo: {
     "@type": "GeoCoordinates",
-    latitude: 51.0973,
-    longitude: 4.2437,
+    latitude: 51.09671,
+    longitude: 4.24536,
   },
   hasMap: GOOGLE_REVIEWS_URL,
   sameAs: [GOOGLE_REVIEWS_URL],
@@ -64,6 +65,17 @@ export const businessSchema = {
       url: `${SITE}/${d.slug}`,
     },
   })),
+};
+
+// Alleen op de homepage: koppelt de website aan het bedrijf.
+export const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": `${SITE}/#website`,
+  url: `${SITE}/`,
+  name: "Taxi Bornem",
+  inLanguage: "nl-BE",
+  publisher: { "@id": BUSINESS_ID },
 };
 
 export function faqSchema(items: LandingFaq[]) {

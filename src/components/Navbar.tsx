@@ -66,6 +66,8 @@ export default function Navbar({ currentPath }: { currentPath: string }) {
             href={`tel:${PHONE_RAW}`}
             className="flex items-center gap-1.5 text-sm text-[#6b6b6b] hover:text-[#181818] transition-colors"
           >
+            <Phone className="w-4 h-4" />
+            {PHONE}
           </a>
           <a
             href="/contact"
@@ -75,14 +77,24 @@ export default function Navbar({ currentPath }: { currentPath: string }) {
           </a>
         </div>
 
-        {/* Mobile menu toggle */}
-        <button
-          onClick={() => setMenuOpen((v) => !v)}
-          className="md:hidden p-2 rounded-xl hover:bg-black/5 transition-colors"
-          aria-label="Menu"
-        >
-          {menuOpen ? <X className="w-5 h-5 text-[#181818]" /> : <Menu className="w-5 h-5 text-[#181818]" />}
-        </button>
+        {/* Mobiel: direct bellen + menu */}
+        <div className="md:hidden flex items-center gap-1">
+          <a
+            href={`tel:${PHONE_RAW}`}
+            className="w-11 h-11 rounded-xl hover:bg-black/5 transition-colors flex items-center justify-center"
+            aria-label={`Bel Taxi Bornem: ${PHONE}`}
+          >
+            <Phone className="w-5 h-5 text-[#181818]" />
+          </a>
+          <button
+            onClick={() => setMenuOpen((v) => !v)}
+            className="w-11 h-11 rounded-xl hover:bg-black/5 transition-colors flex items-center justify-center"
+            aria-label="Menu"
+            aria-expanded={menuOpen}
+          >
+            {menuOpen ? <X className="w-5 h-5 text-[#181818]" /> : <Menu className="w-5 h-5 text-[#181818]" />}
+          </button>
+        </div>
       </nav>
 
       {/* Mobile menu */}

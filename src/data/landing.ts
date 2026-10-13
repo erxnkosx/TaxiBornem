@@ -14,6 +14,8 @@ export interface LandingSection {
   heading: string;
   paragraphs: string[];
   bullets?: string[];
+  /** Interne links onder het blok, bv. naar een verwante pagina. */
+  links?: { label: string; href: string }[];
 }
 
 export interface RouteRow {
@@ -54,7 +56,7 @@ export const dienstPages: LandingPageData[] = [
     slug: "luchthavenvervoer",
     kind: "dienst",
     label: "Luchthavenvervoer",
-    metaTitle: "Taxi naar de luchthaven vanuit Bornem",
+    metaTitle: "Luchthavenvervoer Bornem, taxi naar Zaventem",
     metaDescription:
       "Taxi van Bornem naar Zaventem, Charleroi, Antwerpen, Eindhoven, Schiphol of Köln/Bonn. Vaste prijs vooraf, vluchttracking en 24/7 vertrek, ook voor vroege vluchten.",
     kicker: "Luchthavenvervoer",
@@ -96,6 +98,7 @@ export const dienstPages: LandingPageData[] = [
           "Voor een vlucht binnen Europa raden de meeste luchtvaartmaatschappijen aan om ongeveer twee uur voor vertrek op de luchthaven te zijn, voor een intercontinentale vlucht rond drie uur. Tel daar de rit bij op: vanuit Bornem naar Brussels Airport is dat ongeveer 40 minuten zonder file, maar in de ochtendspits rond Brussel kan het flink langer duren.",
           "Bij uw boeking spreken we samen een vertrekuur af, met genoeg marge voor het verkeer.",
         ],
+        links: [{ label: "Alles over de taxi naar Zaventem", href: "/taxi-naar-zaventem" }],
       },
       {
         heading: "Goed om te weten",
@@ -139,6 +142,111 @@ export const dienstPages: LandingPageData[] = [
       {
         q: "Rijdt u ook naar luchthavens in Nederland en Duitsland?",
         a: "Ja. Naast Zaventem, Charleroi en Antwerpen rijden we ook naar Eindhoven, Schiphol en Köln/Bonn.",
+      },
+    ],
+    dienstSlug: "luchthavenvervoer",
+  },
+  {
+    slug: "taxi-naar-zaventem",
+    kind: "dienst",
+    label: "Taxi naar Zaventem",
+    metaTitle: "Taxi naar Zaventem (Brussels Airport) vanuit Bornem",
+    metaDescription:
+      "Taxi van Bornem, Puurs, Willebroek of Temse naar Brussels Airport in Zaventem. Ophalen aan huis, vluchttracking bij terugkeer, 24/7. Vaste prijs vooraf via WhatsApp.",
+    kicker: "Brussels Airport",
+    h1: "Taxi naar Zaventem vanuit Bornem en Klein-Brabant",
+    lead:
+      "Brussels Airport in Zaventem is voor de meeste reizigers uit de regio de dichtstbijzijnde grote luchthaven. Wij halen u thuis op in Bornem, Puurs-Sint-Amands, Willebroek, Temse of de rest van de regio en zetten u af aan de vertrekhal. Bij uw terugkeer staan we klaar wanneer u landt.",
+    image: "/dienst-luchthaven.webp",
+    imageAlt: "Bagage wordt ingeladen in een witte Kia-taxi voor de rit naar Brussels Airport",
+    highlights: [
+      {
+        title: "Van deur tot vertrekhal",
+        text: "Geen parking zoeken en geen shuttle: u stapt in aan uw voordeur en uit aan de vertrekhal.",
+      },
+      {
+        title: "Uw vlucht wordt gevolgd",
+        text: "Bij uw terugkeer volgen we uw landing. Vertraging? Dan wachten we zonder extra kosten.",
+      },
+      {
+        title: "Ook voor de eerste vlucht",
+        text: "Om 4 uur 's nachts vertrekken is geen probleem: we rijden 24 uur per dag.",
+      },
+    ],
+    sections: [
+      {
+        heading: "Hoe laat vertrekt u naar Zaventem?",
+        paragraphs: [
+          "Een eenvoudige rekensom. Vliegt u om 7.00 uur binnen Europa, dan wilt u rond 5.00 uur op de luchthaven zijn. Vanuit Bornem is dat ongeveer 40 minuten rijden, 's nachts meestal vlot. Met wat marge vertrekken we dan rond 4.00 uur.",
+          "Vliegt u overdag of op vrijdagavond, dan houden we rekening met de spits op de Ring rond Brussel. Bij uw boeking spreken we samen het vertrekuur af.",
+        ],
+      },
+      {
+        heading: "Waarom met de taxi naar Brussels Airport?",
+        paragraphs: [
+          "Vanuit Klein-Brabant is de luchthaven niet altijd makkelijk bereikbaar. Met het openbaar vervoer stapt u meestal over, met koffers en vaak op een uur dat er nog geen trein rijdt.",
+        ],
+        bullets: [
+          "Geen parkeerkosten voor een week of langer",
+          "Geen overstap met uw bagage",
+          "Vertrek op elk uur, ook voor de eerste trein",
+          "Met het gezin en de koffers in één rit",
+        ],
+      },
+      {
+        heading: "Terug van reis",
+        paragraphs: [
+          "Geef bij uw aanvraag uw vluchtnummer en de geplande aankomst door. Wij volgen de vlucht en passen ons aan als u vroeger of later landt. We spreken vooraf een duidelijk ontmoetingspunt af, zodat u na een lange reis niet hoeft te zoeken.",
+          "Wordt u aan de terminal opgehaald, dan komt er €8,00 bij voor het luchthavenparkeren. Verder betaalt u de prijs die vooraf is afgesproken.",
+        ],
+      },
+      {
+        heading: "Met veel bagage of met het gezin",
+        paragraphs: [
+          "Laat bij uw aanvraag weten met hoeveel personen u reist en hoeveel koffers, buggy's of golftassen meegaan. Dan bevestigen we vooraf dat alles en iedereen past.",
+        ],
+      },
+      {
+        heading: "Ook naar andere luchthavens",
+        paragraphs: [
+          "Vertrekt u vanuit Charleroi, Antwerpen, Eindhoven, Schiphol of Köln/Bonn? Ook daarheen rijden we, met dezelfde werkwijze en een vaste prijs vooraf.",
+        ],
+        links: [{ label: "Alle luchthavens", href: "/luchthavenvervoer" }],
+      },
+    ],
+    routes: {
+      title: "Reistijd naar Brussels Airport",
+      from: "Brussels Airport (Zaventem)",
+      rows: [
+        { naar: "Mechelen", afstand: "± 20 km", reistijd: "± 20 min" },
+        { naar: "Willebroek", afstand: "± 30 km", reistijd: "± 30 min" },
+        { naar: "Puurs", afstand: "± 40 km", reistijd: "± 35 min" },
+        { naar: "Bornem", afstand: "± 45 km", reistijd: "± 40 min" },
+        { naar: "Temse", afstand: "± 55 km", reistijd: "± 50 min" },
+      ],
+    },
+    areaServed: ["Bornem", "Puurs-Sint-Amands", "Willebroek", "Temse", "Mechelen", "Zaventem"],
+    serviceType: "Luchthavenvervoer naar Brussels Airport",
+    faq: [
+      {
+        q: "Hoe lang duurt een taxirit van Bornem naar Zaventem?",
+        a: "Ongeveer 40 minuten zonder file, voor zo'n 45 kilometer. In de spits rond Brussel kan het langer duren, daarom plannen we altijd marge in.",
+      },
+      {
+        q: "Wat kost een taxi van Bornem naar Brussels Airport?",
+        a: "U krijgt een vaste prijs op maat via WhatsApp, op basis van uw ophaaladres, het uur en of u heen en terug boekt. De prijs die u vooraf bevestigt, is de prijs die u betaalt. Alleen bij ophalen aan de terminal komt er €8,00 parkeertoeslag bij.",
+      },
+      {
+        q: "Halen jullie mij na mijn reis ook op in Zaventem?",
+        a: "Ja. Boek de terugrit samen met de heenrit of apart. Geef uw vluchtnummer door, dan volgen we uw landing.",
+      },
+      {
+        q: "Kan ik een taxi naar Zaventem boeken voor een vlucht om 6 uur 's ochtends?",
+        a: "Ja, we rijden 24 uur per dag. Boek liefst minstens 24 uur vooraf, zodat uw vroege rit zeker vastligt.",
+      },
+      {
+        q: "Rijden jullie ook vanuit Puurs, Willebroek en Temse naar Zaventem?",
+        a: "Ja, vanuit heel Klein-Brabant en de buurgemeenten. Vanuit Willebroek is het ongeveer een halfuur, vanuit Temse ongeveer 50 minuten.",
       },
     ],
     dienstSlug: "luchthavenvervoer",
@@ -376,13 +484,13 @@ export const gemeentePages: LandingPageData[] = [
     teaser: "Vanuit Bornem in ongeveer 10 minuten, ook in Breendonk, Liezele, Ruisbroek, Lippelo en Oppuurs.",
     kind: "gemeente",
     label: "Taxi Puurs-Sint-Amands",
-    metaTitle: "Taxi Puurs-Sint-Amands, 24/7 met vaste prijs",
+    metaTitle: "Taxi Puurs, 24/7 in heel Puurs-Sint-Amands",
     metaDescription:
-      "Taxi in Puurs-Sint-Amands: Puurs, Breendonk, Liezele, Ruisbroek, Sint-Amands, Lippelo en Oppuurs. Luchthavenvervoer, zakelijke en privéritten, 24/7. Prijs vooraf.",
+      "Taxi Puurs nodig? Wij rijden dag en nacht in Puurs, Sint-Amands, Breendonk, Liezele, Ruisbroek, Lippelo en Oppuurs. Naar Zaventem, het werk of naar huis. Prijs vooraf.",
     kicker: "Werkgebied",
-    h1: "Taxi in Puurs-Sint-Amands",
+    h1: "Taxi in Puurs en heel Puurs-Sint-Amands",
     lead:
-      "Taxi Bornem rijdt elke dag in Puurs-Sint-Amands, de buurgemeente van Bornem. Wij halen u op in alle zeven deelgemeenten, op elk uur van de dag, en u kent de prijs voor de rit begint.",
+      "Zoekt u een taxi in Puurs? Taxi Bornem rijdt elke dag in Puurs-Sint-Amands, de buurgemeente van Bornem. Wij halen u op in alle zeven deelgemeenten, op elk uur van de dag, en u kent de prijs voor de rit begint.",
     image: "/dienst-zakelijk.webp",
     imageAlt: "Witte Kia-taxi van Taxi Bornem voor een kantoorgebouw",
     highlights: [
@@ -404,6 +512,7 @@ export const gemeentePages: LandingPageData[] = [
         heading: "Deelgemeenten waar we rijden",
         paragraphs: [
           "Sinds de fusie van 2019 vormen Puurs en Sint-Amands één gemeente. Voor ons maakt het niet uit of u in het centrum van Puurs woont of aan de Schelde in Sint-Amands: de werkwijze en de prijsafspraak zijn overal dezelfde.",
+          "Moet u naar het station van Puurs, komt u 's avonds terug van een feest in Liezele of vertrekt u vroeg vanuit Lippelo naar de luchthaven? Bel of stuur een bericht, dan halen we u op aan uw deur.",
         ],
         bullets: ["Puurs", "Breendonk", "Liezele", "Ruisbroek", "Sint-Amands", "Lippelo", "Oppuurs"],
       },
@@ -417,6 +526,10 @@ export const gemeentePages: LandingPageData[] = [
         heading: "Van Puurs-Sint-Amands naar de luchthaven",
         paragraphs: [
           "Door de ligging aan de A12 bent u vanuit Puurs snel richting Brussel. Brussels Airport ligt op ongeveer 35 à 40 minuten zonder file, Antwerp Airport op een klein halfuur. Bij uw boeking spreken we een vertrekuur af met marge voor het verkeer.",
+        ],
+        links: [
+          { label: "Taxi naar Zaventem", href: "/taxi-naar-zaventem" },
+          { label: "Alle luchthavens", href: "/luchthavenvervoer" },
         ],
       },
     ],
@@ -457,9 +570,9 @@ export const gemeentePages: LandingPageData[] = [
     teaser: "Vanuit Bornem in ongeveer 15 minuten, ook in Blaasveld, Heindonk en Tisselt.",
     kind: "gemeente",
     label: "Taxi Willebroek",
-    metaTitle: "Taxi Willebroek, 24/7 met vaste prijs vooraf",
+    metaTitle: "Taxi Willebroek, 24/7 in Blaasveld, Heindonk, Tisselt",
     metaDescription:
-      "Taxi in Willebroek, Blaasveld, Heindonk en Tisselt. Vlot naar Brussels Airport, zakelijk vervoer en privéritten, dag en nacht. Prijs vooraf via WhatsApp.",
+      "Taxi Willebroek: dag en nacht in Willebroek, Blaasveld, Heindonk en Tisselt. Op een halfuur van Zaventem, ook naar Fort Breendonk. Prijs vooraf via WhatsApp.",
     kicker: "Werkgebied",
     h1: "Taxi in Willebroek",
     lead:
@@ -493,6 +606,7 @@ export const gemeentePages: LandingPageData[] = [
         paragraphs: [
           "Door de ligging aan de A12 en de nabijheid van Mechelen en de E19 is Willebroek een van de vlotste vertrekpunten naar Zaventem in de regio. Reken op ongeveer een halfuur zonder file. Bij uw terugkeer volgen we uw vlucht en wachten we bij vertraging zonder extra kosten.",
         ],
+        links: [{ label: "Taxi naar Zaventem", href: "/taxi-naar-zaventem" }],
       },
       {
         heading: "Een bezoek aan Fort Breendonk",
@@ -538,9 +652,9 @@ export const gemeentePages: LandingPageData[] = [
     teaser: "Vanuit Bornem in ongeveer 10 minuten via de Temsebrug, ook in Elversele, Steendorp en Tielrode.",
     kind: "gemeente",
     label: "Taxi Temse",
-    metaTitle: "Taxi Temse, net over de Schelde, 24/7",
+    metaTitle: "Taxi Temse, 24/7 in Temse, Elversele en Tielrode",
     metaDescription:
-      "Taxi in Temse, Elversele, Steendorp en Tielrode. Vanuit Bornem snel over de Temsebrug. Luchthavenvervoer, privé- en zakelijke ritten, prijs vooraf.",
+      "Taxi Temse: dag en nacht in Temse, Elversele, Steendorp en Tielrode. Vanuit Bornem snel over de Temsebrug. Naar Zaventem, Antwerpen of Sint-Niklaas, prijs vooraf.",
     kicker: "Werkgebied",
     h1: "Taxi in Temse",
     lead:
@@ -574,6 +688,7 @@ export const gemeentePages: LandingPageData[] = [
         paragraphs: [
           "Naar Brussels Airport rijden we over de Temsebrug en via de A12 of Mechelen. Reken op ongeveer 50 minuten zonder file. Antwerp Airport en het centrum van Antwerpen liggen op ongeveer een halfuur.",
         ],
+        links: [{ label: "Taxi naar Zaventem", href: "/taxi-naar-zaventem" }],
       },
       {
         heading: "Ritten in het Waasland",
